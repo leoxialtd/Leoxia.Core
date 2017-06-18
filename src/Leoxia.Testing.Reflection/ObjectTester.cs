@@ -96,7 +96,7 @@ namespace Leoxia.Testing.Reflection
                         decimal val = Convert<TimeSpan>(tested).Ticks;
                         if (val == 0)
                         {
-                            trace.SetFailure("Tested Timespan is uninitialized.");
+                            trace.SetFailure("Tested TimeSpan is uninitialized.");
                             return false;
                         }
                         return true;

@@ -96,5 +96,45 @@ namespace Leoxia.Testing.Reflection
             fieldInfo.SetValue(null, value);
             return true;
         }
+
+        public static PropertyInfo[] GetProperties(this Type type)
+        {
+            return type.GetTypeInfo().GetProperties();
+        }
+
+        public static Type[] GetGenericArguments(this Type type)
+        {
+            return type.GetTypeInfo().GetGenericArguments();
+        }
+
+        public static MethodInfo GetMethod(this Type type, string methodName, BindingFlags flags)
+        {
+            return type.GetTypeInfo().GetMethod(methodName, flags);
+        }
+
+        public static ConstructorInfo GetConstructor(this Type type, Type[] types)
+        {
+            return type.GetTypeInfo().GetConstructor(types);
+        }
+
+        public static PropertyInfo[] GetProperties(this Type type, BindingFlags flags)
+        {
+            return type.GetTypeInfo().GetProperties(flags);
+        }
+
+        public static PropertyInfo GetProperty(this Type type, string propertyName)
+        {
+            return type.GetTypeInfo().GetProperty(propertyName);
+        }
+
+        public static bool IsAssignableFrom(this Type type, Type other)
+        {
+            return type.GetTypeInfo().IsAssignableFrom(other);
+        }
+
+        public static ConstructorInfo[] GetConstructors(this Type type)
+        {
+            return type.GetTypeInfo().GetConstructors();
+        }
     }
 }

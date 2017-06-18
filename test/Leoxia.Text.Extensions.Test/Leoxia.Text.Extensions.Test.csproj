@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Leoxia.Collections\Leoxia.Collections.csproj" />
     <ProjectReference Include="..\..\src\Leoxia.Log\Leoxia.Log.csproj" />
-    <ProjectReference Include="..\..\src\Leoxia.Testing\Leoxia.Testing.csproj" />
     <ProjectReference Include="..\..\src\Leoxia.Text.Extensions\Leoxia.Text.Extensions.csproj" />
   </ItemGroup>
   <ItemGroup>

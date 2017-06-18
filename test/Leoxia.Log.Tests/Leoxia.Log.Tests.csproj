@@ -11,7 +11,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Leoxia.Log\Leoxia.Log.csproj" />
-    <ProjectReference Include="..\..\src\Leoxia.Testing\Leoxia.Testing.csproj" />
+    <ProjectReference Include="..\..\src\Leoxia.Testing.Mocks\Leoxia.Testing.Mocks.csproj" />
+    <ProjectReference Include="..\..\src\Leoxia.Testing.Reflection\Leoxia.Testing.Reflection.csproj" />
+    <ProjectReference Include="..\..\src\Leoxia.Testing.Assertions\Leoxia.Testing.Assertions.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

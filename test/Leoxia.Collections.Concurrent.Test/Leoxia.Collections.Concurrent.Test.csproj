@@ -11,7 +11,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Leoxia.Collections.Concurrent\Leoxia.Collections.Concurrent.csproj" />
-    <ProjectReference Include="..\..\src\Leoxia.Testing\Leoxia.Testing.csproj" />
+    <ProjectReference Include="..\..\src\Leoxia.Testing.Checkers\Leoxia.Testing.Checkers.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />

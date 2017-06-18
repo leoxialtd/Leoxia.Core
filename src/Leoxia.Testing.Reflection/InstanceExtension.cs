@@ -122,7 +122,7 @@ namespace Leoxia.Testing.Reflection
                 BindingFlags.InvokeMethod);
             if (info != null)
             {
-                return (bool) info.Invoke(instance1, new object[] {instance1, instance2});
+                return (bool)info.Invoke(instance1, new object[] { instance1, instance2 });
             }
             return false;
         }
@@ -138,7 +138,7 @@ namespace Leoxia.Testing.Reflection
         {
             var info = typeof(TInstance).GetMethod("op_Inequality",
                 BindingFlags.Static | BindingFlags.Public | BindingFlags.InvokeMethod);
-            return (bool) info.Invoke(instance1, new object[] {instance1, instance2});
+            return (bool)info.Invoke(instance1, new object[] { instance1, instance2 });
         }
     }
 }

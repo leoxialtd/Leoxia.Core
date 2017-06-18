@@ -119,7 +119,7 @@ namespace Leoxia.Testing.Reflection
             }
         }
 
-        internal static object CreateInstance(Type type, int seed, bool recurse)
+        public static object CreateInstance(Type type, int seed, bool recurse)
         {
             object resultValue;
             var flag = CreateValue(type, seed, out resultValue);

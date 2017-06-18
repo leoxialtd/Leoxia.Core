@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+    <Authors>Leoxia</Authors>
+    <Company>Leoxia Ltd</Company>
+    <Copyright>Copyright (c) Leoxia Ltd 2011 - 2017. All Rights reserved.</Copyright>
+    <Version>1.1.90.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Leoxia.Abstractions.IO" Version="1.2.3" />
+    <PackageReference Include="Leoxia.Implementations" Version="1.2.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Leoxia.Collections\Leoxia.Collections.csproj" />
+    <ProjectReference Include="..\Leoxia.Testing.Reflection\Leoxia.Testing.Reflection.csproj" />
+  </ItemGroup>
+</Project>
