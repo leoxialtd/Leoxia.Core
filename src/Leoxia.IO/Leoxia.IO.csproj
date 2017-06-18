@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <Version>1.1.90.0</Version>
+    <Authors>Leoxia</Authors>
+    <Company>Leoxia Ltd</Company>
+    <Copyright>Copyright (c) Leoxia Ltd 2011 - 2017. All Rights reserved.</Copyright>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Leoxia.Log\Leoxia.Log.csproj" />
+    <ProjectReference Include="..\Leoxia.Text.Extensions\Leoxia.Text.Extensions.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.3</TargetFrameworks>
+    <Authors>Leoxia</Authors>
+    <Company>Leoxia Ltd</Company>
+    <Copyright>Copyright (c) Leoxia Ltd 2011 - 2017. All Rights reserved.</Copyright>
+    <Version>1.1.90.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Leoxia.Abstractions" Version="1.2.0" />
+    <PackageReference Include="Leoxia.Implementations.IO" Version="1.2.0" />
+    <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
+    <PackageReference Include="System.Threading.ThreadPool" Version="4.3.0" />
+  </ItemGroup>
+</Project>

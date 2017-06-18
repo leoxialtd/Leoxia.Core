@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <Copyright>Copyright (c) Leoxia Ltd 2011 - 2017. All Rights reserved.</Copyright>
+    <Company>Leoxia Ltd</Company>
+    <Authors>Leoxia</Authors>
+    <Description>Text manipulation classes</Description>
+    <Version>1.1.90.0</Version>
+  </PropertyGroup>
+</Project>

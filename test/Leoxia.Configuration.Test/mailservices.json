@@ -1,0 +1,7 @@
+﻿{
+  "ConfigurationHolder": {
+    "MyString": "mystring",
+    "MyFlag": "true",
+    "MyNumber": "42"
+  }
+}

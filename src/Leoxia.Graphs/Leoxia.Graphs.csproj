@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <Product>Lx Framework</Product>
+    <Company>Leoxia Ltd</Company>
+    <Version>1.1.90.0</Version>
+    <Copyright>Copyright (c) Leoxia Ltd 2011 - 2017. All Rights reserved.</Copyright>
+    <Description>Graph structure, traversal and related algorithms.</Description>
+    <Authors>Leoxia</Authors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.4\Leoxia.Graphs.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Leoxia.Collections\Leoxia.Collections.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+    <Copyright>Copyright (c) Leoxia Ltd 2011 - 2017. All Rights reserved.</Copyright>
+    <Description>Constant values. Stateless objects.</Description>
+    <Company>Leoxia Ltd</Company>
+    <Version>1.1.90.0</Version>
+    <Authors>Leoxia</Authors>
+  </PropertyGroup>
+</Project>

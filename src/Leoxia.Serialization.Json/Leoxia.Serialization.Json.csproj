@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <Authors>Leoxia</Authors>
+    <Company>Leoxia Ltd</Company>
+    <Copyright>Copyright (c) Leoxia Ltd 2011 - 2017. All Rights reserved.</Copyright>
+    <Version>1.1.90.0</Version>
+    <Description>Helper classes for serialization/deserialization of Json files.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Leoxia.Abstractions.IO" Version="1.2.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+  </ItemGroup>
+</Project>

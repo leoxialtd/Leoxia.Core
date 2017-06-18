@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <Description>Provides helpers for manipulation of classes in System.Security or its sub namespaces.</Description>
+    <Version>1.1.90.0</Version>
+    <Authors>Leoxia</Authors>
+    <Company>Leoxia Ltd</Company>
+    <Copyright>Copyright (c) Leoxia Ltd 2011 - 2017. All Rights reserved.</Copyright>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Leoxia.IO\Leoxia.IO.csproj" />
+    <ProjectReference Include="..\Leoxia.Log\Leoxia.Log.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <Company>Leoxia Ltd</Company>
+    <Copyright>Copyright (c) Leoxia Ltd 2011 - 2017. All Rights reserved.</Copyright>
+    <Description>Network communication helper classes.</Description>
+    <Authors>Leoxia</Authors>
+    <Version>1.1.90.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DnsClient" Version="1.0.5" />
+    <PackageReference Include="System.Net.Ping" Version="4.3.0" />
+  </ItemGroup>
+</Project>
