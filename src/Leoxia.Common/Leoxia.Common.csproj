@@ -15,4 +15,9 @@
     <PackageTags>framework leoxia</PackageTags>
     <PackageReleaseNotes />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+    <DocumentationFile>bin\Release\netstandard1.5\Leoxia.Common.xml</DocumentationFile>
+  </PropertyGroup>
 </Project>

@@ -28,6 +28,11 @@ Provides
     <PackageTags>framework leoxia log</PackageTags>
     <PackageReleaseNotes />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.3\Leoxia.Log.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Leoxia.Implementations.Time" Version="1.2.3" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.1" />

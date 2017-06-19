@@ -16,6 +16,11 @@ Provides Serialize() and Deserialize() on IFileInfo.</Description>
     <PackageTags>framework leoxia json serialization</PackageTags>
     <PackageReleaseNotes />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.3\Leoxia.Serialization.Json.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Leoxia.Abstractions.IO" Version="1.2.3" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />

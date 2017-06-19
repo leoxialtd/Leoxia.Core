@@ -19,6 +19,11 @@ Provides:
     <PackageTags>framework leoxia network</PackageTags>
     <PackageReleaseNotes />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+    <DocumentationFile>bin\Release\netstandard1.3\Leoxia.Network.xml</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="DnsClient" Version="1.0.5" />
     <PackageReference Include="System.Net.Ping" Version="4.3.0" />

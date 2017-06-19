@@ -21,4 +21,9 @@ Provides:
     <PackageTags>framework leoxia string</PackageTags>
     <PackageReleaseNotes />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+    <DocumentationFile>bin\Release\netstandard1.0\Leoxia.Text.Extensions.xml</DocumentationFile>
+  </PropertyGroup>
 </Project>

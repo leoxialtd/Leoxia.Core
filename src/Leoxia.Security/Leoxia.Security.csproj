@@ -18,6 +18,11 @@ Provides:
     <PackageTags>framework leoxia security certificate cipher</PackageTags>
     <PackageReleaseNotes />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.3\Leoxia.Security.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Leoxia.IO\Leoxia.IO.csproj" />
     <ProjectReference Include="..\Leoxia.Log\Leoxia.Log.csproj" />

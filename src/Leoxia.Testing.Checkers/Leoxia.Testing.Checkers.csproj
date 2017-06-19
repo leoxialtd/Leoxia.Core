@@ -22,6 +22,11 @@ Provides:
   HashSetChecker (for IHashSet)
   IShallowCloneableChecker (for IShallowCloneable)</Description>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+    <DocumentationFile>bin\Release\netstandard1.5\Leoxia.Testing.Checkers.xml</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Checkers\**" />
     <EmbeddedResource Remove="Checkers\**" />

@@ -15,6 +15,11 @@
     <PackageReleaseNotes />
     <Description>Threads related classes.</Description>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard1.3|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+    <DocumentationFile>bin\Release\netstandard1.3\Leoxia.Threading.xml</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Leoxia.Abstractions" Version="1.2.0" />
     <PackageReference Include="Leoxia.Implementations.IO" Version="1.2.0" />

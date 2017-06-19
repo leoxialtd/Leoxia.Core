@@ -17,6 +17,11 @@
 Provides:
   ConcurrentHashSet&lt;T&gt;</Description>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.3\Leoxia.Collections.Concurrent.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Leoxia.Collections\Leoxia.Collections.csproj" />
   </ItemGroup>

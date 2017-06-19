@@ -24,6 +24,11 @@ Provides:
   InstanceExtensions
   ListExtensions</Description>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.5\Leoxia.Testing.Reflection.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Leoxia.Abstractions.IO" Version="1.2.3" />
     <PackageReference Include="Leoxia.Implementations" Version="1.2.3" />

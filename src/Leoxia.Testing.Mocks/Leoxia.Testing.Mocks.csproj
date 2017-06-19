@@ -18,6 +18,11 @@ Provides
   MockUnitTestFixture
   WriterUnitTestFixture</Description>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+    <DocumentationFile>bin\Release\netstandard1.5\Leoxia.Testing.Mocks.xml</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Leoxia.Abstractions.IO" Version="1.2.3" />
     <PackageReference Include="Leoxia.Implementations" Version="1.2.3" />
