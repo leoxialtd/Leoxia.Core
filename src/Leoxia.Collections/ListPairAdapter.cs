@@ -48,7 +48,7 @@ namespace Leoxia.Collections
     /// </summary>
     /// <typeparam name="TInner">element for inner IList</typeparam>
     /// <typeparam name="TOuter">element used to expose interface of IList</typeparam>
-    public class ListAdapter<TInner, TOuter> : IList<TOuter>
+    public class ListPairAdapter<TInner, TOuter> : IList<TOuter>
     {
         private readonly Func<TOuter, TInner> _backward;
         private readonly Func<TInner, TOuter> _forward;
@@ -56,12 +56,12 @@ namespace Leoxia.Collections
         private readonly IList<TOuter> _outer;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ListAdapter{TInner, TOuter}" /> class.
+        ///     Initializes a new instance of the <see cref="ListPairAdapter{TInner,TOuter}" /> class.
         /// </summary>
         /// <param name="inner">The inner.</param>
         /// <param name="forward">The function providing a TOuter with a TInner instance.</param>
         /// <param name="backward">The backward providing a TInner with a TOuter instance.</param>
-        public ListAdapter(IList<TInner> inner, Func<TInner, TOuter> forward, Func<TOuter, TInner> backward)
+        public ListPairAdapter(IList<TInner> inner, Func<TInner, TOuter> forward, Func<TOuter, TInner> backward)
         {
             _inner = inner;
             _outer = inner.Select(x => _forward(x)).ToList();

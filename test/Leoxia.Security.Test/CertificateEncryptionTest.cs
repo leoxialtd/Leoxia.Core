@@ -53,7 +53,7 @@ namespace Leoxia.Security.Test
         {
             var loader = new CertificateLoader();
             var certificate = loader.Load(new FileInfo(fileName).Adapt(), passPhrase);
-            var cipher = new RSACerticateCipher(new X509CertificateSimpleProvider(certificate));
+            var cipher = new RSACertificateCipher(new X509CertificateSimpleProvider(certificate));
             var encryptedData = cipher.Encrypt(DataToEncrypt);
             var decryptedData = cipher.Decrypt(encryptedData);
             Assert.Equal(DataToEncrypt, decryptedData);

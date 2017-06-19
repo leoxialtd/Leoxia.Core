@@ -1,0 +1,1 @@
+lx project cycle fullbuild -t Prod -s https://www.nuget.org/api/v2/package

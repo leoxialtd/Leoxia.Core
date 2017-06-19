@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="WordForm.cs" company="Leoxia Ltd">
+// <copyright file="Casing.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -35,36 +35,36 @@
 namespace Leoxia.Text.Extensions
 {
     /// <summary>
-    ///     Handle singular, plural form of word.
-    ///     Depends on language. This is for English.
+    ///     Casing related methods
     /// </summary>
-    public static class WordForm
+    public static class CasingExtensions
     {
         /// <summary>
-        ///     Return the plural of the specified word.
+        ///     Lowers the first character of input
         /// </summary>
-        /// <param name="word">The word.</param>
-        /// <returns>the plural form of the word</returns>
-        public static string Plural(this string word)
+        /// <param name="input">The input.</param>
+        /// <returns></returns>
+        public static string UnCapitalize(this string input)
         {
-            var last = word[word.Length - 1];
-            if (last == 'y')
+            if (char.IsLower(input[0]))
             {
-                return word.Substring(0, word.Length - 1) + "ies";
+                return input;
             }
-            if (last == 'Y')
+            return char.ToLowerInvariant(input[0]) + input.Substring(1, input.Length - 1);
+        }
+
+        /// <summary>
+        ///     Capitalizes the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns></returns>
+        public static string Capitalize(this string input)
+        {
+            if (char.IsUpper(input[0]))
             {
-                return word.Substring(0, word.Length - 1) + "IES";
+                return input;
             }
-            if (last == 's')
-            {
-                return word + "es";
-            }
-            if (last == 'S')
-            {
-                return word + "ES";
-            }
-            return word + "s";
+            return char.ToUpperInvariant(input[0]) + input.Substring(1, input.Length - 1);
         }
     }
 }

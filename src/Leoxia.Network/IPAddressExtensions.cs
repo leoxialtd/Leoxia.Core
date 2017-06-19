@@ -38,12 +38,20 @@ using DnsClient;
 
 namespace Leoxia.Network
 {
+    /// <summary>
+    /// Extensions on <see cref="IPAddress"/>
+    /// </summary>
     public static class IpAddressExtensions
     {
         private static readonly LookupClient _client =
             new LookupClient(IPAddress.Parse("8.8.8.8"), IPAddress.Parse("8.8.4.4"));
 
 
+        /// <summary>
+        /// Gets the type of the network given the ip.
+        /// </summary>
+        /// <param name="address">The address.</param>
+        /// <returns>Type of network</returns>
         public static IPNetworkType GetNetworkType(this IPAddress address)
         {
             switch (address.AddressFamily)
@@ -149,6 +157,11 @@ namespace Leoxia.Network
             return IPNetworkType.Public;
         }
 
+        /// <summary>
+        /// Gets the location information.
+        /// </summary>
+        /// <param name="address">The address.</param>
+        /// <returns></returns>
         public static IPLocationInformation GetLocationInformation(this IPAddress address)
         {
             var information = new IPLocationInformation();

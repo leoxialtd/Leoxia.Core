@@ -1,9 +1,9 @@
 {
     "RequireLicenseAcceptance" : true,
-    "LicenseUrl" : "https://raw.githubusercontent.com/leoxialtd/Leoxia.Core/master/LICENSE",
+    "LicenseUrl" : "https://gitlab.leoxia.com/leoxia/Leoxia.Core/raw/master/LICENSE",
     "ProjectUrl" : "https://www.leoxia.com",
-    "IconUrl" : "https://raw.githubusercontent.com/leoxialtd/Leoxia.Core/master/images/icon.png",
-    "RepositoryUrl" : "https://github.com/leoxialtd/Leoxia.Core",
+    "IconUrl" : "https://gitlab.leoxia.com/leoxia/Leoxia.Core/raw/master/images/icon.png",
+    "RepositoryUrl" : "https://gitlab.leoxia.com/leoxia/Leoxia.Core",
     "RepositoryType" : "Git",
     "Tags" : "framework leoxia",
     "ReleaseNotes" : ""

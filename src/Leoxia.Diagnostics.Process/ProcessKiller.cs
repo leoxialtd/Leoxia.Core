@@ -34,18 +34,25 @@
 
 namespace Leoxia.Diagnostics.Process
 {
+    /// <summary>
+    /// Kill a process
+    /// </summary>
     public class ProcessKiller
     {
         private readonly string _processName;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="T:System.Object" /> class.
+        /// Initializes a new instance of the <see cref="ProcessKiller"/> class.
         /// </summary>
+        /// <param name="processName">Name of the process.</param>
         public ProcessKiller(string processName)
         {
             _processName = processName;
         }
 
+        /// <summary>
+        /// Kills the process.
+        /// </summary>
         public void Kill()
         {
             foreach (var process in System.Diagnostics.Process.GetProcesses())

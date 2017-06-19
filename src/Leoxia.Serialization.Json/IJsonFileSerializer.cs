@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Casing.cs" company="Leoxia Ltd">
+// <copyright file="IJsonHelper.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -32,39 +32,16 @@
 
 #endregion
 
-namespace Leoxia.Text.Extensions
+namespace Leoxia.Serialization.Json
 {
-    /// <summary>
-    ///     Casing related methods
-    /// </summary>
-    public static class Casing
+    public interface IJsonFileSerializer
     {
         /// <summary>
-        ///     Lowers the first character of input
+        /// Deserialize a T object for a file located at the specified file path.
         /// </summary>
-        /// <param name="input">The input.</param>
-        /// <returns></returns>
-        public static string UnCapitalize(this string input)
-        {
-            if (char.IsLower(input[0]))
-            {
-                return input;
-            }
-            return char.ToLowerInvariant(input[0]) + input.Substring(1, input.Length - 1);
-        }
-
-        /// <summary>
-        ///     Capitalizes the specified input.
-        /// </summary>
-        /// <param name="input">The input.</param>
-        /// <returns></returns>
-        public static string Capitalize(this string input)
-        {
-            if (char.IsUpper(input[0]))
-            {
-                return input;
-            }
-            return char.ToUpperInvariant(input[0]) + input.Substring(1, input.Length - 1);
-        }
+        /// <typeparam name="T">type of object to deserialize</typeparam>
+        /// <param name="filePath">The file path.</param>
+        /// <returns>deserialized T</returns>
+        T Deserialize<T>(string filePath);
     }
 }

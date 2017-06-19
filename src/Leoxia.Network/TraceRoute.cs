@@ -39,23 +39,39 @@ using System.Text;
 
 namespace Leoxia.Network
 {
+    /// <summary>
+    /// Trace Route tool
+    /// Comes from https://stackoverflow.com/questions/142614/traceroute-and-ping-in-c-sharp
+    /// </summary>
     public class TraceRoute
     {
         private const string Data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
+        /// <summary>
+        /// Gets the trace route.
+        /// </summary>
+        /// <param name="hostNameOrAddress">The host name or address.</param>
+        /// <returns></returns>
         public IEnumerable<IPAddress> GetTraceRoute(string hostNameOrAddress)
         {
             return GetTraceRoute(hostNameOrAddress, 1);
         }
 
-        // Test It !!!! Comes from stackoverflow and not tested yet.
+        
+        /// <summary>
+        /// Gets the trace route.
+        /// </summary>
+        /// <param name="hostNameOrAddress">The host name or address.</param>
+        /// <param name="ttl">The TTL.</param>
+        /// <returns>the ip addresses.</returns>
         private IEnumerable<IPAddress> GetTraceRoute(string hostNameOrAddress, int ttl)
         {
-            Ping pinger = new Ping();
-            PingOptions pingerOptions = new PingOptions(ttl, true);
+            // Test It !!!! Comes from stack overflow and not tested yet.
+            Ping pingSender = new Ping();
+            PingOptions options = new PingOptions(ttl, true);
             int timeout = 10000;
-            byte[] buffer = Encoding.ASCII.GetBytes((string) Data);
-            var task = pinger.SendPingAsync(hostNameOrAddress, timeout, buffer, pingerOptions);
+            byte[] buffer = Encoding.ASCII.GetBytes(Data);
+            var task = pingSender.SendPingAsync(hostNameOrAddress, timeout, buffer, options);
             var reply = task.Result;
             List<IPAddress> result = new List<IPAddress>();
             if (reply.Status == IPStatus.Success)
@@ -69,9 +85,8 @@ namespace Leoxia.Network
                 {
                     result.Add(reply.Address);
                 }
-                //recurse to get the next address...
-                IEnumerable<IPAddress> tempResult;
-                tempResult = GetTraceRoute(hostNameOrAddress, ttl + 1);
+                //recursion to get the next address...
+                var tempResult = GetTraceRoute(hostNameOrAddress, ttl + 1);
                 result.AddRange(tempResult);
             }
 

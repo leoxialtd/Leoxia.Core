@@ -36,8 +36,15 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Leoxia.Security
 {
+    /// <summary>
+    /// Provides a <see cref="X509Certificate2"/>
+    /// </summary>
     public interface IX509CertificateProvider
     {
+        /// <summary>
+        /// Gets the certificate.
+        /// </summary>
+        /// <returns>the certificate</returns>
         X509Certificate2 Get();
     }
 }

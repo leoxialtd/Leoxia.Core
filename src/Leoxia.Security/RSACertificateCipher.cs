@@ -39,21 +39,39 @@ using System.Text;
 
 namespace Leoxia.Security
 {
+
+    /// <summary>
+    /// Cipher based on RSA certificate keys
+    /// </summary>
     // ReSharper disable once InconsistentNaming
-    public class RSACerticateCipher
+    public class RSACertificateCipher
     {
         private readonly IX509CertificateProvider _provider;
 
-        public RSACerticateCipher(IX509CertificateProvider provider)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RSACertificateCipher"/> class.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        public RSACertificateCipher(IX509CertificateProvider provider)
         {
             _provider = provider;
         }
 
+        /// <summary>
+        /// Encrypts the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>encrypted string</returns>
         public string Encrypt(string input)
         {
             return Convert.ToBase64String(Encrypt(Encoding.UTF8.GetBytes(input)));
         }
 
+        /// <summary>
+        /// Encrypts the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>encrypted bytes</returns>
         public byte[] Encrypt(byte[] input)
         {
             X509Certificate2 certificate = _provider.Get();
@@ -66,11 +84,22 @@ namespace Leoxia.Security
             }
         }
 
+        /// <summary>
+        /// Decrypts the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>decrypted string</returns>
         public string Decrypt(string input)
         {
             return Encoding.UTF8.GetString(Decrypt(Convert.FromBase64String(input)));
         }
 
+        /// <summary>
+        /// Decrypts the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>decrypted bytes</returns>
+        /// <exception cref="System.InvalidOperationException">Certificate doesn't contain private key: cannot decrypt.</exception>
         public byte[] Decrypt(byte[] input)
         {
             X509Certificate2 certificate = _provider.Get();

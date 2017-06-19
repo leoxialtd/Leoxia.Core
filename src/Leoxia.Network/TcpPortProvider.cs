@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="JsonHelper.cs" company="Leoxia Ltd">
+// <copyright file="TcpHelper.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -32,54 +32,29 @@
 
 #endregion
 
-#region Usings
+using System.Net;
+using System.Net.Sockets;
 
-using System.IO;
-using Leoxia.Abstractions.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-#endregion
-
-namespace Leoxia.Serialization.Json
+namespace Leoxia.Network
 {
-    public class JsonHelper : IJsonHelper
+    /// <summary>
+    /// Provides an available TCP port.
+    /// </summary>
+    public static class TcpPortProvider
     {
-        private readonly IFile _fileSystem;
-
-        public JsonHelper(IFile fileSystem)
+        /// <summary>
+        /// Gets a random TCP port available.
+        /// Note that it will open it to find it. 
+        /// Not thread safe.
+        /// </summary>
+        /// <returns>A available port</returns>
+        public static int GetTcpPortAvailable()
         {
-            _fileSystem = fileSystem;
-        }
-
-        public T Deserialize<T>(string filePath)
-        {
-            using (var fileReader = _fileSystem.OpenText(filePath))
-            {
-                return JsonConvert.DeserializeObject<T>(fileReader.ReadToEnd());
-            }
-        }
-
-        public static T Deserialize<T>(IFileInfo file)
-        {
-            using (var fileReader = file.OpenText())
-            {
-                return JsonConvert.DeserializeObject<T>(fileReader.ReadToEnd());
-            }
-        }
-
-        public static JObject DeserializeJObject(IFileInfo file)
-        {
-            using (var fileReader = file.OpenText())
-            {
-                using (var reader = new StringReader(fileReader.ReadToEnd()))
-                {
-                    using (var jsonReader = new JsonTextReader(reader))
-                    {
-                        return (JObject) JToken.ReadFrom(jsonReader);
-                    }
-                }
-            }
+            var listener = new TcpListener(IPAddress.Loopback, 0);
+            listener.Start();
+            int port = ((IPEndPoint) listener.LocalEndpoint).Port;
+            listener.Stop();
+            return port;
         }
     }
 }

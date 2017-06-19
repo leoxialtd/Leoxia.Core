@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TcpHelper.cs" company="Leoxia Ltd">
+// <copyright file="Transform.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -32,20 +32,38 @@
 
 #endregion
 
-using System.Net;
-using System.Net.Sockets;
+#region Usings
 
-namespace Leoxia.Network
+using System.Linq;
+
+#endregion
+
+namespace Leoxia.Text.Extensions
 {
-    public static class TcpHelper
+    /// <summary>
+    ///     Transform characters in a <see cref="string" />
+    /// </summary>
+    public static class TransformExtensions
     {
-        public static int GetTcpPortAvailable()
+        /// <summary>
+        ///     Replace all characters to replace by the replacement character.
+        /// </summary>
+        /// <param name="input">The input <see cref="string" /></param>
+        /// <param name="toReplace">characters to replace.</param>
+        /// <param name="replacement">The <see cref="char" /> replacement.</param>
+        /// <returns><see cref="string" /> with characters replaced.</returns>
+        public static string MultiReplace(this string input, char[] toReplace, char replacement)
         {
-            var listener = new TcpListener(IPAddress.Loopback, 0);
-            listener.Start();
-            int port = ((IPEndPoint) listener.LocalEndpoint).Port;
-            listener.Stop();
-            return port;
+            var destination = input.ToCharArray();
+            for (var index = 0; index < destination.Length; index++)
+            {
+                var c = destination[index];
+                if (toReplace.Contains(c))
+                {
+                    destination[index] = replacement;
+                }
+            }
+            return string.Concat(destination);
         }
     }
 }

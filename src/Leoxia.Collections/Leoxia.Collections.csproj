@@ -4,8 +4,22 @@
     <Authors>Leoxia</Authors>
     <Company>Leoxia Ltd</Company>
     <Copyright>Copyright (c) Leoxia Ltd 2011 - 2017. All Rights reserved.</Copyright>
-    <Description>Special Collections not available in Framework</Description>
-    <Version>1.1.90.0</Version>
+    <Description>Special Collections not available in Framework.
+Empty collections singletons.
+Provides:
+  IHashSet&lt;T&gt; and  HashSetAdapter&lt;T&gt;
+  ReadOnlyHashSet&lt;T&gt;
+  ICursor&lt;T&gt; and  Cursor&lt;T&gt;
+  ListPairAdapter&lt;TX, TY&gt;</Description>
+    <Version>1.3.0.0</Version>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://gitlab.leoxia.com/leoxia/Leoxia.Core/raw/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://www.leoxia.com</PackageProjectUrl>
+    <PackageIconUrl>https://gitlab.leoxia.com/leoxia/Leoxia.Core/raw/master/images/icon.png</PackageIconUrl>
+    <RepositoryUrl>https://gitlab.leoxia.com/leoxia/Leoxia.Core</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>framework leoxia</PackageTags>
+    <PackageReleaseNotes />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard1.4\Leoxia.Collections.xml</DocumentationFile>

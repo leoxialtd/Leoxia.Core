@@ -4,7 +4,21 @@
     <Copyright>Copyright (c) Leoxia Ltd 2011 - 2017. All Rights reserved.</Copyright>
     <Company>Leoxia Ltd</Company>
     <Authors>Leoxia</Authors>
-    <Description>Text manipulation classes</Description>
-    <Version>1.1.90.0</Version>
+    <Description>Text manipulation classes.
+Provides:
+  CasingExtensions
+  LineExtensions
+  TransformExtensions
+  TrimExtensions
+  WordFormExtensions</Description>
+    <Version>1.3.0.0</Version>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://gitlab.leoxia.com/leoxia/Leoxia.Core/raw/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://www.leoxia.com</PackageProjectUrl>
+    <PackageIconUrl>https://gitlab.leoxia.com/leoxia/Leoxia.Core/raw/master/images/icon.png</PackageIconUrl>
+    <RepositoryUrl>https://gitlab.leoxia.com/leoxia/Leoxia.Core</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>framework leoxia string</PackageTags>
+    <PackageReleaseNotes />
   </PropertyGroup>
 </Project>

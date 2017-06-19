@@ -41,16 +41,30 @@ using Newtonsoft.Json.Linq;
 
 namespace Leoxia.Serialization.Json
 {
+    /// <summary>
+    /// Extensions for serialization of <see cref="IFileInfo"/>
+    /// </summary>
     public static class FileInfoExtensions
     {
+        /// <summary>
+        /// Deserialize the file to T instance.
+        /// </summary>
+        /// <typeparam name="T">type of object to deserialize</typeparam>
+        /// <param name="info">The information.</param>
+        /// <returns></returns>
         public static T DeserializeTo<T>(this IFileInfo info)
         {
-            return JsonHelper.Deserialize<T>(info);
+            return JsonFileSerializer.Deserialize<T>(info);
         }
 
+        /// <summary>
+        /// Deserialize to <see cref="JObject"/>
+        /// </summary>
+        /// <param name="info">The information.</param>
+        /// <returns>the read <see cref="JObject"/></returns>
         public static JObject DeserializeToJObject(this IFileInfo info)
         {
-            return JsonHelper.DeserializeJObject(info);
+            return JsonFileSerializer.DeserializeJObject(info);
         }
     }
 }

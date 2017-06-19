@@ -38,16 +38,28 @@ using DnsClient;
 
 namespace Leoxia.Network
 {
+    /// <summary>
+    /// Resolve Ip from DNS.
+    /// </summary>
     public class IpResolver
     {
         private readonly LookupClient _client;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IpResolver"/> class.
+        /// </summary>
+        /// <param name="domainNameServerIps">The domain name server ips.</param>
         public IpResolver(params string[] domainNameServerIps)
         {
             var servers = domainNameServerIps.Select(IPAddress.Parse).ToArray();
             _client = new LookupClient(servers);
         }
 
+        /// <summary>
+        /// Resolves the domain name to an ip.
+        /// </summary>
+        /// <param name="domainName">Name of the domain.</param>
+        /// <returns></returns>
         public string ResolveIp(string domainName)
         {
             var response = _client.Query(domainName, QueryType.A);

@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Transform.cs" company="Leoxia Ltd">
+// <copyright file="WordForm.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -32,38 +32,39 @@
 
 #endregion
 
-#region Usings
-
-using System.Linq;
-
-#endregion
-
 namespace Leoxia.Text.Extensions
 {
     /// <summary>
-    ///     Transform characters in a <see cref="string" />
+    ///     Handle singular, plural form of word.
+    ///     Depends on language. This is for English.
     /// </summary>
-    public static class Transform
+    public static class WordFormExtensions
     {
         /// <summary>
-        ///     Replace all characters to replace by the replacement character.
+        ///     Return the plural of the specified word.
         /// </summary>
-        /// <param name="input">The input <see cref="string" /></param>
-        /// <param name="toReplace">characters to replace.</param>
-        /// <param name="replacement">The <see cref="char" /> replacement.</param>
-        /// <returns><see cref="string" /> with characters replaced.</returns>
-        public static string MultiReplace(this string input, char[] toReplace, char replacement)
+        /// <param name="word">The word.</param>
+        /// <returns>the plural form of the word</returns>
+        public static string Plural(this string word)
         {
-            var destination = input.ToCharArray();
-            for (var index = 0; index < destination.Length; index++)
+            var last = word[word.Length - 1];
+            if (last == 'y')
             {
-                var c = destination[index];
-                if (toReplace.Contains(c))
-                {
-                    destination[index] = replacement;
-                }
+                return word.Substring(0, word.Length - 1) + "ies";
             }
-            return string.Concat(destination);
+            if (last == 'Y')
+            {
+                return word.Substring(0, word.Length - 1) + "IES";
+            }
+            if (last == 's')
+            {
+                return word + "es";
+            }
+            if (last == 'S')
+            {
+                return word + "ES";
+            }
+            return word + "s";
         }
     }
 }
