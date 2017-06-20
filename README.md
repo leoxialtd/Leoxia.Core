@@ -1,6 +1,7 @@
 # Leoxia.Core
 
 [![Build status](https://ci.appveyor.com/api/projects/status/2xrjylsvbxfotsoo?svg=true)](https://ci.appveyor.com/project/leoxialtd/leoxia-core)
+
 [![NuGet version](https://badge.fury.io/nu/Leoxia.Core.svg)](https://badge.fury.io/nu/Leoxia.Core)
 
 Leoxia.Core or Lx.Core regroups all tranversal and low level libraries developped by Leoxia.
