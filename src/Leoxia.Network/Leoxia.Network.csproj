@@ -25,7 +25,7 @@ Provides:
     <DocumentationFile>bin\Release\netstandard1.3\Leoxia.Network.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="DnsClient" Version="1.0.5" />
+    <PackageReference Include="DnsClient" Version="1.0.7" />
     <PackageReference Include="System.Net.Ping" Version="4.3.0" />
   </ItemGroup>
 </Project>

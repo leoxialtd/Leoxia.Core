@@ -55,7 +55,7 @@ namespace Leoxia.Testing.Reflection
 
         static AssemblyExtensions()
         {
-            var system = typeof(string).GetTypeInfo().Assembly.Wrap();
+            var system = typeof(string).GetTypeInfo().Assembly.Adapt();
             _systemPath = Path.GetDirectoryName(system.Location);
         }
 
@@ -123,7 +123,7 @@ namespace Leoxia.Testing.Reflection
                         {
                             if (!marked.Contains(assemblyName.Name))
                             {
-                                var referenced = Assembly.Load(assemblyName).Wrap();
+                                var referenced = Assembly.Load(assemblyName).Adapt();
                                 GetAllReferencedAssemblies(referenced, pattern, excludePattern, marked, assemblies);
                             }
                         }
