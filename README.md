@@ -2,7 +2,25 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/2xrjylsvbxfotsoo?svg=true)](https://ci.appveyor.com/project/leoxialtd/leoxia-core)
 
-[![NuGet version](https://badge.fury.io/nu/Leoxia.Core.svg)](https://badge.fury.io/nu/Leoxia.Core)
+Package  | NuGet 
+-------- | :------------ 
+[Leoxia.Collections](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Collections) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Collections.svg)](https://www.nuget.org/packages/Leoxia.Collections/)
+[Leoxia.Collections.Concurrent](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Collections.Concurrent) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Collections.Concurrent.svg)](https://www.nuget.org/packages/Leoxia.Collections.Concurrent/)
+[Leoxia.CommandLine](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.CommandLine) | [![NuGet version](https://badge.fury.io/nu/Leoxia.CommandLine.svg)](https://www.nuget.org/packages/Leoxia.CommandLine/)
+[Leoxia.Common](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Common) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Common.svg)](https://www.nuget.org/packages/Leoxia.Common/)
+[Leoxia.Configuration](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Configuration) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Configuration.svg)](https://www.nuget.org/packages/Leoxia.Configuration/) [Leoxia.Diagnostics.Process](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Diagnostics.Process) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Diagnostics.Process.svg)](https://www.nuget.org/packages/Leoxia.Diagnostics.Process/)
+[Leoxia.Graphs](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Graphs) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Graphs.svg)](https://www.nuget.org/packages/Leoxia.Graphs/)
+[Leoxia.IO](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.IO) | [![NuGet version](https://badge.fury.io/nu/Leoxia.IO.svg)](https://www.nuget.org/packages/Leoxia.IO/)
+[Leoxia.Log](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Log) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Log.svg)](https://www.nuget.org/packages/Leoxia.Log/)
+[Leoxia.Network](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Network) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Network.svg)](https://www.nuget.org/packages/Leoxia.Network/)
+[Leoxia.Reflection](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Reflection) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Reflection.svg)](https://www.nuget.org/packages/Leoxia.Reflection/)
+[Leoxia.Security](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Security) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Security.svg)](https://www.nuget.org/packages/Leoxia.Security/)
+[Leoxia.Serialization.Json](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Serialization.Json) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Serialization.Json.svg)](https://www.nuget.org/packages/Leoxia.Serialization.Json/)
+[Leoxia.Testing.Assertions](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Testing.Assertions) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Testing.Assertions.svg)](https://www.nuget.org/packages/Leoxia.Testing.Assertions/)
+[Leoxia.Testing.Checkers](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Testing.Checkers) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Testing.Checkers.svg)](https://www.nuget.org/packages/Leoxia.Testing.Checkers/)
+[Leoxia.Testing.Mocks](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Testing.Mocks) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Testing.Mocks.svg)](https://www.nuget.org/packages/Leoxia.Testing.Mocks/) [Leoxia.Testing.Reflection](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Testing.Reflection) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Testing.Reflection.svg)](https://www.nuget.org/packages/Leoxia.Testing.Reflection/)
+[Leoxia.Text.Extensions](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Text.Extensions) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Text.Extensions.svg)](https://www.nuget.org/packages/Leoxia.Text.Extensions/)
+[Leoxia.Threading](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Threading) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Threading.svg)](https://www.nuget.org/packages/Leoxia.Threading/)
 
 Leoxia.Core or Lx.Core regroups all tranversal and low level libraries developped by Leoxia.
 
