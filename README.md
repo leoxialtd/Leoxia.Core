@@ -10,7 +10,7 @@ All general purposes and low level libraries used by Leoxia organization.
 
 OS  | Compiler | Status 
 -------- | :------------ | :------------ 
-Windows | Visual 2017 | [![Build status](https://ci.appveyor.com/api/projects/status/2xrjylsvbxfotsoo?svg=true)](https://ci.appveyor.com/project/leoxialtd/leoxia-core)
+Windows | Visual Studio 2017 | [![Build status](https://ci.appveyor.com/api/projects/status/2xrjylsvbxfotsoo?svg=true)](https://ci.appveyor.com/project/leoxialtd/leoxia-core)
 
 ## Packages
 
