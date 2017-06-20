@@ -6,6 +6,10 @@ All general purposes and low level libraries used by Leoxia organization.
 
 [![.NET Standard](https://img.shields.io/badge/Build_For-.NetStandard-0073AE.svg)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard)
 
+## Original repository
+
+This repository is a clone of [Leoxia GitLab](https://gitlab.leoxia.com/leoxia/Leoxia.Core)
+
 ## Build status
 
 OS  | Compiler | Status 
@@ -34,7 +38,7 @@ Package  | NuGet
 [Leoxia.Text.Extensions](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Text.Extensions) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Text.Extensions.svg)](https://www.nuget.org/packages/Leoxia.Text.Extensions/)
 [Leoxia.Threading](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Threading) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Threading.svg)](https://www.nuget.org/packages/Leoxia.Threading/)
 
-# Requirements
+## Requirements
 
 To be part of Lx.Core, a library must:
 
