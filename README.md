@@ -1,5 +1,7 @@
 # Leoxia.Core
 
+[![Build status](https://ci.appveyor.com/api/projects/status/2xrjylsvbxfotsoo?svg=true)](https://ci.appveyor.com/project/leoxialtd/leoxia-core)
+
 Leoxia.Core or Lx.Core regroups all tranversal and low level libraries developped by Leoxia.
 
 To be part of Lx.Core, a library must:
