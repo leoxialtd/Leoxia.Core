@@ -1,5 +1,11 @@
 # Leoxia.Core
 
+All general purposes and low level libraries used by Leoxia organization.
+
+[![.NET Core](https://img.shields.io/badge/Build_For-.NetCore-5C2D91.svg)](https://www.microsoft.com/net/core#windowsvs2017)
+
+[![.NET Standard](https://img.shields.io/badge/Build_For-.NetStandard-0073AE.svg)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard)
+
 [![Build status](https://ci.appveyor.com/api/projects/status/2xrjylsvbxfotsoo?svg=true)](https://ci.appveyor.com/project/leoxialtd/leoxia-core)
 
 Package  | NuGet 
