@@ -8,7 +8,7 @@ All general purposes and low level libraries used by Leoxia organization.
 
 ## Original repository
 
-This repository is a clone of [Leoxia GitLab](https://gitlab.leoxia.com/leoxia/Leoxia.Core)
+This repository is a clone of [Leoxia.Core on GitLab](https://gitlab.leoxia.com/leoxia/Leoxia.Core)
 
 ## Build status
 
