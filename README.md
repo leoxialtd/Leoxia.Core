@@ -6,7 +6,13 @@ All general purposes and low level libraries used by Leoxia organization.
 
 [![.NET Standard](https://img.shields.io/badge/Build_For-.NetStandard-0073AE.svg)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/2xrjylsvbxfotsoo?svg=true)](https://ci.appveyor.com/project/leoxialtd/leoxia-core)
+## Build status
+
+OS  | Compiler | Status 
+-------- | :------------ | :------------ 
+Windows | Visual 2017 | [![Build status](https://ci.appveyor.com/api/projects/status/2xrjylsvbxfotsoo?svg=true)](https://ci.appveyor.com/project/leoxialtd/leoxia-core)
+
+## Packages
 
 Package  | NuGet 
 -------- | :------------ 
@@ -28,7 +34,7 @@ Package  | NuGet
 [Leoxia.Text.Extensions](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Text.Extensions) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Text.Extensions.svg)](https://www.nuget.org/packages/Leoxia.Text.Extensions/)
 [Leoxia.Threading](https://github.com/leoxialtd/Leoxia.Core/tree/master/src/Leoxia.Threading) | [![NuGet version](https://badge.fury.io/nu/Leoxia.Threading.svg)](https://www.nuget.org/packages/Leoxia.Threading/)
 
-Leoxia.Core or Lx.Core regroups all tranversal and low level libraries developped by Leoxia.
+# Requirements
 
 To be part of Lx.Core, a library must:
 
