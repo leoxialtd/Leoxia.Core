@@ -38,6 +38,7 @@ namespace Leoxia.Testing.Assertions
     ///     Interface for Check Failure of T
     /// </summary>
     /// <typeparam name="T">type of tested value</typeparam>
+    // ReSharper disable once UnusedTypeParameter
     public interface ICheckFailure<T>
     {
     }

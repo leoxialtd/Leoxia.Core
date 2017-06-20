@@ -39,6 +39,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Leoxia.Collections;
 
 #endregion
 
@@ -144,6 +145,10 @@ namespace Leoxia.Testing.Reflection
             IEnumerable<string> excludedList)
         {
             var names = new List<string>(properties.Count);
+            if (excludedList == null)
+            {
+                excludedList = EmptyArray<string>.Instance;
+            }
             var excludedProperties = excludedList as IList<string> ?? excludedList.ToArray();
             foreach (var propertyInfo in properties)
             {

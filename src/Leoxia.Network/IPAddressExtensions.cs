@@ -51,6 +51,7 @@ namespace Leoxia.Network
         /// </summary>
         /// <param name="address">The address.</param>
         /// <returns>Type of network</returns>
+        // ReSharper disable once ExcessiveIndentation
         public static IPNetworkType GetNetworkType(this IPAddress address)
         {
             switch (address.AddressFamily)

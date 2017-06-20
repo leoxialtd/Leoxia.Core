@@ -44,14 +44,14 @@ using Leoxia.Testing.Assertions.Abstractions;
 namespace Leoxia.Testing.Assertions
 {
     /// <summary>
-    /// Entry class for fluent assertions.
+    ///     Entry class for fluent assertions.
     /// </summary>
     public static class Check
     {
         private static readonly IExceptionFactory _factory;
 
         /// <summary>
-        /// Initializes the <see cref="Check"/> class.
+        ///     Initializes the <see cref="Check" /> class.
         /// </summary>
         static Check()
         {
@@ -59,7 +59,7 @@ namespace Leoxia.Testing.Assertions
         }
 
         /// <summary>
-        /// Check on the specified value.
+        ///     Check on the specified value.
         /// </summary>
         /// <param name="value">if set to <c>true</c> [value].</param>
         /// <returns></returns>
@@ -69,7 +69,7 @@ namespace Leoxia.Testing.Assertions
         }
 
         /// <summary>
-        /// Check on the specified value.
+        ///     Check on the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns></returns>
@@ -79,7 +79,7 @@ namespace Leoxia.Testing.Assertions
         }
 
         /// <summary>
-        /// Check on the specified value.
+        ///     Check on the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns></returns>
@@ -89,7 +89,7 @@ namespace Leoxia.Testing.Assertions
         }
 
         /// <summary>
-        /// Check on the specified value.
+        ///     Check on the specified value.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="value">The value.</param>
@@ -100,7 +100,7 @@ namespace Leoxia.Testing.Assertions
         }
 
         /// <summary>
-        /// Check on the specified value.
+        ///     Check on the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns></returns>
@@ -110,7 +110,7 @@ namespace Leoxia.Testing.Assertions
         }
 
         /// <summary>
-        /// Check on the specified value.
+        ///     Check on the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns></returns>
@@ -125,7 +125,7 @@ namespace Leoxia.Testing.Assertions
         }
 
         /// <summary>
-        /// Check on the specified value.
+        ///     Check on the specified value.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="value">The value.</param>
@@ -137,7 +137,7 @@ namespace Leoxia.Testing.Assertions
         }
 
         /// <summary>
-        /// Check on the specified value.
+        ///     Check on the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns></returns>
@@ -147,7 +147,7 @@ namespace Leoxia.Testing.Assertions
         }
 
         /// <summary>
-        /// Check on the specified value.
+        ///     Check on the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns></returns>

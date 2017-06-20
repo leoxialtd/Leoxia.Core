@@ -41,7 +41,7 @@ using System;
 namespace Leoxia.Testing.Assertions.Abstractions
 {
     /// <summary>
-    /// Interface for checks on <see cref="Type"/>
+    ///     Interface for checks on <see cref="Type" />
     /// </summary>
     /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.IClassCheckable{Type}" />
     public interface ITypeCheckable : IClassCheckable<Type>

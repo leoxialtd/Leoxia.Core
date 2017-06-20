@@ -42,31 +42,34 @@ using System.Collections;
 namespace Leoxia.Testing.Assertions.Failures
 {
     /// <summary>
-    /// Base class for displaying the check failure message.
+    ///     Base class for displaying the check failure message.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="Leoxia.Testing.Assertions.ICheckFailure{IList}" />
     public abstract class BaseCheckFailure<T> : ICheckFailure<IList>
     {
         /// <summary>
-        /// The expected
+        ///     The expected
         /// </summary>
         protected readonly T _expected;
+
         /// <summary>
-        /// The message
+        ///     The message
         /// </summary>
         protected readonly string _message;
+
         /// <summary>
-        /// The tested
+        ///     The tested
         /// </summary>
         protected readonly T _tested;
+
         /// <summary>
-        /// The type
+        ///     The type
         /// </summary>
         protected readonly CheckType _type;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseCheckFailure{T}"/> class.
+        ///     Initializes a new instance of the <see cref="BaseCheckFailure{T}" /> class.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="tested">The tested.</param>
@@ -93,7 +96,7 @@ namespace Leoxia.Testing.Assertions.Failures
         }
 
         /// <summary>
-        /// Displays the message.
+        ///     Displays the message.
         /// </summary>
         /// <returns></returns>
         protected abstract string DisplayMessage();

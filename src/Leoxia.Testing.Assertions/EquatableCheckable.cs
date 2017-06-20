@@ -42,7 +42,7 @@ using Leoxia.Testing.Assertions.Abstractions;
 namespace Leoxia.Testing.Assertions
 {
     /// <summary>
-    /// Checks for <see cref="IEquatable{T}"/>
+    ///     Checks for <see cref="IEquatable{T}" />
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="Leoxia.Testing.Assertions.BaseClassCheckable{IEquatable}" />
@@ -51,7 +51,7 @@ namespace Leoxia.Testing.Assertions
         where T : IEquatable<T>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EquatableCheckable{T}"/> class.
+        ///     Initializes a new instance of the <see cref="EquatableCheckable{T}" /> class.
         /// </summary>
         /// <param name="factory"></param>
         /// <param name="value"></param>
@@ -60,7 +60,7 @@ namespace Leoxia.Testing.Assertions
         }
 
         /// <summary>
-        /// Checks the Inner is equal to
+        ///     Checks the Inner is equal to
         /// </summary>
         /// <param name="expected">The expected.</param>
         /// <param name="message">The message.</param>
@@ -71,7 +71,7 @@ namespace Leoxia.Testing.Assertions
         }
 
         /// <summary>
-        /// Checks the Inner is not equal to
+        ///     Checks the Inner is not equal to
         /// </summary>
         /// <param name="expected">The expected.</param>
         /// <param name="message">The message.</param>

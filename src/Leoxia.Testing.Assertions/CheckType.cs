@@ -35,88 +35,107 @@
 namespace Leoxia.Testing.Assertions
 {
     /// <summary>
-    /// The different check types.
+    ///     The different check types.
     /// </summary>
     public enum CheckType
     {
         /// <summary>
-        /// The true
+        ///     The true
         /// </summary>
         True,
+
         /// <summary>
-        /// The false
+        ///     The false
         /// </summary>
         False,
+
         /// <summary>
-        /// The null
+        ///     The null
         /// </summary>
         Null,
+
         /// <summary>
-        /// The not null
+        ///     The not null
         /// </summary>
         NotNull,
+
         /// <summary>
-        /// The equal
+        ///     The equal
         /// </summary>
         Equal,
+
         /// <summary>
-        /// The not equal
+        ///     The not equal
         /// </summary>
         NotEqual,
+
         /// <summary>
-        /// The op equal
+        ///     The op equal
         /// </summary>
         OpEqual,
+
         /// <summary>
-        /// The op not equal
+        ///     The op not equal
         /// </summary>
         OpNotEqual,
+
         /// <summary>
-        /// The count not equal
+        ///     The count not equal
         /// </summary>
         CountNotEqual,
+
         /// <summary>
-        /// The list item not equal
+        ///     The list item not equal
         /// </summary>
         ListItemNotEqual,
+
         /// <summary>
-        /// The list item all equal
+        ///     The list item all equal
         /// </summary>
         ListItemAllEqual,
+
         /// <summary>
-        /// The string null or empty
+        ///     The string null or empty
         /// </summary>
         StringNullOrEmpty,
+
         /// <summary>
-        /// The string not null or empty
+        ///     The string not null or empty
         /// </summary>
         StringNotNullOrEmpty,
+
         /// <summary>
-        /// The properties not equal
+        ///     The properties not equal
         /// </summary>
         PropertiesNotEqual,
+
         /// <summary>
-        /// The properties not initialized
+        ///     The properties not initialized
         /// </summary>
         PropertiesNotInitialized,
+
         /// <summary>
-        /// The properties equal
+        ///     The properties equal
         /// </summary>
         PropertiesEqual,
+
         /// <summary>
-        /// The properties initialized
+        ///     The properties initialized
         /// </summary>
         PropertiesInitialized,
+
         /// <summary>
-        /// The count equal
+        ///     The count equal
         /// </summary>
         CountEqual,
+
         /// <summary>
-        /// The list item equal
+        ///     The list item equal
         /// </summary>
         ListItemEqual,
+
         /// <summary>
-        /// The list item is not contained
+        ///     The list item is not contained
         /// </summary>
         ListItemIsNotContained
     }

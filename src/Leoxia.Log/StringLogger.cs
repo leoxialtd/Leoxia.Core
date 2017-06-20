@@ -35,7 +35,6 @@
 #region Usings
 
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 
 #endregion
@@ -43,7 +42,6 @@ using System.Text;
 namespace Leoxia.Log
 {
     /// <summary>
-    /// 
     /// </summary>
     public class StringLogger
     {
@@ -56,10 +54,10 @@ namespace Leoxia.Log
         }
 
         /// <summary>
-        /// Gets the log.
+        ///     Gets the log.
         /// </summary>
         /// <value>
-        /// The log.
+        ///     The log.
         /// </value>
         public static List<string> Log { get; private set; }
 
@@ -123,7 +121,7 @@ namespace Leoxia.Log
         }
 
         /// <summary>
-        /// Logs the get property after.
+        ///     Logs the get property after.
         /// </summary>
         /// <typeparam name="K"></typeparam>
         /// <param name="instance">The instance.</param>
@@ -137,7 +135,7 @@ namespace Leoxia.Log
         }
 
         /// <summary>
-        /// Logs the get property before.
+        ///     Logs the get property before.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="propertyName">Name of the property.</param>
@@ -147,7 +145,7 @@ namespace Leoxia.Log
         }
 
         /// <summary>
-        /// Logs the set property before.
+        ///     Logs the set property before.
         /// </summary>
         /// <typeparam name="K"></typeparam>
         /// <param name="instance">The instance.</param>
@@ -162,7 +160,7 @@ namespace Leoxia.Log
         }
 
         /// <summary>
-        /// Logs the set property after.
+        ///     Logs the set property after.
         /// </summary>
         /// <typeparam name="K"></typeparam>
         /// <param name="instance">The instance.</param>
