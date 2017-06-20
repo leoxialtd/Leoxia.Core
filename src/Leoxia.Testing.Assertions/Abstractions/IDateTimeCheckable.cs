@@ -35,12 +35,15 @@
 #region Usings
 
 using System;
-using Leoxia.Testing.Assertions.Abstractions;
 
 #endregion
 
-namespace Leoxia.Testing.Assertions
+namespace Leoxia.Testing.Assertions.Abstractions
 {
+    /// <summary>
+    ///     Checks for <see cref="DateTime" />
+    /// </summary>
+    /// <seealso cref="DateTime" />
     public interface IDateTimeCheckable : ICheckable<DateTime>
     {
     }

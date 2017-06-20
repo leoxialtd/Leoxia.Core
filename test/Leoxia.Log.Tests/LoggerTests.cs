@@ -38,9 +38,7 @@ using System;
 using System.Globalization;
 using System.Threading;
 using Leoxia.Abstractions;
-using Leoxia.Log.Tests.IO;
 using Leoxia.Testing.Assertions;
-using Leoxia.Testing.Reflection;
 using Moq;
 using Xunit;
 
@@ -62,12 +60,13 @@ namespace Leoxia.Log.Tests
             var appenderMediatorMock = new Mock<IAppenderMediator>();
             appenderMediatorMock.Setup(x => x.Log(It.IsAny<ILogEvent>())).Callback<ILogEvent>(x => SetLogEvent(x));
             var appenderMediator = appenderMediatorMock.Object;
-            _logger = new Logger(appenderMediator, new LogEventFactory(new TimestampProvider(mockProvider.Object)), "Topic");
+            _logger = new Logger(appenderMediator, new LogEventFactory(new TimestampProvider(mockProvider.Object)),
+                "Topic");
         }
 
-        private ILogEvent SetLogEvent(ILogEvent x)
+        private void SetLogEvent(ILogEvent x)
         {
-            return _lastEvent = x;
+            _lastEvent = x;
         }
 
         [Fact]

@@ -40,9 +40,29 @@ using Leoxia.Testing.Reflection;
 
 namespace Leoxia.Testing.Assertions.Abstractions
 {
+    /// <summary>
+    ///     Factory building failure messages
+    /// </summary>
     public interface ICheckFailureMessageFactory
     {
+        /// <summary>
+        ///     Builds the message.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="checkType">Type of the check.</param>
+        /// <param name="tested">The tested.</param>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         string BuildMessage<T>(CheckType checkType, T tested, T expected, string message);
+
+        /// <summary>
+        ///     Builds the message.
+        /// </summary>
+        /// <param name="checkType">Type of the check.</param>
+        /// <param name="trace">The trace.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         string BuildMessage(CheckType checkType, CheckingTrace trace, string message);
     }
 }

@@ -32,13 +32,29 @@
 
 #endregion
 
+#region Usings
+
 using System.IO;
 using Leoxia.Abstractions.IO;
 
+#endregion
+
 namespace Leoxia.IO
 {
+    /// <summary>
+    ///     Reader of file content.
+    /// </summary>
+    /// <seealso cref="Leoxia.IO.IFileReader" />
     public class FileReader : IFileReader
     {
+        /// <summary>
+        ///     Reads the bytes of a file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <returns>
+        ///     <see cref="byte" /> array
+        /// </returns>
+        /// <exception cref="System.IO.FileNotFoundException"></exception>
         public byte[] ReadBytes(IFileInfo file)
         {
             if (!file.Exists)

@@ -40,7 +40,7 @@ using Xunit.Abstractions;
 
 #endregion
 
-namespace Leoxia.Testing.IO
+namespace Leoxia.Testing.Mocks.IO
 {
     /// <summary>
     ///     Adapter for XUnit output helper into TextWriter
@@ -49,7 +49,7 @@ namespace Leoxia.Testing.IO
     public class TextWriterAdapter : TextWriter
     {
         private readonly ITestOutputHelper _output;
-        private readonly object _synchro = new object();
+        private readonly object _synchronization = new object();
         private StringBuilder _builder = new StringBuilder();
         private bool _lastReturn;
 
@@ -69,7 +69,7 @@ namespace Leoxia.Testing.IO
         /// <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
         public override void Write(char value)
         {
-            lock (_synchro)
+            lock (_synchronization)
             {
                 if (value == '\n')
                 {

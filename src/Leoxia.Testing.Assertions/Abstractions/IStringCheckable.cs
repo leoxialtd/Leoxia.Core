@@ -34,9 +34,22 @@
 
 namespace Leoxia.Testing.Assertions.Abstractions
 {
+    /// <summary>
+    ///     Interface for checks on <see cref="string" />
+    /// </summary>
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.IClassCheckable{String}" />
     public interface IStringCheckable : IClassCheckable<string>
     {
+        /// <summary>
+        ///     Check the current value is null or empty.
+        /// </summary>
+        /// <param name="message">The message.</param>
         void IsNullOrEmpty(string message = null);
+
+        /// <summary>
+        ///     Check the current value is not null or empty.
+        /// </summary>
+        /// <param name="message">The message.</param>
         void IsNotNullOrEmpty(string message = null);
     }
 }

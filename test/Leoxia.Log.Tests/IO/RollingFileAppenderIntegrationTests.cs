@@ -1,7 +1,7 @@
 #region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RollingFileAppenderIntegrationTest.cs" company="Leoxia Ltd">
+// <copyright file="RollingFileAppenderIntegrationTests.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -41,9 +41,9 @@ using Xunit;
 
 #endregion
 
-namespace Leoxia.Log.Unit.Tests
+namespace Leoxia.Log.Tests.IO
 {
-    public class RollingFileAppenderIntegrationTest
+    public class RollingFileAppenderIntegrationTests
     {
         [Fact]
         public void IntegrationLogInSubDirectoryTest()
@@ -59,7 +59,7 @@ namespace Leoxia.Log.Unit.Tests
             }
             var appender = new RollingFileAppender("Logs/myTest.Log");
             LogManager.AppenderMediator.Subscribe(appender);
-            var logger = LogManager.GetLogger(typeof(RollingFileAppenderTest));
+            var logger = LogManager.GetLogger(typeof(RollingFileAppenderTests));
             logger.Info("Appender is logging");
             appender.Dispose();
             LogManager.AppenderMediator.Unsubscribe(appender);
@@ -67,8 +67,8 @@ namespace Leoxia.Log.Unit.Tests
             LogManager.AppenderMediator.Subscribe(appender);
             logger.Info("Appender is logging again");
             appender.Dispose();
-            var logfiles = directoryInfo.GetFiles("myTest*.Log");
-            Assert.Equal(2, logfiles.Length);
+            var logFiles = directoryInfo.GetFiles("myTest*.Log");
+            Assert.Equal(2, logFiles.Length);
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace Leoxia.Log.Unit.Tests
             }
             var appender = new RollingFileAppender("myTest.Log");
             LogManager.AppenderMediator.Subscribe(appender);
-            var logger = LogManager.GetLogger(typeof(RollingFileAppenderTest));
+            var logger = LogManager.GetLogger(typeof(RollingFileAppenderTests));
             logger.Info("Appender is logging");
             appender.Dispose();
             LogManager.AppenderMediator.Unsubscribe(appender);
@@ -103,7 +103,7 @@ namespace Leoxia.Log.Unit.Tests
             }
             var appender = new RollingFileAppender("rollTest.Log");
             LogManager.AppenderMediator.Subscribe(appender);
-            var logger = LogManager.GetLogger(typeof(RollingFileAppenderTest));
+            var logger = LogManager.GetLogger(typeof(RollingFileAppenderTests));
             logger.Info("Appender is logging");
             appender.Dispose();
             appender.MaxLength = 0;
@@ -132,7 +132,7 @@ namespace Leoxia.Log.Unit.Tests
             }
             var appender = new RollingFileAppender("otherTest.Log");
             LogManager.AppenderMediator.Subscribe(appender);
-            var logger = LogManager.GetLogger(typeof(RollingFileAppenderTest));
+            var logger = LogManager.GetLogger(typeof(RollingFileAppenderTests));
             logger.Info("Appender is logging");
             LogManager.AppenderMediator.Unsubscribe(appender);
             appender.Dispose();
@@ -140,7 +140,7 @@ namespace Leoxia.Log.Unit.Tests
             Assert.Equal(1, files.Length);
             var fileLog = files.FirstOrDefault();
             // grab a lock on the log file
-            using (var writer = File.Open(fileLog.FullName, FileMode.Open, FileAccess.Write, FileShare.None))
+            using (File.Open(fileLog.FullName, FileMode.Open, FileAccess.Write, FileShare.None))
             {
                 appender = new RollingFileAppender("otherTest.Log");
                 LogManager.AppenderMediator.Subscribe(appender);

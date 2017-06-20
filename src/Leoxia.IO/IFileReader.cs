@@ -32,20 +32,24 @@
 
 #endregion
 
+#region Usings
+
 using Leoxia.Abstractions.IO;
+
+#endregion
 
 namespace Leoxia.IO
 {
     /// <summary>
-    /// Abstraction for reading file.
+    ///     Abstraction for reading file.
     /// </summary>
     public interface IFileReader
     {
         /// <summary>
-        /// Reads the bytes of a file.
+        ///     Reads the bytes of a file.
         /// </summary>
         /// <param name="file">The file.</param>
-        /// <returns><see cref="byte"/> array</returns>
+        /// <returns><see cref="byte" /> array</returns>
         byte[] ReadBytes(IFileInfo file);
     }
 }

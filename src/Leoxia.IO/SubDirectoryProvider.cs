@@ -32,15 +32,19 @@
 
 #endregion
 
+#region Usings
+
 using System;
 using System.IO;
 using System.Linq;
 using Leoxia.Abstractions.IO;
 
+#endregion
+
 namespace Leoxia.IO
 {
     /// <summary>
-    /// Provides <see cref="IDirectoryInfo" /> as a sub directory of a reference one.
+    ///     Provides <see cref="IDirectoryInfo" /> as a sub directory of a reference one.
     /// </summary>
     /// <seealso cref="Leoxia.IO.IDirectoryInfoProvider" />
     public class SubDirectoryProvider : IDirectoryInfoProvider
@@ -48,7 +52,7 @@ namespace Leoxia.IO
         private readonly IDirectoryInfo _directoryPath;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SubDirectoryProvider"/> class.
+        ///     Initializes a new instance of the <see cref="SubDirectoryProvider" /> class.
         /// </summary>
         /// <param name="provider">The provider.</param>
         /// <param name="subDirectory">The sub directory.</param>
@@ -58,7 +62,7 @@ namespace Leoxia.IO
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SubDirectoryProvider"/> class.
+        ///     Initializes a new instance of the <see cref="SubDirectoryProvider" /> class.
         /// </summary>
         /// <param name="directoryPath">The directory path.</param>
         /// <param name="subDirectory">The sub directory.</param>
@@ -73,7 +77,7 @@ namespace Leoxia.IO
         }
 
         /// <summary>
-        /// Gets <see cref="IDirectoryInfo" />.
+        ///     Gets <see cref="IDirectoryInfo" />.
         /// </summary>
         /// <returns></returns>
         public IDirectoryInfo Get()
@@ -87,8 +91,7 @@ namespace Leoxia.IO
             {
                 return directoryPath;
             }
-            IDirectoryInfo target = null;
-            target = directoryPath.GetDirectories(subDirectory, SearchOption.TopDirectoryOnly).FirstOrDefault();
+            var target = directoryPath.GetDirectories(subDirectory, SearchOption.TopDirectoryOnly).FirstOrDefault();
             if (target == null || !target.Exists)
             {
                 target = directoryPath.CreateSubdirectory(subDirectory);

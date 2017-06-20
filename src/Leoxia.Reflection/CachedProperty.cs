@@ -35,21 +35,26 @@
 #region Usings
 
 using System;
-using System.Linq;
 using System.Reflection;
-using Leoxia.Collections;
 
 #endregion
 
 namespace Leoxia.Reflection
 {
+    /// <summary>
+    ///     Holds type data related to a property
+    /// </summary>
     public class CachedProperty
     {
         private readonly Type _elementType;
         private IGetterMethod _getter;
         private ISetterMethod _setter;
 
-        public CachedProperty(Type containingType, PropertyInfo propertyInfo)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="CachedProperty" /> class.
+        /// </summary>
+        /// <param name="propertyInfo">The property information.</param>
+        public CachedProperty(PropertyInfo propertyInfo)
         {
             PropertyInfo = propertyInfo;
             PropertyType = propertyInfo.PropertyType;
@@ -66,132 +71,106 @@ namespace Leoxia.Reflection
             IsCollectionType = PropertyType.TryGetCollectionElement(out _elementType);
         }
 
+        /// <summary>
+        ///     Gets the type of the element. Null if the type is not a collection type.
+        /// </summary>
+        /// <value>
+        ///     The type of the element.
+        /// </value>
         public Type ElementType => _elementType;
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is collection type.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is collection type; otherwise, <c>false</c>.
+        /// </value>
         public bool IsCollectionType { get; }
 
+        /// <summary>
+        ///     Gets a value indicating whether this instance is key.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is key; otherwise, <c>false</c>.
+        /// </value>
         public bool IsKey { get; } = false;
 
+        /// <summary>
+        ///     Gets a value indicating whether this instance is valid entity type.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is valid entity type; otherwise, <c>false</c>.
+        /// </value>
         public bool IsValidEntityType { get; }
 
+        /// <summary>
+        ///     Gets a value indicating whether this instance is virtual.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is virtual; otherwise, <c>false</c>.
+        /// </value>
         public bool IsVirtual { get; }
+
+        /// <summary>
+        ///     Gets the name.
+        /// </summary>
+        /// <value>
+        ///     The name.
+        /// </value>
         public string Name => PropertyInfo.Name;
+
+        /// <summary>
+        ///     Gets the property information.
+        /// </summary>
+        /// <value>
+        ///     The property information.
+        /// </value>
         public PropertyInfo PropertyInfo { get; }
 
 
+        /// <summary>
+        ///     Gets the type of the property.
+        /// </summary>
+        /// <value>
+        ///     The type of the property.
+        /// </value>
         public Type PropertyType { get; }
 
+        /// <summary>
+        ///     Gets the property type information.
+        /// </summary>
+        /// <value>
+        ///     The property type information.
+        /// </value>
         public TypeInfo PropertyTypeInfo { get; }
 
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <param name="newEntity">The new entity.</param>
+        /// <returns></returns>
         public object GetValue(object newEntity)
         {
             return _getter.Invoke(newEntity);
         }
 
+        /// <summary>
+        ///     Sets the value.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <param name="value">The value.</param>
         public void SetValue(object instance, object value)
         {
             _setter.Invoke(instance, value);
         }
 
+        /// <summary>
+        ///     Compiles the getter and setter accessor.
+        /// </summary>
         public void Compile()
         {
             _getter = _getter.Compile();
             _setter = _setter.Compile();
-        }
-    }
-
-    public class NotCompiledGetter : IGetterMethod
-    {
-        private readonly MethodInfo _method;
-
-        public NotCompiledGetter(MethodInfo method)
-        {
-            _method = method;
-        }
-
-        public object Invoke(object instance)
-        {
-            return _method.Invoke(instance, EmptyArray<object>.Instance);
-        }
-
-        public IGetterMethod Compile()
-        {
-            return new CompiledGetter(_method);
-        }
-    }
-
-    public class CompiledGetter : IGetterMethod
-    {
-        private readonly Delegate _delegate;
-
-        public CompiledGetter(MethodInfo method)
-        {
-            var type = typeof(Func<,>).MakeGenericType(method.DeclaringType,
-                method.ReturnType);
-            _delegate = method.CreateDelegate(type);
-        }
-
-        public object Invoke(object instance)
-        {
-            return _delegate.DynamicInvoke(instance);
-        }
-
-        public IGetterMethod Compile()
-        {
-            return this;
-        }
-    }
-
-    public interface IGetterMethod
-    {
-        object Invoke(object newEntity);
-        IGetterMethod Compile();
-    }
-
-    public interface ISetterMethod
-    {
-        void Invoke(object instance, object value);
-        ISetterMethod Compile();
-    }
-
-    public class NotCompiledSetter : ISetterMethod
-    {
-        private readonly MethodInfo _method;
-
-        public NotCompiledSetter(MethodInfo method)
-        {
-            _method = method;
-        }
-
-        public void Invoke(object instance, object value)
-        {
-            _method.Invoke(instance, new[] {value});
-        }
-
-        public ISetterMethod Compile()
-        {
-            return new CompileSetter(_method);
-        }
-    }
-
-    public class CompileSetter : ISetterMethod
-    {
-        private readonly Delegate _delegate;
-
-        public CompileSetter(MethodInfo method)
-        {
-            var type = typeof(Action<,>).MakeGenericType(method.DeclaringType,
-                method.GetParameters().FirstOrDefault().ParameterType);
-            _delegate = method.CreateDelegate(type);
-        }
-
-        public void Invoke(object instance, object value)
-        {
-            _delegate.DynamicInvoke(instance, value);
-        }
-
-        public ISetterMethod Compile()
-        {
-            return this;
         }
     }
 }

@@ -55,6 +55,10 @@ namespace Leoxia.Log
 
         private readonly object _syncRoot = new object();
 
+        /// <summary>
+        ///     Logs the specified log event.
+        /// </summary>
+        /// <param name="logEvent">The log event.</param>
         public void Log(ILogEvent logEvent)
         {
             IAppender[] appenderArray;
@@ -72,6 +76,10 @@ namespace Leoxia.Log
             }
         }
 
+        /// <summary>
+        ///     Register the subscription of the specified appender.
+        /// </summary>
+        /// <param name="appender">The appender.</param>
         public void Subscribe(IAppender appender)
         {
             ILogEvent[] logEvents;
@@ -88,6 +96,10 @@ namespace Leoxia.Log
             }
         }
 
+        /// <summary>
+        ///     Unsubscribes the specified appender.
+        /// </summary>
+        /// <param name="appender">The appender.</param>
         public void Unsubscribe(IAppender appender)
         {
             lock (_syncRoot)
@@ -96,6 +108,9 @@ namespace Leoxia.Log
             }
         }
 
+        /// <summary>
+        ///     Clears this instance.
+        /// </summary>
         public void Clear()
         {
             lock (_syncRoot)

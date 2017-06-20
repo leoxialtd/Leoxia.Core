@@ -50,13 +50,17 @@ namespace Leoxia.IO
         private readonly ILogger _logger = LogManager.GetLogger(typeof(TemporaryTextFileAccessor));
         private readonly ITemporaryFileProvider _provider;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="TemporaryTextFileAccessor" /> class.
+        /// </summary>
+        /// <param name="temporaryFileProvider">The temporary file provider.</param>
         public TemporaryTextFileAccessor(ITemporaryFileProvider temporaryFileProvider)
         {
             _provider = temporaryFileProvider;
         }
 
         /// <summary>
-        /// Saves text to the specified file name.
+        ///     Saves text to the specified file name.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <param name="content">The content.</param>
@@ -71,7 +75,7 @@ namespace Leoxia.IO
         }
 
         /// <summary>
-        /// Loads text from the specified file name.
+        ///     Loads text from the specified file name.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>text</returns>
@@ -85,7 +89,7 @@ namespace Leoxia.IO
         }
 
         /// <summary>
-        /// Returns whether the specified file name exists.
+        ///     Returns whether the specified file name exists.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <returns></returns>

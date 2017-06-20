@@ -6,6 +6,7 @@ ForEach ($file in Get-ChildItem test)
 	dotnet test $project --configuration release 
 	if ($LASTEXITCODE -ne 0)
 	{
+		echo "Tests failed."
 		exit $LASTEXITCODE
 	}
 }

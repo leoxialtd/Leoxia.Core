@@ -37,24 +37,18 @@ namespace Leoxia.Testing.Test
     public class DummyContainer
     {
         /// <summary>
-        /// Keep the field as it used by reflection test
-        /// </summary>
-        private readonly string _myField = "FieldValue1";
-
-        /// <summary>
-        /// Keep the field as it used by reflection test
+        ///     Keep the field as it used by reflection test
         /// </summary>
         private readonly IInterface _instance = new Implementation();
 
-        public IInterface Instance
-        {
-            get { return _instance; }
-        }
+        /// <summary>
+        ///     Keep the field as it used by reflection test
+        /// </summary>
+        private readonly string _myField = "FieldValue1";
 
-        public string MyField
-        {
-            get { return _myField; }
-        }
+        public IInterface Instance => _instance;
+
+        public string MyField => _myField;
     }
 
     public class Implementation : IInterface

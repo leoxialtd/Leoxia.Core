@@ -1,7 +1,7 @@
-﻿#region Copyright (c) 2017 Leoxia Ltd
+#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LogEx.cs" company="Leoxia Ltd">
+// <copyright file="ISetterMethod.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -32,33 +32,24 @@
 
 #endregion
 
-#region Usings
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-#endregion
-
-namespace Leoxia.Log
+namespace Leoxia.Reflection
 {
-    public class LogEx
+    /// <summary>
+    ///     Interface for setters
+    /// </summary>
+    public interface ISetterMethod
     {
-        public static string Exception(Exception exception)
-        {
-            var stack = new Stack<string>();
-            stack.Push(exception.ToString());
-            while (exception.InnerException != null)
-            {
-                exception = exception.InnerException;
-                stack.Push(exception.ToString());
-            }
-            var builder = new StringBuilder();
-            foreach (var item in stack)
-            {
-                builder.AppendLine(item);
-            }
-            return builder.ToString();
-        }
+        /// <summary>
+        ///     Invokes the specified instance.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <param name="value">The value.</param>
+        void Invoke(object instance, object value);
+
+        /// <summary>
+        ///     Compiles this instance.
+        /// </summary>
+        /// <returns></returns>
+        ISetterMethod Compile();
     }
 }

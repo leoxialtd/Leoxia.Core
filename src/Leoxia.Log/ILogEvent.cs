@@ -40,15 +40,73 @@ using System;
 
 namespace Leoxia.Log
 {
+    /// <summary>
+    ///     Interface for logs
+    /// </summary>
     public interface ILogEvent
     {
+        /// <summary>
+        ///     Gets the date.
+        /// </summary>
+        /// <value>
+        ///     The date.
+        /// </value>
         DateTime Date { get; }
+
+        /// <summary>
+        ///     Gets the identifier.
+        /// </summary>
+        /// <value>
+        ///     The identifier.
+        /// </value>
         int Id { get; }
+
+        /// <summary>
+        ///     Gets the level.
+        /// </summary>
+        /// <value>
+        ///     The level.
+        /// </value>
         LogLevel Level { get; }
+
+        /// <summary>
+        ///     Gets the message.
+        /// </summary>
+        /// <value>
+        ///     The message.
+        /// </value>
         string Message { get; }
+
+        /// <summary>
+        ///     Gets the precise timestamp.
+        /// </summary>
+        /// <value>
+        ///     The precise timestamp.
+        /// </value>
         long PreciseTimestamp { get; }
+
+        /// <summary>
+        ///     Gets the process identifier.
+        /// </summary>
+        /// <value>
+        ///     The process identifier.
+        /// </value>
         int ProcessId { get; }
+
+        /// <summary>
+        ///     Gets the thread identifier.
+        /// </summary>
+        /// <value>
+        ///     The thread identifier.
+        /// </value>
         string ThreadId { get; }
+
+        /// <summary>
+        ///     Gets the topic.
+        /// </summary>
+        /// <value>
+        ///     The topic.
+        /// </value>
         string Topic { get; }
     }
 }

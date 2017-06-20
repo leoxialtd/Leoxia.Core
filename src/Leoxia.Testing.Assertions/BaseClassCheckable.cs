@@ -42,6 +42,12 @@ using Leoxia.Testing.Reflection;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    ///     Base class for <see cref="ICheckable{T}" /> related to classes.
+    /// </summary>
+    /// <typeparam name="T">type of the tested value.</typeparam>
+    /// <seealso cref="Leoxia.Testing.Assertions.BaseCheckable{T}" />
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.IClassCheckable{T}" />
     public abstract class BaseClassCheckable<T> : BaseCheckable<T>, IClassCheckable<T> where T : class
     {
         /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
@@ -49,16 +55,29 @@ namespace Leoxia.Testing.Assertions
         {
         }
 
+        /// <summary>
+        ///     Checks that the tested value is not null.
+        /// </summary>
+        /// <param name="message">The message.</param>
         public void IsNotNull(string message = null)
         {
             CommonCheck(_value == null, CheckType.NotNull, message);
         }
 
+        /// <summary>
+        ///     Checks that the tested value is null.
+        /// </summary>
+        /// <param name="message">The message.</param>
         public void IsNull(string message = null)
         {
             CommonCheck(_value != null, CheckType.Null, message);
         }
 
+        /// <summary>
+        ///     Check that the tested value has properties that respect a contract.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns></returns>
         public IPropertiesCheckable<T> HavePropertiesThat(PropertiesComparisonOptions options = null)
         {
             if (options == null)
@@ -73,6 +92,7 @@ namespace Leoxia.Testing.Assertions
             if (flag)
             {
                 var classCheckFailure = new ClassCheckFailure<T>(checkType, _value, null, message);
+                // ReSharper disable once UnthrowableException
                 throw _factory.Build(classCheckFailure);
             }
         }

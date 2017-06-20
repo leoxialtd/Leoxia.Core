@@ -41,6 +41,7 @@ using Xunit;
 
 namespace Leoxia.Network.Test
 {
+    // ReSharper disable once InconsistentNaming
     public class IPAddressExtensionsTest
     {
         [Fact]

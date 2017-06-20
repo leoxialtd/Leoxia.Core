@@ -32,13 +32,16 @@
 
 #endregion
 
+#region Usings
+
 using System.IO;
-using Leoxia.Abstractions.IO;
+
+#endregion
 
 namespace Leoxia.IO
 {
     /// <summary>
-    /// Provide temporary file path as a file in a temporary directory.
+    ///     Provide temporary file path as a file in a temporary directory.
     /// </summary>
     /// <seealso cref="Leoxia.IO.ITemporaryFileProvider" />
     public class TemporaryFileProvider : ITemporaryFileProvider
@@ -46,7 +49,7 @@ namespace Leoxia.IO
         private readonly IDirectoryInfoProvider _provider;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TemporaryFileProvider"/> class.
+        ///     Initializes a new instance of the <see cref="TemporaryFileProvider" /> class.
         /// </summary>
         /// <param name="provider">The provider.</param>
         public TemporaryFileProvider(IDirectoryInfoProvider provider)
@@ -55,11 +58,11 @@ namespace Leoxia.IO
         }
 
         /// <summary>
-        /// Gets the specified temporary file path.
+        ///     Gets the specified temporary file path.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>
-        /// temporary file path
+        ///     temporary file path
         /// </returns>
         public string Get(string fileName)
         {

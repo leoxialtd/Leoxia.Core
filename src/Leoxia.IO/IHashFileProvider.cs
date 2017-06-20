@@ -32,20 +32,24 @@
 
 #endregion
 
+#region Usings
+
 using Leoxia.Abstractions.IO;
+
+#endregion
 
 namespace Leoxia.IO
 {
     /// <summary>
-    /// Provider of a <see cref="string"/> hash of a <see cref="IFileInfo"/>
+    ///     Provider of a <see cref="string" /> hash of a <see cref="IFileInfo" />
     /// </summary>
     public interface IHashFileProvider
     {
         /// <summary>
-        /// Gets the <see cref="IFileInfo"/> hash.
+        ///     Gets the <see cref="IFileInfo" /> hash.
         /// </summary>
         /// <param name="fileInfo">The file information.</param>
-        /// <returns><see cref="string"/> hash</returns>
+        /// <returns><see cref="string" /> hash</returns>
         string GetFileHash(IFileInfo fileInfo);
     }
 }

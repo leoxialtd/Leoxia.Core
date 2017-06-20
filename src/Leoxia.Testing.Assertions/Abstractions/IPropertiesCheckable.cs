@@ -34,10 +34,23 @@
 
 namespace Leoxia.Testing.Assertions.Abstractions
 {
+    /// <summary>
+    ///     Interface for checks of properties
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IPropertiesCheckable<T>
     {
+        /// <summary>
+        ///     Checks the properties are equal to properties to another expected object.
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
         void AreEqualToPropertiesOf(T expected, string message = null);
 
+        /// <summary>
+        ///     Checks the properties are initialized.
+        /// </summary>
+        /// <param name="message">The message.</param>
         void AreInitialized(string message = null);
     }
 }

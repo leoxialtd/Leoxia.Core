@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TypeEx.cs" company="Leoxia Ltd">
+// <copyright file="TypeExtensions.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -44,18 +44,27 @@ using System.Reflection;
 
 namespace Leoxia.Reflection
 {
-    public static class TypeEx
+    /// <summary>
+    ///     Extension methods for <see cref="Type" />
+    /// </summary>
+    public static class TypeExtensions
     {
         private static readonly Random _random = new Random(Environment.TickCount);
 
-        private static readonly IDictionary<Type, object> defaultValues =
+        private static readonly IDictionary<Type, object> _defaultValues =
             new Dictionary<Type, object>();
 
-        private static readonly TypeInfo listTypeInfo = typeof(IList).GetTypeInfo();
-        private static readonly TypeInfo collectionTypeInfo = typeof(ICollection).GetTypeInfo();
-        private static readonly Type listGenType = typeof(IList<>);
-        private static readonly Type collectionGenType = typeof(ICollection<>);
+        private static readonly TypeInfo _listTypeInfo = typeof(IList).GetTypeInfo();
+        private static readonly TypeInfo _collectionTypeInfo = typeof(ICollection).GetTypeInfo();
+        private static readonly Type _listGenType = typeof(IList<>);
+        private static readonly Type _collectionGenType = typeof(ICollection<>);
 
+        /// <summary>
+        ///     Tries to determine if a type is a collection type and its element type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="elementType">Type of the element.</param>
+        /// <returns>true if it's collection, false otherwise</returns>
         public static bool TryGetCollectionElement(this Type type, out Type elementType)
         {
             elementType = null;
@@ -70,10 +79,10 @@ namespace Leoxia.Reflection
             var typeInfo = type.GetTypeInfo();
             if (typeInfo.IsGenericType)
             {
-                if (listTypeInfo.IsAssignableFrom(typeInfo) ||
-                    listGenType == type.GetGenericTypeDefinition() ||
-                    collectionTypeInfo.IsAssignableFrom(typeInfo) ||
-                    collectionGenType == type.GetGenericTypeDefinition())
+                if (_listTypeInfo.IsAssignableFrom(typeInfo) ||
+                    _listGenType == type.GetGenericTypeDefinition() ||
+                    _collectionTypeInfo.IsAssignableFrom(typeInfo) ||
+                    _collectionGenType == type.GetGenericTypeDefinition())
                 {
                     elementType = typeInfo.GetGenericArguments().First();
                     return true;
@@ -83,18 +92,30 @@ namespace Leoxia.Reflection
         }
 
 
+        /// <summary>
+        ///     Gets the default value.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns></returns>
         public static object GetDefaultValue(this Type type)
         {
             object result;
-            if (!defaultValues.TryGetValue(type, out result))
+            if (!_defaultValues.TryGetValue(type, out result))
             {
                 var genericType = typeof(DefaultProvider<>).MakeGenericType(type);
                 result = ((IDefaultProvider) Activator.CreateInstance(genericType)).Default;
-                defaultValues[type] = result;
+                _defaultValues[type] = result;
             }
             return result;
         }
 
+        /// <summary>
+        ///     Determines whether the type is a collection type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified type is a collection type; otherwise, <c>false</c>.
+        /// </returns>
         public static bool IsCollectionType(this Type type)
         {
             if (type.IsArray)
@@ -106,9 +127,9 @@ namespace Leoxia.Reflection
             }
             if (type.GetTypeInfo().IsGenericType)
             {
-                if (listTypeInfo.IsAssignableFrom(type) ||
-                    listGenType == type.GetGenericTypeDefinition() ||
-                    collectionTypeInfo.IsAssignableFrom(type) ||
+                if (_listTypeInfo.IsAssignableFrom(type) ||
+                    _listGenType == type.GetGenericTypeDefinition() ||
+                    _collectionTypeInfo.IsAssignableFrom(type) ||
                     typeof(ICollection<>) == type.GetGenericTypeDefinition())
                 {
                     return true;
@@ -128,11 +149,22 @@ namespace Leoxia.Reflection
             return instance?.GetType().GetTypeInfo().GetProperty(propertyName)?.GetValue(instance);
         }
 
+        /// <summary>
+        ///     Sets the property value.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <param name="value">The value.</param>
         public static void SetPropertyValue(this object instance, string propertyName, object value)
         {
             instance?.GetType().GetTypeInfo().GetProperty(propertyName)?.SetValue(instance, value);
         }
 
+        /// <summary>
+        ///     Gets a random value from the given <see cref="Type" />.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>random value</returns>
         public static object GetRandomValue(this Type type)
         {
             if (type == typeof(int))
@@ -155,7 +187,7 @@ namespace Leoxia.Reflection
         ///     Useful for generics.
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <returns></returns>
+        /// <returns>valid type name</returns>
         public static string GetValidName(this Type type)
         {
             var cached = CachedType.Get(type);

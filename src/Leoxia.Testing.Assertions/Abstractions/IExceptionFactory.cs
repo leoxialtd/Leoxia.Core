@@ -40,8 +40,17 @@ using System;
 
 namespace Leoxia.Testing.Assertions.Abstractions
 {
+    /// <summary>
+    /// Interface for factory of <see cref="Exception"/>
+    /// </summary>
     public interface IExceptionFactory
     {
+        /// <summary>
+        /// Builds the specified <see cref="Exception"/>.
+        /// </summary>
+        /// <typeparam name="T">type of tested object</typeparam>
+        /// <param name="failure">The failure.</param>
+        /// <returns></returns>
         Exception Build<T>(ICheckFailure<T> failure);
     }
 }

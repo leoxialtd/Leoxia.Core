@@ -49,6 +49,11 @@ using Leoxia.Threading;
 
 namespace Leoxia.Log.IO
 {
+    /// <summary>
+    ///     File Appender rolling the file depending on date.
+    /// </summary>
+    /// <seealso cref="Leoxia.Log.IAppender" />
+    /// <seealso cref="System.IDisposable" />
     public sealed class RollingFileAppender : IAppender, IDisposable
     {
         private readonly string _baseFile;
@@ -64,6 +69,11 @@ namespace Leoxia.Log.IO
         private bool _locked;
         private StreamWriter _writer;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="RollingFileAppender" /> class.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="provider">The provider.</param>
         public RollingFileAppender(string file,
             ILogFormatProvider provider = null) :
             this(file, provider, new FileInfoFactory(), new FileAdapter(),
@@ -121,14 +131,27 @@ namespace Leoxia.Log.IO
             MaxLength = 1024 * 1024;
         }
 
+        /// <summary>
+        ///     Gets or sets the maximum length.
+        /// </summary>
+        /// <value>
+        ///     The maximum length.
+        /// </value>
         public long MaxLength { get; set; }
 
+        /// <summary>
+        ///     Appends the specified log event.
+        /// </summary>
+        /// <param name="logEvent">The log event.</param>
         public void Append(ILogEvent logEvent)
         {
             AppendAsync(logEvent);
         }
 
-        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             foreach (var task in _tasks)
@@ -169,6 +192,11 @@ namespace Leoxia.Log.IO
             return Path.Combine(directoryPart, filePart + dateComponent + lockedPart + counterPart + fileExtension);
         }
 
+        /// <summary>
+        ///     Appends the <see cref="ILogEvent" /> asynchronously.
+        /// </summary>
+        /// <param name="logEvent">The log event.</param>
+        /// <returns></returns>
         public Task AppendAsync(ILogEvent logEvent)
         {
             _events.Enqueue(logEvent);

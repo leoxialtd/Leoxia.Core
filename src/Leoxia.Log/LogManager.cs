@@ -44,9 +44,11 @@ namespace Leoxia.Log
     /// <summary>
     ///     Factory responsible for building one Logger for a given topic.
     /// </summary>
+    // ReSharper disable once HollowTypeName
     public static class LogManager
     {
-        private static readonly ILogEventFactory _factory = new LogEventFactory(new TimestampProvider(new TimeProvider()));
+        private static readonly ILogEventFactory _factory =
+            new LogEventFactory(new TimestampProvider(new TimeProvider()));
 
         /// <summary>
         ///     Gets the log event manager.

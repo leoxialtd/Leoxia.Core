@@ -41,12 +41,19 @@ using Moq;
 
 #endregion
 
-namespace Leoxia.Testing.Mock
+namespace Leoxia.Testing.Mocks
 {
+    /// <summary>
+    ///     A test unit fixture providing class IOC resolution and auto injection of mocks.
+    /// </summary>
+    /// <seealso cref="System.IDisposable" />
     public class MockUnitTestFixture : IDisposable
     {
         private readonly MockFactory _factory = new MockFactory();
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MockUnitTestFixture" /> class.
+        /// </summary>
         public MockUnitTestFixture()
         {
             Behavior = MockBehavior.Default;
@@ -57,40 +64,94 @@ namespace Leoxia.Testing.Mock
                 {
                     return null; // Mock interface or abstract class only.
                 }
-                return new DelegateFactory(x => _factory.Get(serviceType, Behavior, Lifetime.Singleton).Object);
+                return new DelegateFactory(x => _factory.Get(serviceType, Behavior).Object);
             }));
         }
 
+        /// <summary>
+        ///     Gets or sets the behavior used to create new <see cref="Mock" />.
+        /// </summary>
+        /// <value>
+        ///     The behavior.
+        /// </value>
         public MockBehavior Behavior { get; set; }
 
+        /// <summary>
+        ///     Gets the IOC container.
+        /// </summary>
+        /// <value>
+        ///     The container.
+        /// </value>
         public IContainer Container { get; }
 
+        /// <summary>
+        ///     Releases unmanaged resources
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        ///     Gets the mock for given interface.
+        /// </summary>
+        /// <typeparam name="T">type of mocked interface.</typeparam>
+        /// <returns>
+        ///     <see cref="Mock{T}" />
+        /// </returns>
         public Mock<T> Get<T>() where T : class
         {
             return (Mock<T>) Get(typeof(T), Behavior, Lifetime.Singleton);
         }
 
+        /// <summary>
+        ///     Gets the mock the specified life time.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="lifeTime">The life time.</param>
+        /// <returns>
+        ///     <see cref="Mock{T}" />
+        /// </returns>
         public Mock<T> Get<T>(Lifetime lifeTime) where T : class
         {
             return (Mock<T>) Get(typeof(T), Behavior, lifeTime);
         }
 
+        /// <summary>
+        ///     Gets the mock with specified behavior.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="behavior">The behavior.</param>
+        /// <returns>
+        ///     <see cref="Mock{T}" />
+        /// </returns>
         public Mock<T> Get<T>(MockBehavior behavior) where T : class
         {
             return (Mock<T>) Get(typeof(T), behavior, Lifetime.Singleton);
         }
 
-        private Moq.Mock Get(Type type, MockBehavior behavior, Lifetime lifetime)
+        /// <summary>
+        ///     Gets the mock for the specified type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="behavior">The behavior.</param>
+        /// <param name="lifetime">The lifetime.</param>
+        /// <returns>
+        ///     <see cref="Mock" />
+        /// </returns>
+        private Mock Get(Type type, MockBehavior behavior, Lifetime lifetime)
         {
             return _factory.Get(type, behavior, lifetime);
         }
 
+        /// <summary>
+        ///     Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        ///     <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+        ///     unmanaged resources.
+        /// </param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

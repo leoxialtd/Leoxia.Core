@@ -34,13 +34,29 @@
 
 namespace Leoxia.Testing.Assertions.Failures
 {
+    /// <summary>
+    /// Checks for classes.
+    /// </summary>
+    /// <typeparam name="T">type of tested element</typeparam>
+    /// <seealso cref="Leoxia.Testing.Assertions.Failures.BaseCheckFailure{T}" />
     public class ClassCheckFailure<T> : BaseCheckFailure<T>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClassCheckFailure{T}"/> class.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="tested">The tested.</param>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
         public ClassCheckFailure(CheckType type, T tested, T expected, string message) : base(type, tested, expected,
             message)
         {
         }
 
+        /// <summary>
+        /// Displays the message.
+        /// </summary>
+        /// <returns></returns>
         protected override string DisplayMessage()
         {
             return $"Check that {_tested} is {_type}: failure";

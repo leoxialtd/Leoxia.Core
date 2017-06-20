@@ -32,21 +32,25 @@
 
 #endregion
 
+#region Usings
+
 using System.Linq;
 using System.Net;
 using DnsClient;
 
+#endregion
+
 namespace Leoxia.Network
 {
     /// <summary>
-    /// Resolve Ip from DNS.
+    ///     Resolve Ip from DNS.
     /// </summary>
     public class IpResolver
     {
         private readonly LookupClient _client;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IpResolver"/> class.
+        ///     Initializes a new instance of the <see cref="IpResolver" /> class.
         /// </summary>
         /// <param name="domainNameServerIps">The domain name server ips.</param>
         public IpResolver(params string[] domainNameServerIps)
@@ -56,7 +60,7 @@ namespace Leoxia.Network
         }
 
         /// <summary>
-        /// Resolves the domain name to an ip.
+        ///     Resolves the domain name to an ip.
         /// </summary>
         /// <param name="domainName">Name of the domain.</param>
         /// <returns></returns>

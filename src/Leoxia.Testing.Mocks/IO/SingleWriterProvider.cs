@@ -39,7 +39,7 @@ using Leoxia.Abstractions.IO;
 
 #endregion
 
-namespace Leoxia.Testing.IO
+namespace Leoxia.Testing.Mocks.IO
 {
     /// <summary>
     ///     Provider giving the same <see cref="TextWriter" /> for output and error.

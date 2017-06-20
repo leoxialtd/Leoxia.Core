@@ -34,10 +34,8 @@
 
 #region Usings
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Leoxia.Testing.Assertions.Abstractions;
 using Leoxia.Testing.Assertions.Failures;
 
@@ -45,21 +43,29 @@ using Leoxia.Testing.Assertions.Failures;
 
 namespace Leoxia.Testing.Assertions
 {
-    public class CheckFailure<T> : ICheckFailure<T>
-    {
-    }
-
-    public interface ICheckFailure<T>
-    {
-    }
-
+    /// <summary>
+    ///     Checks for <see cref="IList" />
+    /// </summary>
+    /// <seealso cref="Leoxia.Testing.Assertions.BaseClassCheckable{IList}" />
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.IListCheckable" />
     public class ListCheckable : BaseClassCheckable<IList>, IListCheckable
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ListCheckable" /> class.
+        /// </summary>
+        /// <param name="factory"></param>
+        /// <param name="value"></param>
         public ListCheckable(IExceptionFactory factory, IList value)
             : base(factory, value)
         {
         }
 
+        /// <summary>
+        ///     Checks the Inner is equal to
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         protected override bool InnerIsEqualTo(IList expected, string message = null)
         {
             if (_value.Count != expected.Count)
@@ -67,6 +73,7 @@ namespace Leoxia.Testing.Assertions
                 var checkFailure = new ListCheckFailure<IList>(CheckType.CountEqual, _value, expected, message);
                 checkFailure.ExpectedCount = expected.Count;
                 checkFailure.TestedCount = _value.Count;
+                // ReSharper disable once UnthrowableException
                 throw _factory.Build(checkFailure);
             }
             for (var i = 0; i < _value.Count; ++i)
@@ -75,12 +82,19 @@ namespace Leoxia.Testing.Assertions
                 {
                     var checkFailure = new ListCheckFailure<IList>(CheckType.ListItemEqual, _value, expected, message);
                     checkFailure.Index = i;
+                    // ReSharper disable once UnthrowableException
                     throw _factory.Build(checkFailure);
                 }
             }
             return true;
         }
 
+        /// <summary>
+        ///     Checks the Inner is not equal to
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         protected override bool InnerIsNotEqualTo(IList expected, string message = null)
         {
             if (_value.Count != expected.Count)
@@ -95,64 +109,49 @@ namespace Leoxia.Testing.Assertions
                 }
             }
             var checkFailure = new ListCheckFailure<IList>(CheckType.ListItemNotEqual, _value, expected, message);
+            // ReSharper disable once UnthrowableException
             throw _factory.Build(checkFailure);
         }
     }
 
-    public class ListCheckFailure<T> : BaseCheckFailure<T>
-    {
-        public ListCheckFailure(CheckType type, T tested, T expected, string message) : base(type, tested, expected,
-            message)
-        {
-        }
-
-        public int ExpectedCount { get; set; }
-        public int Index { get; set; }
-        public int TestedCount { get; set; }
-
-        protected override string DisplayMessage()
-        {
-            switch (_type)
-            {
-                case CheckType.CountEqual:
-                {
-                    return $"Check that {_tested} is equal to {_expected} but item count is different:" +
-                           Environment.NewLine +
-                           $"Tested.Count == {TestedCount} and Expected.Count == {ExpectedCount}";
-                }
-                case CheckType.ListItemEqual:
-                {
-                    return $"Check that {_tested} is equal to {_expected} but items are different on index {Index}:" +
-                           Environment.NewLine +
-                           $"Tested[{Index}] == {((IList) _tested)[Index]} and Expected[{Index}] == {((IList) _expected)[Index]}";
-                }
-                case CheckType.ListItemNotEqual:
-                {
-                    return $"Check that {_tested} is not equal to {_expected} but all items are equal";
-                }
-                default:
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
-            }
-        }
-    }
-
+    /// <summary>
+    ///     Checks for <see cref="IList{T}" />
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <seealso cref="Assertions.BaseClassCheckable{IList}" />
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.IListCheckable" />
     public class ListCheckable<T> : BaseClassCheckable<IList<T>>, IListCheckable<T>
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ListCheckable{T}" /> class.
+        /// </summary>
+        /// <param name="factory"></param>
+        /// <param name="value"></param>
         public ListCheckable(IExceptionFactory factory, IList<T> value) : base(factory, value)
         {
         }
 
+        /// <summary>
+        ///     Checks that the item is contained by the list.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <param name="message">The message.</param>
         public void Contains(T item, string message = null)
         {
             if (!_value.Contains(item))
             {
                 var checkFailure = new ListItemCheckFailure<T>(CheckType.ListItemIsNotContained, _value, item, message);
+                // ReSharper disable once UnthrowableException
                 throw _factory.Build(checkFailure);
             }
         }
 
+        /// <summary>
+        ///     Checks the Inner is equal to
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         protected override bool InnerIsEqualTo(IList<T> expected, string message = null)
         {
             if (_value.Count != expected.Count)
@@ -160,6 +159,7 @@ namespace Leoxia.Testing.Assertions
                 var checkFailure = new ListCheckFailure<IList<T>>(CheckType.CountEqual, _value, expected, message);
                 checkFailure.ExpectedCount = expected.Count;
                 checkFailure.TestedCount = _value.Count;
+                // ReSharper disable once UnthrowableException
                 throw _factory.Build(checkFailure);
             }
             for (var i = 0; i < _value.Count; ++i)
@@ -169,12 +169,19 @@ namespace Leoxia.Testing.Assertions
                     var checkFailure =
                         new ListCheckFailure<IList<T>>(CheckType.ListItemEqual, _value, expected, message);
                     checkFailure.Index = i;
+                    // ReSharper disable once UnthrowableException
                     throw _factory.Build(checkFailure);
                 }
             }
             return true;
         }
 
+        /// <summary>
+        ///     Checks the Inner is not equal to
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         protected override bool InnerIsNotEqualTo(IList<T> expected, string message = null)
         {
             if (_value.Count == expected.Count)
@@ -189,46 +196,8 @@ namespace Leoxia.Testing.Assertions
                 }
             }
             var checkFailure = new ListCheckFailure<IList<T>>(CheckType.ListItemAllEqual, _value, expected, message);
+            // ReSharper disable once UnthrowableException
             throw _factory.Build(checkFailure);
-        }
-    }
-
-    public class ListItemCheckFailure<T> : BaseCheckFailure<T>
-    {
-        private new readonly IList<T> _tested;
-
-        public ListItemCheckFailure(CheckType checkType, IList<T> tested, T expected, string message)
-            : base(checkType, default(T), expected, message)
-        {
-            _tested = tested;
-        }
-
-        protected override string DisplayMessage()
-        {
-            return DisplayItem(_expected) + " is not contained in [" + DisplayList() + "]";
-        }
-
-        private string DisplayList()
-        {
-            return string.Join(", ", _tested.Select(DisplayItem));
-        }
-
-        private static string DisplayItem(T x)
-        {
-            if (x == null)
-            {
-                return "Null";
-            }
-            var res = x.ToString();
-            if (res == null)
-            {
-                return "Null";
-            }
-            if (res.Length == 0)
-            {
-                return "Empty";
-            }
-            return res;
         }
     }
 }

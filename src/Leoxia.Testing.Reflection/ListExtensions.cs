@@ -38,10 +38,18 @@ using System.Collections;
 
 #endregion
 
-namespace Leoxia.Testing
+namespace Leoxia.Testing.Reflection
 {
+    /// <summary>
+    ///     Extension methods for <see cref="IList" />.
+    /// </summary>
     public static class ListExtensions
     {
+        /// <summary>
+        ///     Shorts the display.
+        /// </summary>
+        /// <param name="list">The list.</param>
+        /// <returns></returns>
         public static string ShortDisplay(this IList list)
         {
             return $"{list.GetType()}[Count:{list.Count}]";

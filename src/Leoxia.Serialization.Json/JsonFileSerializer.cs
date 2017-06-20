@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="JsonHelper.cs" company="Leoxia Ltd">
+// <copyright file="JsonFileSerializer.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -44,7 +44,7 @@ using Newtonsoft.Json.Linq;
 namespace Leoxia.Serialization.Json
 {
     /// <summary>
-    /// Serialize and deserialize data from <see cref="IFileInfo"/>
+    ///     Serialize and deserialize data from <see cref="IFileInfo" />
     /// </summary>
     /// <seealso cref="IJsonFileSerializer" />
     public class JsonFileSerializer : IJsonFileSerializer
@@ -52,7 +52,7 @@ namespace Leoxia.Serialization.Json
         private readonly IFile _fileSystem;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JsonFileSerializer"/> class.
+        ///     Initializes a new instance of the <see cref="JsonFileSerializer" /> class.
         /// </summary>
         /// <param name="fileSystem">The file system.</param>
         public JsonFileSerializer(IFile fileSystem)
@@ -61,12 +61,12 @@ namespace Leoxia.Serialization.Json
         }
 
         /// <summary>
-        /// Deserialize a T object from a file located at the specified file path.
+        ///     Deserialize a T object from a file located at the specified file path.
         /// </summary>
         /// <typeparam name="T">type of object to deserialize</typeparam>
         /// <param name="filePath">The file path.</param>
         /// <returns>
-        /// deserialized T
+        ///     deserialized T
         /// </returns>
         public T Deserialize<T>(string filePath)
         {
@@ -77,7 +77,7 @@ namespace Leoxia.Serialization.Json
         }
 
         /// <summary>
-        /// Deserialize the specified file.
+        ///     Deserialize the specified file.
         /// </summary>
         /// <typeparam name="T">Type of object to deserialize</typeparam>
         /// <param name="file">The file.</param>
@@ -91,10 +91,10 @@ namespace Leoxia.Serialization.Json
         }
 
         /// <summary>
-        /// Deserialize the <see cref="JObject"/>.
+        ///     Deserialize the <see cref="JObject" />.
         /// </summary>
         /// <param name="file">The file.</param>
-        /// <returns>deserialized <see cref="JObject"/></returns>
+        /// <returns>deserialized <see cref="JObject" /></returns>
         public static JObject DeserializeJObject(IFileInfo file)
         {
             using (var fileReader = file.OpenText())

@@ -2,7 +2,7 @@
 echo "DotNet Version:"
 dotnet --version
 
-$solutionName = Leoxia.Core.sln
+$solutionName = "Leoxia.Core.sln"
 
 dotnet restore $solutionName
 

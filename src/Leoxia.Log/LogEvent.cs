@@ -40,6 +40,10 @@ using System;
 
 namespace Leoxia.Log
 {
+    /// <summary>
+    ///     Container for log message and related information.
+    /// </summary>
+    /// <seealso cref="Leoxia.Log.ILogEvent" />
     public class LogEvent : ILogEvent
     {
         /// <summary>
@@ -66,8 +70,28 @@ namespace Leoxia.Log
             Date = date;
         }
 
+        /// <summary>
+        ///     Gets the identifier.
+        /// </summary>
+        /// <value>
+        ///     The identifier.
+        /// </value>
         public int Id { get; }
+
+        /// <summary>
+        ///     Gets the precise timestamp.
+        /// </summary>
+        /// <value>
+        ///     The precise timestamp.
+        /// </value>
         public long PreciseTimestamp { get; }
+
+        /// <summary>
+        ///     Gets the process identifier.
+        /// </summary>
+        /// <value>
+        ///     The process identifier.
+        /// </value>
         public int ProcessId { get; }
 
         /// <summary>

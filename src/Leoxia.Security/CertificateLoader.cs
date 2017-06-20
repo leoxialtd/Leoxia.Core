@@ -73,7 +73,7 @@ namespace Leoxia.Security
             try
             {
                 var reader = new FileReader();
-                byte[] bytes = reader.ReadBytes(mappedPath);
+                var bytes = reader.ReadBytes(mappedPath);
                 // The key storage is really important as without it, it won't work when run from IIS
                 var certificate = new X509Certificate2(bytes, passPhrase,
                     X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet);

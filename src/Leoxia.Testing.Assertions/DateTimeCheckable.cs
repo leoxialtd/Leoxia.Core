@@ -41,8 +41,18 @@ using Leoxia.Testing.Assertions.Abstractions;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    /// Checks for <see cref="DateTime"/>
+    /// </summary>
+    /// <seealso cref="Leoxia.Testing.Assertions.BaseCheckable{DateTime}" />
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.IDateTimeCheckable" />
     public class DateTimeCheckable : BaseCheckable<DateTime>, IDateTimeCheckable
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DateTimeCheckable"/> class.
+        /// </summary>
+        /// <param name="factory">The factory.</param>
+        /// <param name="value">The value.</param>
         public DateTimeCheckable(IExceptionFactory factory, DateTime value) :
             base(factory, value)
         {

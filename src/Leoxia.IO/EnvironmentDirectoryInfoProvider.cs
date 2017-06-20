@@ -32,8 +32,12 @@
 
 #endregion
 
+#region Usings
+
 using Leoxia.Abstractions;
 using Leoxia.Abstractions.IO;
+
+#endregion
 
 namespace Leoxia.IO
 {
@@ -49,7 +53,7 @@ namespace Leoxia.IO
         private readonly IDirectoryInfoFactory _factory;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EnvironmentDirectoryInfoProvider"/> class.
+        ///     Initializes a new instance of the <see cref="EnvironmentDirectoryInfoProvider" /> class.
         /// </summary>
         /// <param name="environment">The environment.</param>
         /// <param name="environmentVariableKey">The environment variable key.</param>
@@ -68,7 +72,7 @@ namespace Leoxia.IO
         }
 
         /// <summary>
-        /// Gets a <see cref="IDirectoryInfo"/> from environment.
+        ///     Gets a <see cref="IDirectoryInfo" /> from environment.
         /// </summary>
         /// <returns></returns>
         public IDirectoryInfo Get()

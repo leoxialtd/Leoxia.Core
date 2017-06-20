@@ -35,9 +35,6 @@
 #region Usings
 
 using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.Threading;
 
 #endregion
 
@@ -72,7 +69,7 @@ namespace Leoxia.Log
         /// <param name="exception">exception to log</param>
         public void Exception(string message, Exception exception)
         {
-            InnerLog(LogLevel.Error, message + ": " + LogEx.Exception(exception));
+            InnerLog(LogLevel.Error, message + ": " + LogExtensions.Exception(exception));
         }
 
         /// <summary>
@@ -184,33 +181,6 @@ namespace Leoxia.Log
         private void InnerLog(LogLevel logLevel, string message)
         {
             _appenderMediator.Log(_factory.Build(logLevel, _topic, message));
-        }
-    }
-
-    public interface ILogEventFactory
-    {
-        ILogEvent Build(LogLevel logLevel, string topic, string message);
-    }
-
-    public class LogEventFactory : ILogEventFactory
-    {
-        private static int id;
-        private readonly ITimestampProvider _provider;
-
-        public LogEventFactory(ITimestampProvider provider)
-        {
-            _provider = provider;
-        }
-
-        public ILogEvent Build(LogLevel logLevel, string topic, string message)
-        {
-            var logId = Interlocked.Increment(ref id);
-            var stamp = _provider.Now;
-            var preciseTimestamp = _provider.PreciseTimestamp;
-            var logEvent = new LogEvent(logId, logLevel, topic, message, stamp, preciseTimestamp,
-                Thread.CurrentThread.ManagedThreadId.ToString(CultureInfo.InvariantCulture),
-                Process.GetCurrentProcess().Id);
-            return logEvent;
         }
     }
 }

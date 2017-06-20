@@ -46,7 +46,7 @@ namespace Leoxia.IO
     public interface IDirectoryInfoProvider
     {
         /// <summary>
-        /// Gets <see cref="IDirectoryInfo" />.
+        ///     Gets <see cref="IDirectoryInfo" />.
         /// </summary>
         /// <returns></returns>
         IDirectoryInfo Get();

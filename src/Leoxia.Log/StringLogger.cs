@@ -35,12 +35,16 @@
 #region Usings
 
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 #endregion
 
 namespace Leoxia.Log
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class StringLogger
     {
         /// <summary>
@@ -51,6 +55,12 @@ namespace Leoxia.Log
             Reset();
         }
 
+        /// <summary>
+        /// Gets the log.
+        /// </summary>
+        /// <value>
+        /// The log.
+        /// </value>
         public static List<string> Log { get; private set; }
 
         /// <summary>
@@ -62,7 +72,7 @@ namespace Leoxia.Log
         }
 
         /// <summary>
-        ///     The implementation of writeline
+        ///     The implementation of write line
         /// </summary>
         internal static void InternalWriteLine(object instance, string name, object[] ps, string prefix)
         {
@@ -75,12 +85,15 @@ namespace Leoxia.Log
             //add parameters
             foreach (var p in ps)
             {
-                if (!first)
+                stringBuilder.Append(p != null ? p.ToString() : "NULL");
+                if (first)
                 {
-                    stringBuilder.Append(",");
                     first = false;
                 }
-                stringBuilder.Append(p != null ? p.ToString() : "NULL");
+                else
+                {
+                    stringBuilder.Append(",");
+                }
             }
             stringBuilder.Append(")");
 
@@ -109,23 +122,54 @@ namespace Leoxia.Log
             InternalWriteLine(instance, name, ps, "After");
         }
 
+        /// <summary>
+        /// Logs the get property after.
+        /// </summary>
+        /// <typeparam name="K"></typeparam>
+        /// <param name="instance">The instance.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <param name="returnValue">The return value.</param>
+        /// <returns></returns>
         public static K LogGetPropertyAfter<K>(T instance, string propertyName, K returnValue)
         {
             InternalWriteLine(instance, propertyName, new object[] { }, "After");
             return returnValue;
         }
 
+        /// <summary>
+        /// Logs the get property before.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <param name="propertyName">Name of the property.</param>
         public static void LogGetPropertyBefore(T instance, string propertyName)
         {
             InternalWriteLine(instance, propertyName, new object[] { }, "Before");
         }
 
+        /// <summary>
+        /// Logs the set property before.
+        /// </summary>
+        /// <typeparam name="K"></typeparam>
+        /// <param name="instance">The instance.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <param name="oldValue">The old value.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public static K LogSetPropertyBefore<K>(T instance, string propertyName, K oldValue, K value)
         {
             InternalWriteLine(instance, propertyName, new object[] {value}, "Before");
             return value;
         }
 
+        /// <summary>
+        /// Logs the set property after.
+        /// </summary>
+        /// <typeparam name="K"></typeparam>
+        /// <param name="instance">The instance.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <param name="oldValue">The old value.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="newValue">The new value.</param>
         public static void LogSetPropertyAfter<K>(T instance, string propertyName, K oldValue, K value, K newValue)
         {
             InternalWriteLine(instance, propertyName, new object[] {value}, "After");

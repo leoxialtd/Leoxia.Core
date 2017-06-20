@@ -48,7 +48,7 @@ namespace Leoxia.Testing.Reflection
     /// </summary>
     public static class ObjectBuilder
     {
-        private static readonly object[] dummyParams = { };
+        private static readonly object[] _dummyParams = { };
 
         /// <summary>
         ///     Call MemberwiseClone on given object.
@@ -62,9 +62,17 @@ namespace Leoxia.Testing.Reflection
                 BindingFlags.Instance |
                 BindingFlags.InvokeMethod |
                 BindingFlags.FlattenHierarchy);
-            return methodInfo.Invoke(instanceToClone, dummyParams);
+            return methodInfo.Invoke(instanceToClone, _dummyParams);
         }
 
+        /// <summary>
+        ///     Creates a <see cref="IList" />.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="seed">The seed.</param>
+        /// <param name="recurse">if set to <c>true</c> [recurse].</param>
+        /// <returns></returns>
+        // ReSharper disable once ExcessiveIndentation
         internal static object CreateIList(Type type, int seed, bool recurse)
         {
             //ConstructorInfo constructorInfo = type.GetConstructor(BindingFlags.Static|BindingFlags.Public |BindingFlags.CreateInstance, null, new Type[]{typeof(int)}, new ParameterModifier[]{});
@@ -119,6 +127,14 @@ namespace Leoxia.Testing.Reflection
             }
         }
 
+        /// <summary>
+        ///     Creates the instance and populates it.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="seed">The seed.</param>
+        /// <param name="recurse">if set to <c>true</c> [recurse].</param>
+        /// <returns></returns>
+        /// <exception cref="System.InvalidOperationException"></exception>
         public static object CreateInstance(Type type, int seed, bool recurse)
         {
             object resultValue;
@@ -173,6 +189,7 @@ namespace Leoxia.Testing.Reflection
         /// <param name="seed">The seed used to generate a value.</param>
         /// <param name="newValue">The new value.</param>
         /// <returns></returns>
+        // ReSharper disable once ExcessiveIndentation
         internal static bool CreateValue(Type type, int seed, out object newValue)
         {
             newValue = null;

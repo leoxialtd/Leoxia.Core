@@ -45,14 +45,14 @@ namespace Leoxia.Security.Test
     public class CertificateEncryptionTest
     {
         private const string DataToEncrypt = "Hello world";
-        private const string fileName = "certfile.pfx";
-        private const string passPhrase = "myPassword";
+        private const string FileName = "certfile.pfx";
+        private const string PassPhrase = "myPassword";
 
         [Fact]
         public void EncryptDecrypt()
         {
             var loader = new CertificateLoader();
-            var certificate = loader.Load(new FileInfo(fileName).Adapt(), passPhrase);
+            var certificate = loader.Load(new FileInfo(FileName).Adapt(), PassPhrase);
             var cipher = new RSACertificateCipher(new X509CertificateSimpleProvider(certificate));
             var encryptedData = cipher.Encrypt(DataToEncrypt);
             var decryptedData = cipher.Decrypt(encryptedData);

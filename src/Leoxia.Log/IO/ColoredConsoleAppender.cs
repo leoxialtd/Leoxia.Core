@@ -50,6 +50,11 @@ namespace Leoxia.Log.IO
         private readonly LogFormatter _formatter = new LogFormatter();
         private readonly ILogFormatProvider _provider;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ColoredConsoleAppender" /> class.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <param name="console">The console.</param>
         public ColoredConsoleAppender(ILogFormatProvider provider = null, ISafeConsole console = null)
         {
             if (console == null)
@@ -64,6 +69,10 @@ namespace Leoxia.Log.IO
             _provider = provider;
         }
 
+        /// <summary>
+        ///     Appends the specified log event.
+        /// </summary>
+        /// <param name="logEvent">The log event.</param>
         public void Append(ILogEvent logEvent)
         {
             var color = GetColor(logEvent);

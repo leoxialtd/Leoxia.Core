@@ -34,7 +34,6 @@
 
 #region Usings
 
-using System;
 using Leoxia.Testing.Assertions.Abstractions;
 using Leoxia.Testing.Assertions.Failures;
 using Leoxia.Testing.Reflection;
@@ -43,61 +42,57 @@ using Leoxia.Testing.Reflection;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    ///     Checks for <see cref="object" />
+    /// </summary>
+    /// <typeparam name="T">type of expected value</typeparam>
+    /// <seealso cref="Leoxia.Testing.Assertions.BaseClassCheckable{T}" />
     public class ObjectCheckable<T> : BaseClassCheckable<T>
         where T : class
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ObjectCheckable{T}" /> class.
+        /// </summary>
+        /// <param name="factory"></param>
+        /// <param name="value"></param>
         public ObjectCheckable(IExceptionFactory factory, T value) : base(factory, value)
         {
         }
 
+        /// <summary>
+        ///     Checks the Inner is equal to
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
+        /// <exception cref="ObjectCheckFailure"></exception>
         protected override bool InnerIsEqualTo(T expected, string message = null)
         {
             var trace = new CheckingTrace();
             if (!ObjectComparer.ObjectsAreEqual(_value, expected, PropertiesComparisonOptions.Default, trace))
             {
+                // ReSharper disable once UnthrowableException
                 throw _factory.Build(new ObjectCheckFailure(CheckType.Equal, _value, expected, trace, message));
             }
             return true;
         }
 
+        /// <summary>
+        ///     Checks the Inner is not equal to
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
+        /// <exception cref="ObjectCheckFailure"></exception>
         protected override bool InnerIsNotEqualTo(T expected, string message = null)
         {
             var trace = new CheckingTrace();
             if (ObjectComparer.ObjectsAreEqual(_value, expected, PropertiesComparisonOptions.Default, trace))
             {
+                // ReSharper disable once UnthrowableException
                 throw _factory.Build(new ObjectCheckFailure(CheckType.NotEqual, _value, expected, trace, message));
             }
             return true;
-        }
-    }
-
-    public class ObjectCheckFailure : BaseCheckFailure<object>
-    {
-        private readonly CheckingTrace _trace;
-
-        public ObjectCheckFailure(CheckType type, object tested, object expected, CheckingTrace trace,
-            string message) : base(type, tested, expected, message)
-        {
-            _trace = trace;
-        }
-
-        protected override string DisplayMessage()
-        {
-            switch (_type)
-            {
-                case CheckType.Equal:
-                {
-                    return $"Check that {_tested} is equal to {_expected}: failure" + Environment.NewLine +
-                           _trace;
-                }
-                case CheckType.NotEqual:
-                {
-                    return $"Check that {_tested} is not equal to {_expected}: failure" + Environment.NewLine +
-                           _trace;
-                }
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
     }
 }

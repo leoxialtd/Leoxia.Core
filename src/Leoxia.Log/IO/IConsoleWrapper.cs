@@ -45,6 +45,12 @@ namespace Leoxia.Log.IO
     /// </summary>
     public interface IConsoleWrapper
     {
+        /// <summary>
+        ///     Gets or sets the color of the foreground.
+        /// </summary>
+        /// <value>
+        ///     The color of the foreground.
+        /// </value>
         ConsoleColor ForegroundColor { get; set; }
 
         /// <summary>

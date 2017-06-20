@@ -32,7 +32,11 @@
 
 #endregion
 
+#region Usings
+
 using Leoxia.Abstractions.IO;
+
+#endregion
 
 namespace Leoxia.IO
 {

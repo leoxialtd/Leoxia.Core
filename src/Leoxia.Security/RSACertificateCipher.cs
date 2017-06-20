@@ -1,7 +1,7 @@
 #region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RSACerticateCipher.cs" company="Leoxia Ltd">
+// <copyright file="RSACertificateCipher.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -32,16 +32,19 @@
 
 #endregion
 
+#region Usings
+
 using System;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
+#endregion
+
 namespace Leoxia.Security
 {
-
     /// <summary>
-    /// Cipher based on RSA certificate keys
+    ///     Cipher based on RSA certificate keys
     /// </summary>
     // ReSharper disable once InconsistentNaming
     public class RSACertificateCipher
@@ -49,7 +52,7 @@ namespace Leoxia.Security
         private readonly IX509CertificateProvider _provider;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RSACertificateCipher"/> class.
+        ///     Initializes a new instance of the <see cref="RSACertificateCipher" /> class.
         /// </summary>
         /// <param name="provider">The provider.</param>
         public RSACertificateCipher(IX509CertificateProvider provider)
@@ -58,7 +61,7 @@ namespace Leoxia.Security
         }
 
         /// <summary>
-        /// Encrypts the specified input.
+        ///     Encrypts the specified input.
         /// </summary>
         /// <param name="input">The input.</param>
         /// <returns>encrypted string</returns>
@@ -68,24 +71,24 @@ namespace Leoxia.Security
         }
 
         /// <summary>
-        /// Encrypts the specified input.
+        ///     Encrypts the specified input.
         /// </summary>
         /// <param name="input">The input.</param>
         /// <returns>encrypted bytes</returns>
         public byte[] Encrypt(byte[] input)
         {
-            X509Certificate2 certificate = _provider.Get();
+            var certificate = _provider.Get();
 
             // GetRSAPublicKey returns an object with an independent lifetime, so it should be
             // handled via a using statement.
-            using (RSA rsa = certificate.GetRSAPublicKey())
+            using (var rsa = certificate.GetRSAPublicKey())
             {
                 return rsa.Encrypt(input, RSAEncryptionPadding.OaepSHA512);
             }
         }
 
         /// <summary>
-        /// Decrypts the specified input.
+        ///     Decrypts the specified input.
         /// </summary>
         /// <param name="input">The input.</param>
         /// <returns>decrypted string</returns>
@@ -95,18 +98,18 @@ namespace Leoxia.Security
         }
 
         /// <summary>
-        /// Decrypts the specified input.
+        ///     Decrypts the specified input.
         /// </summary>
         /// <param name="input">The input.</param>
         /// <returns>decrypted bytes</returns>
         /// <exception cref="System.InvalidOperationException">Certificate doesn't contain private key: cannot decrypt.</exception>
         public byte[] Decrypt(byte[] input)
         {
-            X509Certificate2 certificate = _provider.Get();
+            var certificate = _provider.Get();
 
             // GetRSAPublicKey returns an object with an independent lifetime, so it should be
             // handled via a using statement.
-            using (RSA rsa = certificate.GetRSAPrivateKey())
+            using (var rsa = certificate.GetRSAPrivateKey())
             {
                 if (rsa == null)
                 {

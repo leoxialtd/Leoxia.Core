@@ -42,31 +42,56 @@ using System.Text;
 
 namespace Leoxia.Testing.Reflection
 {
+    /// <summary>
+    ///     Check trace.
+    /// </summary>
     public class CheckingTrace
     {
         private readonly List<string> _frames = new List<string>();
         private string _failureCause;
 
+        /// <summary>
+        ///     Sets the failure.
+        /// </summary>
+        /// <param name="message">The message.</param>
         public void SetFailure(string message)
         {
             _failureCause = message;
         }
 
+        /// <summary>
+        ///     Pushes the specified type.
+        /// </summary>
+        /// <param name="type">The type.</param>
         public void Push(Type type)
         {
             _frames.Add("On " + type + ":");
         }
 
+        /// <summary>
+        ///     Pushes the index.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="index">The index.</param>
         public void PushIndex(Type type, int index)
         {
             _frames.Add($"On {type}[{index}]: ");
         }
 
+        /// <summary>
+        ///     Pushes the property.
+        /// </summary>
+        /// <param name="containerType">Type of the container.</param>
+        /// <param name="propertyType">Type of the property.</param>
+        /// <param name="propertyName">Name of the property.</param>
         public void PushProperty(Type containerType, Type propertyType, string propertyName)
         {
             _frames.Add($"On {containerType}.{propertyName} of type {propertyType}: ");
         }
 
+        /// <summary>
+        ///     Pops this instance.
+        /// </summary>
         public void Pop()
         {
             _frames.RemoveAt(_frames.Count - 1);

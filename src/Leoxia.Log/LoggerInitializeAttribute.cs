@@ -40,6 +40,10 @@ using System;
 
 namespace Leoxia.Log
 {
+    /// <summary>
+    ///     Attribute for logger initialization
+    /// </summary>
+    /// <seealso cref="System.Attribute" />
     [AttributeUsage(AttributeTargets.Field)]
     public class LoggerInitializeAttribute : Attribute
     {

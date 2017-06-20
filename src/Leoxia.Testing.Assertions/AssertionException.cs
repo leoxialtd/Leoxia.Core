@@ -40,24 +40,32 @@ using System;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    ///     Exception for assertion failed.
+    /// </summary>
+    /// <seealso cref="System.Exception" />
     public class AssertionException : Exception
     {
-        /// <summary>Initializes a new instance of the <see cref="T:System.Exception" /> class.</summary>
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AssertionException" /> class.
+        /// </summary>
         public AssertionException()
         {
         }
 
-        /// <summary>Initializes a new instance of the <see cref="T:System.Exception" /> class with a specified error message.</summary>
-        /// <param name="message">The message that describes the error. </param>
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AssertionException" /> class.
+        /// </summary>
+        /// <param name="message">The message that describes the error.</param>
         public AssertionException(string message) : base(message)
         {
         }
 
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="T:System.Exception" /> class with a specified error message and a
-        ///     reference to the inner exception that is the cause of this exception.
+        ///     Initializes a new instance of the <see cref="AssertionException" /> class.
         /// </summary>
-        /// <param name="message">The error message that explains the reason for the exception. </param>
+        /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="innerException">
         ///     The exception that is the cause of the current exception, or a null reference (Nothing in
         ///     Visual Basic) if no inner exception is specified.

@@ -41,14 +41,23 @@ using Moq;
 
 #endregion
 
-namespace Leoxia.Testing.Mock
+namespace Leoxia.Testing.Mocks
 {
+    /// <summary>
+    ///     Factory responsible for <see cref="Mock" /> creation.
+    /// </summary>
     public class MockFactory
     {
-        private readonly List<Moq.Mock> _instanceMocks = new List<Moq.Mock>();
-        private readonly IDictionary<Type, Moq.Mock> _mocks = new Dictionary<Type, Moq.Mock>();
+        private readonly List<Mock> _instanceMocks = new List<Mock>();
+        private readonly IDictionary<Type, Mock> _mocks = new Dictionary<Type, Mock>();
 
-        public IList<Moq.Mock> Mocks
+        /// <summary>
+        ///     Gets all the created mocks.
+        /// </summary>
+        /// <value>
+        ///     The mocks.
+        /// </value>
+        public IList<Mock> Mocks
         {
             get
             {
@@ -58,10 +67,17 @@ namespace Leoxia.Testing.Mock
             }
         }
 
-        public Moq.Mock Get(Type type, MockBehavior behavior = MockBehavior.Default,
+        /// <summary>
+        ///     Gets the mock for specified type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="behavior">The behavior.</param>
+        /// <param name="lifetime">The lifetime.</param>
+        /// <returns></returns>
+        public Mock Get(Type type, MockBehavior behavior = MockBehavior.Default,
             Lifetime lifetime = Lifetime.Singleton)
         {
-            Moq.Mock instance;
+            Mock instance;
             if (lifetime == Lifetime.Singleton)
             {
                 if (!_mocks.TryGetValue(type, out instance))
@@ -78,7 +94,13 @@ namespace Leoxia.Testing.Mock
             return instance;
         }
 
-        private static Moq.Mock CreateMock(Type type, MockBehavior behavior)
+        /// <summary>
+        ///     Creates the mock.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="behavior">The behavior.</param>
+        /// <returns></returns>
+        private static Mock CreateMock(Type type, MockBehavior behavior)
         {
             var mockType = typeof(MockProxy<>).MakeGenericType(type);
             var proxy = (IMockProxy) Activator.CreateInstance(mockType);

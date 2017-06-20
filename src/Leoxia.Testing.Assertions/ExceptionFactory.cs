@@ -41,8 +41,18 @@ using Leoxia.Testing.Assertions.Abstractions;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    ///     Builds <see cref="Exception" />
+    /// </summary>
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.IExceptionFactory" />
     public class ExceptionFactory : IExceptionFactory
     {
+        /// <summary>
+        ///     Builds the specified <see cref="Exception" />.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="checkable">The checkable.</param>
+        /// <returns></returns>
         public Exception Build<T>(ICheckFailure<T> checkable)
         {
             return new AssertionException(checkable.ToString());

@@ -44,12 +44,29 @@ using Leoxia.Testing.Reflection;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    ///     Base class for all <see cref="ICheckable{T}" />
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.ICheckable{T}" />
     public abstract class BaseCheckable<T> : ICheckable<T>
     {
+        /// <summary>
+        ///     The factory
+        /// </summary>
         protected readonly IExceptionFactory _factory;
+
+        /// <summary>
+        ///     The value
+        /// </summary>
         protected readonly T _value;
 
-        /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="BaseCheckable{T}" /> class.
+        /// </summary>
+        /// <param name="factory">The factory.</param>
+        /// <param name="value">The value.</param>
         protected BaseCheckable(IExceptionFactory factory, T value)
         {
             _factory = factory;
@@ -58,13 +75,29 @@ namespace Leoxia.Testing.Assertions
             // TODO: Retrieve the variable, property etc name to produce a better message.
         }
 
+        /// <summary>
+        ///     Gets the value.
+        /// </summary>
+        /// <value>
+        ///     The value.
+        /// </value>
         internal T Value => _value;
 
+        /// <summary>
+        ///     Determines whether [is] [the specified function].
+        /// </summary>
+        /// <param name="func">The function.</param>
+        /// <returns></returns>
         public IBoolCheckable Is(Expression<Func<T, bool>> func)
         {
             return new ExpressionCheckable<T>(_factory, func, _value);
         }
 
+        /// <summary>
+        ///     Determines whether [is equal to] [the specified expected].
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
         public void IsEqualTo(T expected, string message = null)
         {
             if (ReferenceEquals(_value, expected))
@@ -81,6 +114,11 @@ namespace Leoxia.Testing.Assertions
             }
         }
 
+        /// <summary>
+        ///     Determines whether [is not equal to] [the specified expected].
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
         public void IsNotEqualTo(T expected, string message = null)
         {
             if (_value.Equals(expected) && InnerIsNotEqualTo(expected, message))
@@ -89,6 +127,11 @@ namespace Leoxia.Testing.Assertions
             }
         }
 
+        /// <summary>
+        ///     Determines whether [is operator equal to] [the specified expected].
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
         public void IsOperatorEqualTo(T expected, string message = null)
         {
             if (!_value.IsOperatorEqual(expected))
@@ -97,6 +140,11 @@ namespace Leoxia.Testing.Assertions
             }
         }
 
+        /// <summary>
+        ///     Determines whether [is operator not equal to] [the specified expected].
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
         public void IsOperatorNotEqualTo(T expected, string message = null)
         {
             if (_value.IsOperatorEqual(expected))
@@ -108,75 +156,30 @@ namespace Leoxia.Testing.Assertions
         private void Throw(T expected, string message, CheckType checkType)
         {
             var equalCheckFailure = new EqualCheckFailure<T>(checkType, _value, expected, message);
+            // ReSharper disable once UnthrowableException
             throw _factory.Build(equalCheckFailure);
         }
 
+        /// <summary>
+        ///     Checks the Inner is equal to
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         protected virtual bool InnerIsEqualTo(T expected, string message = null)
         {
             return false; // By default fail
         }
 
+        /// <summary>
+        ///     Checks the Inner is not equal to
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         protected virtual bool InnerIsNotEqualTo(T expected, string message = null)
         {
             return true; // By default succeed
-        }
-    }
-
-    public class ExpressionCheckable<T> : IBoolCheckable
-    {
-        private readonly Expression<Func<T, bool>> _expression;
-        private readonly IExceptionFactory _factory;
-        private readonly T _value;
-        private readonly Func<T, bool> _func;
-
-        public ExpressionCheckable(IExceptionFactory factory, Expression<Func<T, bool>> expression, T value)
-        {
-            _factory = factory;
-            _expression = expression;
-            _func = expression.Compile();
-            _value = value;
-        }
-
-        public void IsTrue(string message = null)
-        {
-            if (!_func(_value))
-            {
-                throw _factory.Build(
-                    new ExpressionCheckFailure<T>(CheckType.True, _value, default(T), message, _expression));
-            }
-        }
-
-        public void IsFalse(string message = null)
-        {
-            if (_func(_value))
-            {
-                throw _factory.Build(new ExpressionCheckFailure<T>(CheckType.False, _value, default(T), message,
-                    _expression));
-            }
-        }
-    }
-
-    public class ExpressionCheckFailure<T> : BaseCheckFailure<T>
-    {
-        private readonly Expression<Func<T, bool>> _expression;
-
-        public ExpressionCheckFailure(CheckType type, T tested, T expected, string message,
-            Expression<Func<T, bool>> expression) : base(type, tested, expected, message)
-        {
-            _expression = expression;
-        }
-
-        protected override string DisplayMessage()
-        {
-            switch (_type)
-            {
-                case CheckType.True:
-                    return $"Check that {_tested} {_expression} is true: failure";
-                case CheckType.False:
-                    return $"Check that {_tested} {_expression} is false: failure";
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
     }
 }

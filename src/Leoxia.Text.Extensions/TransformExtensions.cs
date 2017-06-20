@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Transform.cs" company="Leoxia Ltd">
+// <copyright file="TransformExtensions.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 

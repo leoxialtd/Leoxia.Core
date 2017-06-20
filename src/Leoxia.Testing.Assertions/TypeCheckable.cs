@@ -41,17 +41,39 @@ using Leoxia.Testing.Assertions.Abstractions;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    ///     Checks for <see cref="Type" />.
+    /// </summary>
+    /// <seealso cref="Leoxia.Testing.Assertions.BaseClassCheckable{Type}" />
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.ITypeCheckable" />
     public class TypeCheckable : BaseClassCheckable<Type>, ITypeCheckable
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="TypeCheckable" /> class.
+        /// </summary>
+        /// <param name="factory"></param>
+        /// <param name="value"></param>
         public TypeCheckable(IExceptionFactory factory, Type value) : base(factory, value)
         {
         }
 
+        /// <summary>
+        ///     Checks the Inner is equal to
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         protected override bool InnerIsEqualTo(Type expected, string message = null)
         {
             return _value == expected;
         }
 
+        /// <summary>
+        ///     Checks the Inner is not equal to
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         protected override bool InnerIsNotEqualTo(Type expected, string message = null)
         {
             return _value != expected;

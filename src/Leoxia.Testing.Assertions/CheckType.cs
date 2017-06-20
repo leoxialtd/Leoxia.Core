@@ -34,27 +34,90 @@
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    /// The different check types.
+    /// </summary>
     public enum CheckType
     {
+        /// <summary>
+        /// The true
+        /// </summary>
         True,
+        /// <summary>
+        /// The false
+        /// </summary>
         False,
+        /// <summary>
+        /// The null
+        /// </summary>
         Null,
+        /// <summary>
+        /// The not null
+        /// </summary>
         NotNull,
+        /// <summary>
+        /// The equal
+        /// </summary>
         Equal,
+        /// <summary>
+        /// The not equal
+        /// </summary>
         NotEqual,
+        /// <summary>
+        /// The op equal
+        /// </summary>
         OpEqual,
+        /// <summary>
+        /// The op not equal
+        /// </summary>
         OpNotEqual,
+        /// <summary>
+        /// The count not equal
+        /// </summary>
         CountNotEqual,
+        /// <summary>
+        /// The list item not equal
+        /// </summary>
         ListItemNotEqual,
+        /// <summary>
+        /// The list item all equal
+        /// </summary>
         ListItemAllEqual,
+        /// <summary>
+        /// The string null or empty
+        /// </summary>
         StringNullOrEmpty,
+        /// <summary>
+        /// The string not null or empty
+        /// </summary>
         StringNotNullOrEmpty,
+        /// <summary>
+        /// The properties not equal
+        /// </summary>
         PropertiesNotEqual,
+        /// <summary>
+        /// The properties not initialized
+        /// </summary>
         PropertiesNotInitialized,
+        /// <summary>
+        /// The properties equal
+        /// </summary>
         PropertiesEqual,
+        /// <summary>
+        /// The properties initialized
+        /// </summary>
         PropertiesInitialized,
+        /// <summary>
+        /// The count equal
+        /// </summary>
         CountEqual,
+        /// <summary>
+        /// The list item equal
+        /// </summary>
         ListItemEqual,
+        /// <summary>
+        /// The list item is not contained
+        /// </summary>
         ListItemIsNotContained
     }
 }

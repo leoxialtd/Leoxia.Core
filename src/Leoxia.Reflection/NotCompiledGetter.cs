@@ -1,7 +1,7 @@
-﻿#region Copyright (c) 2017 Leoxia Ltd
+#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConsoleAppenderTest.cs" company="Leoxia Ltd">
+// <copyright file="NotCompiledGetter.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -34,35 +34,47 @@
 
 #region Usings
 
-using System;
-using System.Threading;
-using Leoxia.Log.IO;
-using Leoxia.Testing.Assertions;
-using Leoxia.Testing.Reflection;
-using Moq;
-using Xunit;
+using System.Reflection;
+using Leoxia.Collections;
 
 #endregion
 
-namespace Leoxia.Log.Unit.Tests
+namespace Leoxia.Reflection
 {
-    public class ConsoleAppenderTest
+    /// <summary>
+    ///     Holds a getter and provides a non-compiled invocation.
+    /// </summary>
+    /// <seealso cref="Leoxia.Reflection.IGetterMethod" />
+    public class NotCompiledGetter : IGetterMethod
     {
-        private string _lastLine;
-        private Mock<IConsoleWrapper> _wrapper;
+        private readonly MethodInfo _method;
 
-        [Fact]
-        public void UseCase()
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="NotCompiledGetter" /> class.
+        /// </summary>
+        /// <param name="method">The method.</param>
+        public NotCompiledGetter(MethodInfo method)
         {
-            var appender = new ConsoleAppender();
-            _wrapper = new Mock<IConsoleWrapper>();
-            _wrapper.Setup(x => x.WriteLine(It.IsAny<string>())).Callback<string>(x => _lastLine = x);
+            _method = method;
+        }
 
-            appender.SetFirstField(_wrapper.Object);
-            appender.Append(new LogEvent(0, LogLevel.Info, "A topic", "Some Info", DateTime.Now, 0, Thread.CurrentThread.ManagedThreadId.ToString(), 1));
-            var end = " - [Info] A topic: Some Info [" + Thread.CurrentThread.ManagedThreadId + "]";
-            Check.That(_lastLine.EndsWith(end))
-                .IsTrue(_lastLine + " should end with " + end);
+        /// <summary>
+        ///     Invokes the specified instance.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <returns></returns>
+        public object Invoke(object instance)
+        {
+            return _method.Invoke(instance, EmptyArray<object>.Instance);
+        }
+
+        /// <summary>
+        ///     Compiles this instance.
+        /// </summary>
+        /// <returns></returns>
+        public IGetterMethod Compile()
+        {
+            return new CompiledGetter(_method);
         }
     }
 }

@@ -35,14 +35,14 @@
 namespace Leoxia.Diagnostics.Process
 {
     /// <summary>
-    /// Kill a process
+    ///     Kill a process
     /// </summary>
     public class ProcessKiller
     {
         private readonly string _processName;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProcessKiller"/> class.
+        ///     Initializes a new instance of the <see cref="ProcessKiller" /> class.
         /// </summary>
         /// <param name="processName">Name of the process.</param>
         public ProcessKiller(string processName)
@@ -51,7 +51,7 @@ namespace Leoxia.Diagnostics.Process
         }
 
         /// <summary>
-        /// Kills the process.
+        ///     Kills the process.
         /// </summary>
         public void Kill()
         {

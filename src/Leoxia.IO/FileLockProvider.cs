@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FileLockManager.cs" company="Leoxia Ltd">
+// <copyright file="FileLockProvider.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -32,26 +32,32 @@
 
 #endregion
 
+#region Usings
+
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using Leoxia.Threading;
 
+#endregion
+
 namespace Leoxia.IO
 {
     /// <summary>
-    /// Provide a <see cref="DisposableMutex"/> lock for a file
+    ///     Provide a <see cref="DisposableMutex" /> lock for a file
     /// </summary>
-    public class FileLockManager
+    public class FileLockProvider
     {
         private static readonly object _syncRoot = new object();
         private static readonly IDictionary<string, Mutex> _dictionary = new Dictionary<string, Mutex>();
 
         /// <summary>
-        /// Gets the lock related to a given file path.
+        ///     Gets the lock related to a given file path.
         /// </summary>
         /// <param name="filePath">The file path.</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     <see cref="DisposableMutex" />
+        /// </returns>
         public static DisposableMutex GetLock(string filePath)
         {
             Mutex locker;

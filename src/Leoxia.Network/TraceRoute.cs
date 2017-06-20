@@ -32,23 +32,27 @@
 
 #endregion
 
+#region Usings
+
 using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
 
+#endregion
+
 namespace Leoxia.Network
 {
     /// <summary>
-    /// Trace Route tool
-    /// Comes from https://stackoverflow.com/questions/142614/traceroute-and-ping-in-c-sharp
+    ///     Trace Route tool
+    ///     Comes from https://stackoverflow.com/questions/142614/traceroute-and-ping-in-c-sharp
     /// </summary>
     public class TraceRoute
     {
         private const string Data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
         /// <summary>
-        /// Gets the trace route.
+        ///     Gets the trace route.
         /// </summary>
         /// <param name="hostNameOrAddress">The host name or address.</param>
         /// <returns></returns>
@@ -57,9 +61,9 @@ namespace Leoxia.Network
             return GetTraceRoute(hostNameOrAddress, 1);
         }
 
-        
+
         /// <summary>
-        /// Gets the trace route.
+        ///     Gets the trace route.
         /// </summary>
         /// <param name="hostNameOrAddress">The host name or address.</param>
         /// <param name="ttl">The TTL.</param>
@@ -67,13 +71,13 @@ namespace Leoxia.Network
         private IEnumerable<IPAddress> GetTraceRoute(string hostNameOrAddress, int ttl)
         {
             // Test It !!!! Comes from stack overflow and not tested yet.
-            Ping pingSender = new Ping();
-            PingOptions options = new PingOptions(ttl, true);
-            int timeout = 10000;
-            byte[] buffer = Encoding.ASCII.GetBytes(Data);
+            var pingSender = new Ping();
+            var options = new PingOptions(ttl, true);
+            var timeout = 10000;
+            var buffer = Encoding.ASCII.GetBytes(Data);
             var task = pingSender.SendPingAsync(hostNameOrAddress, timeout, buffer, options);
             var reply = task.Result;
-            List<IPAddress> result = new List<IPAddress>();
+            var result = new List<IPAddress>();
             if (reply.Status == IPStatus.Success)
             {
                 result.Add(reply.Address);

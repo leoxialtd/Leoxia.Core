@@ -37,14 +37,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 #endregion
 
 namespace Leoxia.Testing.Reflection
 {
+    /// <summary>
+    ///     Extension methods for object comparison.
+    /// </summary>
     public static class ObjectComparer
     {
+        /// <summary>
+        ///     Determines whether objects are equal.
+        /// </summary>
+        /// <param name="tested">The tested.</param>
+        /// <param name="expected">The expected.</param>
+        /// <param name="options">The options.</param>
+        /// <param name="trace">The trace.</param>
+        /// <returns></returns>
         public static bool ObjectsAreEqual(object tested, object expected, PropertiesComparisonOptions options,
             CheckingTrace trace)
         {
@@ -94,6 +106,14 @@ namespace Leoxia.Testing.Reflection
             return true;
         }
 
+        /// <summary>
+        ///     Determines whether properties are equal.
+        /// </summary>
+        /// <param name="tested">The tested.</param>
+        /// <param name="expected">The expected.</param>
+        /// <param name="trace">The trace.</param>
+        /// <param name="comparisonOptions">The comparison options.</param>
+        /// <returns></returns>
         public static bool PropertiesAreEqual(object tested, object expected, CheckingTrace trace,
             PropertiesComparisonOptions comparisonOptions)
         {
@@ -113,18 +133,27 @@ namespace Leoxia.Testing.Reflection
             return PropertiesAreEqual(expected, tested, collection, comparisonOptions, trace);
         }
 
+        /// <summary>
+        ///     Selects the properties.
+        /// </summary>
+        /// <param name="properties">The properties.</param>
+        /// <param name="excludedList">The excluded list.</param>
+        /// <returns></returns>
+        // ReSharper disable once ExcessiveIndentation
         internal static string[] SelectProperties(ICollection<PropertyInfo> properties,
             IEnumerable<string> excludedList)
         {
             var names = new List<string>(properties.Count);
+            var excludedProperties = excludedList as IList<string> ?? excludedList.ToArray();
             foreach (var propertyInfo in properties)
             {
                 if (propertyInfo.CanRead)
                 {
                     var bAbbProperty = true;
+
                     if (excludedList != null)
                     {
-                        foreach (var excludedProperty in excludedList)
+                        foreach (var excludedProperty in excludedProperties)
                         {
                             if (excludedProperty == propertyInfo.Name)
                             {

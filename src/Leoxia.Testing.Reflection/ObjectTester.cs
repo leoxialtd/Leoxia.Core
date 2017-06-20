@@ -41,13 +41,30 @@ using System.Reflection;
 
 namespace Leoxia.Testing.Reflection
 {
+    /// <summary>
+    ///     Extension methods for testing objects.
+    /// </summary>
     public static class ObjectTester
     {
+        /// <summary>
+        ///     Converts the specified value.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         private static T Convert<T>(object value)
         {
             return (T) value;
         }
 
+        /// <summary>
+        ///     Determines whether this instance is initialized.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="instance">The instance.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified instance is initialized; otherwise, <c>false</c>.
+        /// </returns>
         internal static bool IsInitialized<T>(this T instance)
         {
             if (!typeof(T).GetTypeInfo().IsValueType)
@@ -75,6 +92,7 @@ namespace Leoxia.Testing.Reflection
         /// <returns>
         ///     <c>true</c> if the specified to check is filled; otherwise, <c>false</c>.
         /// </returns>
+        // ReSharper disable once ExcessiveIndentation
         private static bool IsFilled<T>(T tested, CheckingTrace trace, PropertiesComparisonOptions options)
         {
             if (tested != null)
@@ -130,6 +148,19 @@ namespace Leoxia.Testing.Reflection
             return true;
         }
 
+        /// <summary>
+        ///     Determines whether properties are initialized or not.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="propertiesContainer">The properties container.</param>
+        /// <param name="trace">The trace.</param>
+        /// <param name="options">The options.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">
+        ///     propertiesContainer - Cannot check if properties are initialized on null
+        ///     instance
+        /// </exception>
+        // ReSharper disable once ExcessiveIndentation
         public static bool PropertiesAreInitialized<T>(T propertiesContainer, CheckingTrace trace,
             PropertiesComparisonOptions options)
         {

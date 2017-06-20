@@ -35,24 +35,25 @@
 namespace Leoxia.IO
 {
     /// <summary>
-    /// Interface for containers of a text content with strongly-typed header.
+    ///     Interface for containers of a text content with strongly-typed header.
     /// </summary>
     /// <typeparam name="T">type of header</typeparam>
     public interface IDocumentedText<out T>
         where T : class
     {
         /// <summary>
-        /// Gets the content.
+        ///     Gets the content.
         /// </summary>
         /// <value>
-        /// The content.
+        ///     The content.
         /// </value>
         string Content { get; }
+
         /// <summary>
-        /// Gets the header.
+        ///     Gets the header.
         /// </summary>
         /// <value>
-        /// The header.
+        ///     The header.
         /// </value>
         T Header { get; }
     }

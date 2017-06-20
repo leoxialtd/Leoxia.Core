@@ -38,11 +38,23 @@ using Moq;
 
 #endregion
 
-namespace Leoxia.Testing.Mock
+namespace Leoxia.Testing.Mocks
 {
+    /// <summary>
+    ///     Provides a strongly typed <see cref="Mock{T}" /> casted in <see cref="Mock" />
+    /// </summary>
+    /// <typeparam name="T">type of mocked interface</typeparam>
+    /// <seealso cref="Leoxia.Testing.Mocks.IMockProxy" />
     internal class MockProxy<T> : IMockProxy where T : class
     {
-        public Moq.Mock CreateMock(MockBehavior behavior)
+        /// <summary>
+        ///     Creates a mock with the given behavior.
+        /// </summary>
+        /// <param name="behavior">The behavior.</param>
+        /// <returns>
+        ///     <see cref="Mock" />
+        /// </returns>
+        public Mock CreateMock(MockBehavior behavior)
         {
             return new Mock<T>(behavior);
         }

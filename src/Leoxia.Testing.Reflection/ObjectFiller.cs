@@ -53,6 +53,7 @@ namespace Leoxia.Testing.Reflection
         /// <param name="target">The target.</param>
         /// <param name="recurse">if set to <c>true</c> [b recurse].</param>
         /// <returns></returns>
+        // ReSharper disable once ExcessiveIndentation
         public static bool Fill(object target, bool recurse)
         {
             var type = target.GetType();
@@ -100,9 +101,10 @@ namespace Leoxia.Testing.Reflection
         ///     Automatically affect values to all public properties
         /// </summary>
         /// <param name="target">The target.</param>
-        /// <param name="bRecurse">True to recurse through memeber object</param>
+        /// <param name="bRecurse">True to recurse through member object</param>
         /// <param name="propertiesInfo">The properties info.</param>
         /// <returns></returns>
+        // ReSharper disable once ExcessiveIndentation
         public static bool Fill(object target, bool bRecurse, PropertyInfo[] propertiesInfo)
         {
             foreach (var propertyInfo in propertiesInfo)

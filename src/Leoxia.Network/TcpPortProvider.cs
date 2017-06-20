@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TcpHelper.cs" company="Leoxia Ltd">
+// <copyright file="TcpPortProvider.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -32,27 +32,31 @@
 
 #endregion
 
+#region Usings
+
 using System.Net;
 using System.Net.Sockets;
+
+#endregion
 
 namespace Leoxia.Network
 {
     /// <summary>
-    /// Provides an available TCP port.
+    ///     Provides an available TCP port.
     /// </summary>
     public static class TcpPortProvider
     {
         /// <summary>
-        /// Gets a random TCP port available.
-        /// Note that it will open it to find it. 
-        /// Not thread safe.
+        ///     Gets a random TCP port available.
+        ///     Note that it will open it to find it.
+        ///     Not thread safe.
         /// </summary>
         /// <returns>A available port</returns>
         public static int GetTcpPortAvailable()
         {
             var listener = new TcpListener(IPAddress.Loopback, 0);
             listener.Start();
-            int port = ((IPEndPoint) listener.LocalEndpoint).Port;
+            var port = ((IPEndPoint) listener.LocalEndpoint).Port;
             listener.Stop();
             return port;
         }

@@ -32,11 +32,21 @@
 
 #endregion
 
-namespace Leoxia.Testing.Mock
+namespace Leoxia.Testing.Mocks
 {
+    /// <summary>
+    ///     Different types of lifetime for IOC.
+    /// </summary>
     public enum Lifetime
     {
+        /// <summary>
+        ///     Singleton lifetime
+        /// </summary>
         Singleton,
+
+        /// <summary>
+        ///     Instance lifetime
+        /// </summary>
         Instance
     }
 }

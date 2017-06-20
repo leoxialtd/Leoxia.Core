@@ -45,6 +45,12 @@ namespace Leoxia.Log
     /// </summary>
     public interface ILogger
     {
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance is debug enabled.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is debug enabled; otherwise, <c>false</c>.
+        /// </value>
         bool IsDebugEnabled { get; set; }
 
         /// <summary>

@@ -32,23 +32,22 @@
 
 #endregion
 
+#region Usings
+
 using System.Net;
 using System.Net.Sockets;
-using DnsClient;
+
+#endregion
 
 namespace Leoxia.Network
 {
     /// <summary>
-    /// Extensions on <see cref="IPAddress"/>
+    ///     Extensions on <see cref="IPAddress" />
     /// </summary>
     public static class IpAddressExtensions
     {
-        private static readonly LookupClient _client =
-            new LookupClient(IPAddress.Parse("8.8.8.8"), IPAddress.Parse("8.8.4.4"));
-
-
         /// <summary>
-        /// Gets the type of the network given the ip.
+        ///     Gets the type of the network given the ip.
         /// </summary>
         /// <param name="address">The address.</param>
         /// <returns>Type of network</returns>
@@ -58,7 +57,7 @@ namespace Leoxia.Network
             {
                 case AddressFamily.InterNetwork:
                 {
-                    byte[] bytes = address.GetAddressBytes();
+                    var bytes = address.GetAddressBytes();
                     switch (bytes[0])
                     {
                         case 0:
@@ -151,14 +150,12 @@ namespace Leoxia.Network
                 }
                 case AddressFamily.InterNetworkV6:
                     break;
-                default:
-                    break;
             }
             return IPNetworkType.Public;
         }
 
         /// <summary>
-        /// Gets the location information.
+        ///     Gets the location information.
         /// </summary>
         /// <param name="address">The address.</param>
         /// <returns></returns>

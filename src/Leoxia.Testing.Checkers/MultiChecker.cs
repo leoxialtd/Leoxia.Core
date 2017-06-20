@@ -49,8 +49,8 @@ namespace Leoxia.Testing.Checkers
     /// </summary>
     public class MultiChecker
     {
-        private readonly Type concreteGenericType;
-        private readonly List<Type> typesToCheck = new List<Type>();
+        private readonly Type _concreteGenericType;
+        private readonly List<Type> _typesToCheck = new List<Type>();
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="MultiChecker" /> class.
@@ -60,7 +60,7 @@ namespace Leoxia.Testing.Checkers
         /// <param name="checkerType">Type of the checker.</param>
         public MultiChecker(IAssembly assembly, Type interfaceType, Type checkerType)
         {
-            concreteGenericType = checkerType;
+            _concreteGenericType = checkerType;
             foreach (var type in assembly.GetAllReferencedTypes())
             {
                 Type specializedGeneric;
@@ -79,7 +79,7 @@ namespace Leoxia.Testing.Checkers
                             !type.IsArray && !type.GetTypeInfo().IsValueType &&
                             !type.IsPointer && !typeof(Delegate).IsAssignableFrom(type))
                         {
-                            typesToCheck.Add(type);
+                            _typesToCheck.Add(type);
                         }
                     }
                 }
@@ -91,9 +91,9 @@ namespace Leoxia.Testing.Checkers
         /// </summary>
         public void Check()
         {
-            foreach (var typeToCheck in typesToCheck)
+            foreach (var typeToCheck in _typesToCheck)
             {
-                var type = concreteGenericType.MakeGenericType(typeToCheck);
+                var type = _concreteGenericType.MakeGenericType(typeToCheck);
                 if (!type.GetTypeInfo().ContainsGenericParameters)
                 {
                     var checker = (IInterfaceChecker) Activator.CreateInstance(type);
@@ -107,14 +107,14 @@ namespace Leoxia.Testing.Checkers
         /// </summary>
         public void Check(Type[] types)
         {
-            foreach (var tmpType in typesToCheck)
+            foreach (var tmpType in _typesToCheck)
             {
                 var typeToCheck = tmpType;
                 if (typeToCheck.GetTypeInfo().ContainsGenericParameters)
                 {
                     typeToCheck = typeToCheck.MakeGenericType(types);
                 }
-                var type = concreteGenericType.MakeGenericType(typeToCheck);
+                var type = _concreteGenericType.MakeGenericType(typeToCheck);
                 if (!type.GetTypeInfo().ContainsGenericParameters)
                 {
                     var checker = (IInterfaceChecker) Activator.CreateInstance(type);

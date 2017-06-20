@@ -36,22 +36,26 @@
 
 using DryIoc;
 using Leoxia.Abstractions.IO;
-using Leoxia.Testing.IO;
+using Leoxia.Testing.Mocks.IO;
 using Xunit.Abstractions;
 
 #endregion
 
-namespace Leoxia.Testing.Mock
+namespace Leoxia.Testing.Mocks
 {
     /// <summary>
     ///     Unit test fixture providing writer out and writer error for tests
     ///     with text interception like console testing.
     /// </summary>
-    /// <seealso cref="Leoxia.Testing.Mock.MockUnitTestFixture" />
+    /// <seealso cref="MockUnitTestFixture" />
     public class WriterUnitTestFixture : MockUnitTestFixture
     {
         private readonly TextWriterInterceptor _interceptor;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="WriterUnitTestFixture" /> class.
+        /// </summary>
+        /// <param name="output">The output.</param>
         public WriterUnitTestFixture(ITestOutputHelper output)
         {
             Output = output;
@@ -61,10 +65,28 @@ namespace Leoxia.Testing.Mock
             Container.RegisterInstance(WriterProvider);
         }
 
+        /// <summary>
+        ///     Gets the intercepted text.
+        /// </summary>
+        /// <value>
+        ///     The intercepted text.
+        /// </value>
         public string InterceptedText => _interceptor.InterceptedText;
 
+        /// <summary>
+        ///     Gets the output.
+        /// </summary>
+        /// <value>
+        ///     The output.
+        /// </value>
         public ITestOutputHelper Output { get; }
 
+        /// <summary>
+        ///     Gets the writer provider.
+        /// </summary>
+        /// <value>
+        ///     The writer provider.
+        /// </value>
         public IStandardWriterProvider WriterProvider { get; }
     }
 }

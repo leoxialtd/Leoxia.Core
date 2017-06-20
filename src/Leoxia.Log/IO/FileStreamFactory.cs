@@ -48,7 +48,7 @@ namespace Leoxia.Log.IO
         {
             if (!Path.IsPathRooted(logFilePath))
             {
-                var assemblyPath = ApplicationHelper.GetApplicationPath();
+                var assemblyPath = ApplicationPathProvider.GetApplicationPath();
                 var directory = Path.GetDirectoryName(assemblyPath);
                 if (!string.IsNullOrEmpty(directory))
                 {
@@ -59,13 +59,24 @@ namespace Leoxia.Log.IO
         }
     }
 
-    public static class ApplicationHelper
+    /// <summary>
+    ///     Provides default paths for an application
+    /// </summary>
+    public static class ApplicationPathProvider
     {
+        /// <summary>
+        ///     Gets the defaut log directory.
+        /// </summary>
+        /// <returns></returns>
         public static string GetDefautLogDirectory()
         {
             return GetApplicationPath();
         }
 
+        /// <summary>
+        ///     Gets the application path.
+        /// </summary>
+        /// <returns></returns>
         public static string GetApplicationPath()
         {
             try
@@ -81,17 +92,34 @@ namespace Leoxia.Log.IO
         }
     }
 
-    public static class ReflectionHelper
+    /// <summary>
+    ///     Provides instance helper methods.
+    /// </summary>
+    public static class InstanceExtensions
     {
         private static readonly Type[] _emptyTypes = new Type[0];
         private static readonly object[] _emptyParameters = new object[0];
 
+        /// <summary>
+        ///     Invokes a static method.
+        /// </summary>
+        /// <typeparam name="TReturnType">The type of the return type.</typeparam>
+        /// <param name="type">The type.</param>
+        /// <param name="methodName">Name of the method.</param>
+        /// <returns></returns>
         public static TReturnType InvokeStaticMethod<TReturnType>(this Type type, string methodName)
         {
             var method = type.GetRuntimeMethod(methodName, _emptyTypes);
             return (TReturnType) method.Invoke(null, _emptyParameters);
         }
 
+        /// <summary>
+        ///     Invokes a property.
+        /// </summary>
+        /// <typeparam name="TReturnType">The type of the return type.</typeparam>
+        /// <param name="instance">The instance.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns></returns>
         public static TReturnType InvokeProperty<TReturnType>(this object instance, string propertyName)
         {
             var type = instance.GetType();

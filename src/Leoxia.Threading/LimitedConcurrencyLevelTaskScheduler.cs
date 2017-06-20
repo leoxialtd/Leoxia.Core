@@ -1,8 +1,15 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
-// The MIT License
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LimitedConcurrencyLevelTaskScheduler.cs" company="Leoxia Ltd">
+//    Copyright (c) 2017 Leoxia Ltd
+// </copyright>
 // 
-// Copyright © 2011 - 2017 Leoxia Ltd, https://www.leoxia.com
+// .NET Software Development
+// https://www.leoxia.com
+// Build. Tomorrow. Together
+// 
+// MIT License
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -11,16 +18,17 @@
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 // 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
 // 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//  --------------------------------------------------------------------------------------------------------------------
 
 #endregion
 
@@ -57,17 +65,31 @@ namespace Leoxia.Threading
         // Indicates whether the scheduler is currently processing work items. 
         private int _delegatesQueuedOrRunning;
 
-        // Creates a new instance with the specified degree of parallelism. 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="LimitedConcurrencyLevelTaskScheduler" /> class.
+        /// </summary>
+        /// <param name="maxDegreeOfParallelism">The maximum degree of parallelism.</param>
+        /// <exception cref="System.ArgumentOutOfRangeException">maxDegreeOfParallelism</exception>
         public LimitedConcurrencyLevelTaskScheduler(int maxDegreeOfParallelism)
         {
-            if (maxDegreeOfParallelism < 1) throw new ArgumentOutOfRangeException(nameof(maxDegreeOfParallelism));
+            if (maxDegreeOfParallelism < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(maxDegreeOfParallelism));
+            }
             _maxDegreeOfParallelism = maxDegreeOfParallelism;
         }
 
-        // Gets the maximum concurrency level supported by this scheduler. 
+        /// <summary>
+        ///     Indicates the maximum concurrency level this <see cref="T:System.Threading.Tasks.TaskScheduler" /> is able to
+        ///     support.
+        /// </summary>
         public sealed override int MaximumConcurrencyLevel => _maxDegreeOfParallelism;
 
-        // Queues a task to the scheduler. 
+
+        /// <summary>
+        ///     Queues a <see cref="T:System.Threading.Tasks.Task" /> to the scheduler.
+        /// </summary>
+        /// <param name="task">The <see cref="T:System.Threading.Tasks.Task" /> to be queued.</param>
         protected sealed override void QueueTask(Task task)
         {
             // Add the task to the list of tasks to be processed.  If there aren't enough 
@@ -105,9 +127,13 @@ namespace Leoxia.Threading
                         }
                         // Get the next item from the queue
                         if (_tasks.TryDequeue(out item))
+                        {
                             TryExecuteTask(item);
+                        }
                         else
+                        {
                             Thread.Sleep(10);
+                        }
                     }
                 }
                 // We're done processing items on the current thread
@@ -118,30 +144,61 @@ namespace Leoxia.Threading
             });
         }
 
-
-        // Attempts to execute the specified task on the current thread. 
+        /// <summary>
+        ///     Determines whether the provided <see cref="T:System.Threading.Tasks.Task" /> can be executed synchronously in this
+        ///     call, and if it can, executes it.
+        /// </summary>
+        /// <param name="task">The <see cref="T:System.Threading.Tasks.Task" /> to be executed.</param>
+        /// <param name="taskWasPreviouslyQueued">
+        ///     A Boolean denoting whether or not task has previously been queued. If this
+        ///     parameter is True, then the task may have been previously queued (scheduled); if False, then the task is known not
+        ///     to have been queued, and this call is being made in order to execute the task inline without queuing it.
+        /// </param>
+        /// <returns>
+        ///     A Boolean value indicating whether the task was executed inline.
+        /// </returns>
         protected sealed override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
         {
             // If this thread isn't already processing a task, we don't support inlining
-            if (!_currentThreadIsProcessingItems) return false;
+            if (!_currentThreadIsProcessingItems)
+            {
+                return false;
+            }
 
             // If the task was previously queued, remove it from the queue
             if (taskWasPreviouslyQueued)
                 // Try to run the task. 
+            {
                 if (TryDequeue(task))
+                {
                     return TryExecuteTask(task);
-                else
-                    return false;
+                }
+                return false;
+            }
             return TryExecuteTask(task);
         }
 
-        // Attempt to remove a previously scheduled task from the scheduler. 
+        /// <summary>
+        ///     Attempts to dequeue a <see cref="T:System.Threading.Tasks.Task" /> that was previously queued to this scheduler.
+        /// </summary>
+        /// <param name="task">The <see cref="T:System.Threading.Tasks.Task" /> to be dequeued.</param>
+        /// <returns>
+        ///     A Boolean denoting whether the <paramref name="task" /> argument was successfully dequeued.
+        /// </returns>
+        // ReSharper disable once RedundantAssignment
         protected sealed override bool TryDequeue(Task task)
         {
             return _tasks.TryDequeue(out task);
         }
 
-        // Gets an enumerable of the tasks currently scheduled on this scheduler. 
+
+        /// <summary>
+        ///     For debugger support only, generates an enumerable of <see cref="T:System.Threading.Tasks.Task" /> instances
+        ///     currently queued to the scheduler waiting to be executed.
+        /// </summary>
+        /// <returns>
+        ///     An enumerable that allows a debugger to traverse the tasks currently queued to this scheduler.
+        /// </returns>
         protected sealed override IEnumerable<Task> GetScheduledTasks()
         {
             return _tasks;

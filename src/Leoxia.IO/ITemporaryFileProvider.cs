@@ -35,12 +35,12 @@
 namespace Leoxia.IO
 {
     /// <summary>
-    /// Provider for temporary file path.
+    ///     Provider for temporary file path.
     /// </summary>
     public interface ITemporaryFileProvider
     {
         /// <summary>
-        /// Gets the specified temporary file path.
+        ///     Gets the specified temporary file path.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>temporary file path</returns>

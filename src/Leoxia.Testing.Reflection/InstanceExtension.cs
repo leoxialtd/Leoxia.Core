@@ -42,16 +42,23 @@ using System.Reflection;
 
 namespace Leoxia.Testing.Reflection
 {
+    /// <summary>
+    ///     Extension methods for instance of objects.
+    /// </summary>
     public static class InstanceExtensions
     {
-        private static readonly Random random = new Random(Environment.TickCount);
-
         private static readonly BindingFlags _fieldFlags =
             BindingFlags.FlattenHierarchy |
             BindingFlags.Instance |
             BindingFlags.NonPublic |
             BindingFlags.Public;
 
+        /// <summary>
+        ///     Gets a new instance with the same type as specified object.
+        /// </summary>
+        /// <typeparam name="T">type of the new instance</typeparam>
+        /// <param name="toCopy">To copy.</param>
+        /// <returns>new instance</returns>
         public static T NewInstance<T>(this T toCopy)
         {
             if (toCopy != null)
@@ -62,11 +69,22 @@ namespace Leoxia.Testing.Reflection
             return Activator.CreateInstance<T>();
         }
 
+        /// <summary>
+        ///     Gets a new instance.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>new instance</returns>
         public static object NewInstance(Type type)
         {
             return Activator.CreateInstance(type);
         }
 
+        /// <summary>
+        ///     Randomizes the specified instance.
+        /// </summary>
+        /// <typeparam name="T">type of the instance</typeparam>
+        /// <param name="toRandomize">To randomize.</param>
+        /// <returns>randomized instance</returns>
         public static T Randomize<T>(T toRandomize)
         {
             Type type;
@@ -81,9 +99,17 @@ namespace Leoxia.Testing.Reflection
             return (T) TypeExtensions.CreateRandomizedInstance(type);
         }
 
+        /// <summary>
+        ///     Sets the field value on the specified field name for the given object.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="current">The current.</param>
+        /// <param name="fieldName">Name of the field.</param>
+        /// <param name="value">The value.</param>
+        /// <exception cref="System.ArgumentException">No field found. - fieldName</exception>
         public static void SetField<T>(this object current, string fieldName, T value)
         {
-            var fieldInfo = GetFieldInfo<T>(current, x => x.Name == fieldName);
+            var fieldInfo = GetFieldInfo(current, x => x.Name == fieldName);
             if (fieldInfo == null)
             {
                 throw new ArgumentException("No field found.", nameof(fieldName));
@@ -91,16 +117,23 @@ namespace Leoxia.Testing.Reflection
             fieldInfo.SetValue(current, value);
         }
 
-        private static FieldInfo GetFieldInfo<T>(object current, Func<FieldInfo, bool> predicate)
+        private static FieldInfo GetFieldInfo(object current, Func<FieldInfo, bool> predicate)
         {
             var fields = current.GetType().GetTypeInfo().GetFields(_fieldFlags);
             var fieldInfo = fields.FirstOrDefault(predicate);
             return fieldInfo;
         }
 
+        /// <summary>
+        ///     Sets the value for the first field in the given instance.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="current">The current.</param>
+        /// <param name="value">The value.</param>
+        /// <exception cref="System.ArgumentException"></exception>
         public static void SetFirstField<T>(this object current, T value)
         {
-            var fieldInfo = GetFieldInfo<T>(current, x => x.FieldType == typeof(T));
+            var fieldInfo = GetFieldInfo(current, x => x.FieldType == typeof(T));
             if (fieldInfo == null)
             {
                 throw new ArgumentException($"No field of type {typeof(T)} found.");
@@ -122,7 +155,7 @@ namespace Leoxia.Testing.Reflection
                 BindingFlags.InvokeMethod);
             if (info != null)
             {
-                return (bool)info.Invoke(instance1, new object[] { instance1, instance2 });
+                return (bool) info.Invoke(instance1, new object[] {instance1, instance2});
             }
             return false;
         }
@@ -138,7 +171,7 @@ namespace Leoxia.Testing.Reflection
         {
             var info = typeof(TInstance).GetMethod("op_Inequality",
                 BindingFlags.Static | BindingFlags.Public | BindingFlags.InvokeMethod);
-            return (bool)info.Invoke(instance1, new object[] { instance1, instance2 });
+            return (bool) info.Invoke(instance1, new object[] {instance1, instance2});
         }
     }
 }

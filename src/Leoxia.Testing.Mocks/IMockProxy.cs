@@ -38,10 +38,20 @@ using Moq;
 
 #endregion
 
-namespace Leoxia.Testing.Mock
+namespace Leoxia.Testing.Mocks
 {
+    /// <summary>
+    ///     Proxy for not strongly typed mock creation
+    /// </summary>
     internal interface IMockProxy
     {
-        Moq.Mock CreateMock(MockBehavior behavior);
+        /// <summary>
+        ///     Creates a mock with the given behavior.
+        /// </summary>
+        /// <param name="behavior">The behavior.</param>
+        /// <returns>
+        ///     <see cref="Mock" />
+        /// </returns>
+        Mock CreateMock(MockBehavior behavior);
     }
 }

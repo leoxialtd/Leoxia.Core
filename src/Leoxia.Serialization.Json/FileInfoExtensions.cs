@@ -42,12 +42,12 @@ using Newtonsoft.Json.Linq;
 namespace Leoxia.Serialization.Json
 {
     /// <summary>
-    /// Extensions for serialization of <see cref="IFileInfo"/>
+    ///     Extensions for serialization of <see cref="IFileInfo" />
     /// </summary>
     public static class FileInfoExtensions
     {
         /// <summary>
-        /// Deserialize the file to T instance.
+        ///     Deserialize the file to T instance.
         /// </summary>
         /// <typeparam name="T">type of object to deserialize</typeparam>
         /// <param name="info">The information.</param>
@@ -58,10 +58,10 @@ namespace Leoxia.Serialization.Json
         }
 
         /// <summary>
-        /// Deserialize to <see cref="JObject"/>
+        ///     Deserialize to <see cref="JObject" />
         /// </summary>
         /// <param name="info">The information.</param>
-        /// <returns>the read <see cref="JObject"/></returns>
+        /// <returns>the read <see cref="JObject" /></returns>
         public static JObject DeserializeToJObject(this IFileInfo info)
         {
             return JsonFileSerializer.DeserializeJObject(info);

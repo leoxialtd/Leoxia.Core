@@ -40,11 +40,30 @@ using Leoxia.Testing.Reflection;
 
 namespace Leoxia.Testing.Assertions.Abstractions
 {
+    /// <summary>
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.ICheckable{T}" />
     public interface IClassCheckable<T> : ICheckable<T>
         where T : class
     {
+        /// <summary>
+        ///     Check the current value is not null.
+        /// </summary>
+        /// <param name="message">The message.</param>
         void IsNotNull(string message = null);
+
+        /// <summary>
+        ///     Check the current value is null.
+        /// </summary>
+        /// <param name="message">The message.</param>
         void IsNull(string message = null);
+
+        /// <summary>
+        ///     Check the current value have the properties that respect a given contract.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns></returns>
         IPropertiesCheckable<T> HavePropertiesThat(PropertiesComparisonOptions options = null);
     }
 }

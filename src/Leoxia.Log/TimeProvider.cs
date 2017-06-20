@@ -49,7 +49,7 @@ namespace Leoxia.Log
         private readonly ITimeProvider _provider;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TimestampProvider" /> class.
+        ///     Initializes a new instance of the <see cref="TimestampProvider" /> class.
         /// </summary>
         /// <param name="provider">The provider.</param>
         public TimestampProvider(ITimeProvider provider)

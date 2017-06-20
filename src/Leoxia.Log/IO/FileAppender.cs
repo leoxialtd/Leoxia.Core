@@ -41,6 +41,11 @@ using System.IO;
 
 namespace Leoxia.Log.IO
 {
+    /// <summary>
+    ///     Append logs into a file.
+    /// </summary>
+    /// <seealso cref="Leoxia.Log.IAppender" />
+    /// <seealso cref="System.IDisposable" />
     public sealed class FileAppender : IAppender, IDisposable
     {
         private readonly IStreamFactory _factory = new FileStreamFactory();
@@ -49,6 +54,11 @@ namespace Leoxia.Log.IO
         private readonly ILogFormatProvider _provider;
         private StreamWriter _writer;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="FileAppender" /> class.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="provider">The provider.</param>
         public FileAppender(string file, ILogFormatProvider provider = null)
         {
             if (!Path.IsPathRooted(file))
@@ -66,6 +76,10 @@ namespace Leoxia.Log.IO
             _provider = provider;
         }
 
+        /// <summary>
+        ///     Appends the specified log event.
+        /// </summary>
+        /// <param name="logEvent">The log event.</param>
         public void Append(ILogEvent logEvent)
         {
             if (_writer == null)
@@ -76,6 +90,9 @@ namespace Leoxia.Log.IO
             _writer.WriteLine(_logFormatter.Format(_provider, logEvent));
         }
 
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             if (_writer != null)

@@ -40,8 +40,18 @@ using Leoxia.Testing.Assertions.Abstractions;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    ///     Checks for <see cref="int" />
+    /// </summary>
+    /// <seealso cref="Leoxia.Testing.Assertions.BaseCheckable{Int32}" />
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.IIntegerCheckable" />
     public class IntegerCheckable : BaseCheckable<int>, IIntegerCheckable
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="IntegerCheckable" /> class.
+        /// </summary>
+        /// <param name="factory">The factory.</param>
+        /// <param name="value">The value.</param>
         public IntegerCheckable(IExceptionFactory factory, int value) : base(factory, value)
         {
         }

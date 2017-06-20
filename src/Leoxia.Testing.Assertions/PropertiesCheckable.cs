@@ -34,7 +34,6 @@
 
 #region Usings
 
-using System;
 using Leoxia.Testing.Assertions.Abstractions;
 using Leoxia.Testing.Assertions.Failures;
 using Leoxia.Testing.Reflection;
@@ -43,12 +42,23 @@ using Leoxia.Testing.Reflection;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    ///     Checks of properties
+    /// </summary>
+    /// <typeparam name="T">type of properties container</typeparam>
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.IPropertiesCheckable{T}" />
     public class PropertiesCheckable<T> : IPropertiesCheckable<T>
     {
         private readonly IExceptionFactory _factory;
         private readonly PropertiesComparisonOptions _options;
         private readonly T _value;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertiesCheckable{T}" /> class.
+        /// </summary>
+        /// <param name="factory">The factory.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="options">The options.</param>
         public PropertiesCheckable(IExceptionFactory factory, T value, PropertiesComparisonOptions options)
         {
             _factory = factory;
@@ -56,57 +66,36 @@ namespace Leoxia.Testing.Assertions
             _options = options;
         }
 
+        /// <summary>
+        ///     Check that the properties are equal to properties of another type
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <exception cref="PropertiesCheckFailure{T}"></exception>
         public void AreEqualToPropertiesOf(T expected, string message = null)
         {
             var trace = new CheckingTrace();
             if (!ObjectComparer.PropertiesAreEqual(_value, expected, trace, _options))
             {
+                // ReSharper disable once UnthrowableException
                 throw _factory.Build(new PropertiesCheckFailure<T>(CheckType.PropertiesEqual, _value, expected, trace,
                     message));
             }
         }
 
+        /// <summary>
+        ///     Check that the properties are initialized.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <exception cref="PropertiesCheckFailure{T}"></exception>
         public void AreInitialized(string message = null)
         {
             var trace = new CheckingTrace();
             if (!ObjectTester.PropertiesAreInitialized(_value, trace, _options))
             {
+                // ReSharper disable once UnthrowableException
                 throw _factory.Build(new PropertiesCheckFailure<T>(CheckType.PropertiesInitialized, _value, default(T),
                     trace, message));
-            }
-        }
-    }
-
-    public class PropertiesCheckFailure<T> : BaseCheckFailure<T>
-    {
-        private readonly CheckingTrace _trace;
-
-        public PropertiesCheckFailure(CheckType type, T tested, T expected, CheckingTrace trace, string message) : base(
-            type, tested, expected, message)
-        {
-            _trace = trace;
-        }
-
-        protected override string DisplayMessage()
-        {
-            switch (_type)
-            {
-                case CheckType.PropertiesEqual:
-                {
-                    return
-                        $"Check {_tested} have properties equal to {_expected}: at least one property is different." +
-                        Environment.NewLine +
-                        _trace;
-                }
-                case CheckType.PropertiesInitialized:
-                {
-                    return
-                        $"Check {_tested} have properties initialized: at least one property is not initialized." +
-                        Environment.NewLine +
-                        _trace;
-                }
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
     }

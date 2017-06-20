@@ -34,24 +34,21 @@
 
 namespace Leoxia.Log
 {
+    /// <summary>
+    ///     Interface for log format provider
+    /// </summary>
     public interface ILogFormatProvider
     {
+        /// <summary>
+        ///     Gets the format.
+        /// </summary>
+        /// <returns></returns>
         string GetFormat();
+
+        /// <summary>
+        ///     Gets the date format.
+        /// </summary>
+        /// <returns></returns>
         string GetDateFormat();
-    }
-
-    public class DefaultLogFormatProvider : ILogFormatProvider
-    {
-        public static readonly ILogFormatProvider Instance = new DefaultLogFormatProvider();
-
-        public string GetFormat()
-        {
-            return "{0} - [{2}] {1}: {3} [{4}]";
-        }
-
-        public string GetDateFormat()
-        {
-            return "dd/MM/yyyy HH:mm:ss,fff";
-        }
     }
 }

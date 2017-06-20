@@ -32,14 +32,23 @@
 
 #endregion
 
-namespace Leoxia.Testing.Assertions
+namespace Leoxia.Testing.Assertions.Abstractions
 {
     /// <summary>
-    /// Checkable for bool
+    ///     Checkable for bool
     /// </summary>
     public interface IBoolCheckable
     {
+        /// <summary>
+        ///     Checks the current value is true.
+        /// </summary>
+        /// <param name="message">The message.</param>
         void IsTrue(string message = null);
+
+        /// <summary>
+        ///     Checks the current value is false.
+        /// </summary>
+        /// <param name="message">The message.</param>
         void IsFalse(string message = null);
     }
 }

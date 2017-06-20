@@ -89,7 +89,7 @@ namespace Leoxia.Configuration.Test
         {
             var builder = new ConfigurationBuilder().AddJsonFile("mailservices.json");
             var reader = new ConfigurationReader(builder.Build());
-            var holder = reader.Read<MissingIgnoredConfigurationHolder>();
+            reader.Read<MissingIgnoredConfigurationHolder>();
         }
 
         [Fact]
@@ -97,7 +97,7 @@ namespace Leoxia.Configuration.Test
         {
             var builder = new ConfigurationBuilder().AddJsonFile("mailservices.json");
             var reader = new ConfigurationReader(builder.Build());
-            var holder = reader.Read<InvalidIgnoredConfigurationHolder>();
+            reader.Read<InvalidIgnoredConfigurationHolder>();
         }
 
         [Fact]

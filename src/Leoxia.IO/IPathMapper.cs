@@ -32,7 +32,11 @@
 
 #endregion
 
+#region Usings
+
 using Leoxia.Abstractions.IO;
+
+#endregion
 
 namespace Leoxia.IO
 {
@@ -42,7 +46,7 @@ namespace Leoxia.IO
     public interface IPathMapper
     {
         /// <summary>
-        /// Maps the specified input path.
+        ///     Maps the specified input path.
         /// </summary>
         /// <param name="inputPath">The input path.</param>
         /// <returns>mapped path</returns>

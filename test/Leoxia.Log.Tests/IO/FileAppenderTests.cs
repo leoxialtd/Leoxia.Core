@@ -99,7 +99,8 @@ namespace Leoxia.Log.Tests.IO
 
         private LogEvent BuidLogEvent(string topic, string message)
         {
-            return new LogEvent(0, LogLevel.Info, topic, message, _date, 0, Thread.CurrentThread.ManagedThreadId.ToString(), 1);
+            return new LogEvent(0, LogLevel.Info, topic, message, _date, 0,
+                Thread.CurrentThread.ManagedThreadId.ToString(), 1);
         }
 
         private static string GetResult(MemoryStream stream)

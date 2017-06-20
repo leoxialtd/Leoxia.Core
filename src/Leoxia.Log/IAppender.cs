@@ -34,8 +34,15 @@
 
 namespace Leoxia.Log
 {
+    /// <summary>
+    ///     Interface for log appender.
+    /// </summary>
     public interface IAppender
     {
+        /// <summary>
+        ///     Appends the specified log event.
+        /// </summary>
+        /// <param name="logEvent">The log event.</param>
         void Append(ILogEvent logEvent);
     }
 }

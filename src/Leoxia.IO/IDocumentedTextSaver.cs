@@ -35,21 +35,21 @@
 namespace Leoxia.IO
 {
     /// <summary>
-    /// Class for saving and loading <see cref="DocumentedText{T}"/>
+    ///     Class for saving and loading <see cref="DocumentedText{T}" />
     /// </summary>
     /// <typeparam name="T">type of header</typeparam>
     public interface IDocumentedTextSaver<T>
         where T : class
     {
         /// <summary>
-        /// Saves the specified <see cref="DocumentedText{T}"/> to the specified path.
+        ///     Saves the specified <see cref="DocumentedText{T}" /> to the specified path.
         /// </summary>
         /// <param name="document">The document.</param>
         /// <param name="filePath">The file path.</param>
         void Save(IDocumentedText<T> document, string filePath);
 
         /// <summary>
-        /// Loads <see cref="DocumentedText{T}"/> from the specified file path.
+        ///     Loads <see cref="DocumentedText{T}" /> from the specified file path.
         /// </summary>
         /// <param name="filePath">The file path.</param>
         /// <returns></returns>

@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LxTraceListener.cs" company="Leoxia Ltd">
+// <copyright file="TraceListenerBridge.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -42,48 +42,28 @@ using System.Text;
 
 namespace Leoxia.Log
 {
-    public class LxTraceListener : TraceListener
+    /// <summary>
+    /// </summary>
+    /// <seealso cref="System.Diagnostics.TraceListener" />
+    public class TraceListenerBridge : TraceListener
     {
         private static readonly ILogger _logger = LogManager.GetLogger("Global");
 
+
         /// <summary>
-        ///     En cas de substitution dans une classe dérivée, écrit le message spécifié dans l'écouteur que vous créez dans la
-        ///     classe dérivée.
+        ///     When overridden in a derived class, writes the specified message to the listener you create in the derived class.
         /// </summary>
-        /// <param name="message">Message à écrire. </param>
+        /// <param name="message">A message to write.</param>
         public override void Write(string message)
         {
             _logger.Info(message);
         }
 
-        /// <summary>
-        ///     En cas de substitution dans une classe dérivée, écrit un message dans l'écouteur que vous créez dans la classe
-        ///     dérivée, suivi d'une marque de fin de ligne.
-        /// </summary>
-        /// <param name="message">Message à écrire. </param>
-        public override void WriteLine(string message)
-        {
-            _logger.Info(message);
-        }
 
         /// <summary>
-        ///     Écrit les informations sur la trace, un objet de données et les informations sur les événements dans la sortie
-        ///     spécifique de l'écouteur.
+        ///     Writes trace information, a data object and event information to the listener specific output.
         /// </summary>
-        /// <param name="eventCache">
-        ///     Objet <see cref="T:System.Diagnostics.TraceEventCache" /> qui contient les informations
-        ///     actuelles sur l'ID de processus, l'ID de thread et la trace de la pile.
-        /// </param>
-        /// <param name="source">
-        ///     Nom utilisé pour identifier la sortie, généralement le nom de l'application qui a généré
-        ///     l'événement de trace.
-        /// </param>
-        /// <param name="eventType">
-        ///     Une des valeurs de <see cref="T:System.Diagnostics.TraceEventType" /> spécifiant le type
-        ///     d'événement qui a déclenché la trace.
-        /// </param>
-        /// <param name="id">Identificateur numérique pour l'événement.</param>
-        /// <param name="data">Données de trace à émettre.</param>
+        /// <param name="message"></param>
         /// <PermissionSet>
         ///     <IPermission
         ///         class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
@@ -92,6 +72,19 @@ namespace Leoxia.Log
         ///         class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ///         version="1" Flags="UnmanagedCode" />
         /// </PermissionSet>
+        public override void WriteLine(string message)
+        {
+            _logger.Info(message);
+        }
+
+        /// <summary>
+        ///     Traces the data.
+        /// </summary>
+        /// <param name="eventCache">The event cache.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="eventType">Type of the event.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="data">The data.</param>
         public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id,
             object data)
         {
@@ -134,23 +127,22 @@ namespace Leoxia.Log
         }
 
         /// <summary>
-        ///     Écrit les informations sur la trace, un tableau d'objets de données et les informations sur les événements dans la
-        ///     sortie spécifique de l'écouteur.
+        ///     Writes trace information, an array of data objects and event information to the listener specific output.
         /// </summary>
         /// <param name="eventCache">
-        ///     Objet <see cref="T:System.Diagnostics.TraceEventCache" /> qui contient les informations
-        ///     actuelles sur l'ID de processus, l'ID de thread et la trace de la pile.
+        ///     A <see cref="T:System.Diagnostics.TraceEventCache" /> object that contains the current process
+        ///     ID, thread ID, and stack trace information.
         /// </param>
         /// <param name="source">
-        ///     Nom utilisé pour identifier la sortie, généralement le nom de l'application qui a généré
-        ///     l'événement de trace.
+        ///     A name used to identify the output, typically the name of the application that generated the trace
+        ///     event.
         /// </param>
         /// <param name="eventType">
-        ///     Une des valeurs de <see cref="T:System.Diagnostics.TraceEventType" /> spécifiant le type
-        ///     d'événement qui a déclenché la trace.
+        ///     One of the <see cref="T:System.Diagnostics.TraceEventType" /> values specifying the type of
+        ///     event that has caused the trace.
         /// </param>
-        /// <param name="id">Identificateur numérique pour l'événement.</param>
-        /// <param name="data">Tableau d'objets à émettre comme données.</param>
+        /// <param name="id">A numeric identifier for the event.</param>
+        /// <param name="data">An array of objects to emit as data.</param>
         /// <PermissionSet>
         ///     <IPermission
         ///         class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
@@ -176,21 +168,21 @@ namespace Leoxia.Log
         }
 
         /// <summary>
-        ///     Écrit les informations sur la trace et les événements dans la sortie spécifique de l'écouteur.
+        ///     Writes trace and event information to the listener specific output.
         /// </summary>
         /// <param name="eventCache">
-        ///     Objet <see cref="T:System.Diagnostics.TraceEventCache" /> qui contient les informations
-        ///     actuelles sur l'ID de processus, l'ID de thread et la trace de la pile.
+        ///     A <see cref="T:System.Diagnostics.TraceEventCache" /> object that contains the current process
+        ///     ID, thread ID, and stack trace information.
         /// </param>
         /// <param name="source">
-        ///     Nom utilisé pour identifier la sortie, généralement le nom de l'application qui a généré
-        ///     l'événement de trace.
+        ///     A name used to identify the output, typically the name of the application that generated the trace
+        ///     event.
         /// </param>
         /// <param name="eventType">
-        ///     Une des valeurs de <see cref="T:System.Diagnostics.TraceEventType" /> spécifiant le type
-        ///     d'événement qui a déclenché la trace.
+        ///     One of the <see cref="T:System.Diagnostics.TraceEventType" /> values specifying the type of
+        ///     event that has caused the trace.
         /// </param>
-        /// <param name="id">Identificateur numérique pour l'événement.</param>
+        /// <param name="id">A numeric identifier for the event.</param>
         /// <PermissionSet>
         ///     <IPermission
         ///         class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
@@ -204,60 +196,40 @@ namespace Leoxia.Log
             Log(eventCache, source, eventType, id, string.Empty);
         }
 
+
         /// <summary>
-        ///     Écrit les informations sur la trace, un message et les informations sur les événements dans la sortie spécifique de
-        ///     l'écouteur.
+        ///     Traces the event.
         /// </summary>
-        /// <param name="eventCache">
-        ///     Objet <see cref="T:System.Diagnostics.TraceEventCache" /> qui contient les informations
-        ///     actuelles sur l'ID de processus, l'ID de thread et la trace de la pile.
-        /// </param>
-        /// <param name="source">
-        ///     Nom utilisé pour identifier la sortie, généralement le nom de l'application qui a généré
-        ///     l'événement de trace.
-        /// </param>
-        /// <param name="eventType">
-        ///     Une des valeurs de <see cref="T:System.Diagnostics.TraceEventType" /> spécifiant le type
-        ///     d'événement qui a déclenché la trace.
-        /// </param>
-        /// <param name="id">Identificateur numérique pour l'événement.</param>
-        /// <param name="message">Message à écrire.</param>
-        /// <PermissionSet>
-        ///     <IPermission
-        ///         class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ///         version="1" Unrestricted="true" />
-        ///     <IPermission
-        ///         class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ///         version="1" Flags="UnmanagedCode" />
-        /// </PermissionSet>
+        /// <param name="eventCache">The event cache.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="eventType">Type of the event.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="message">The message.</param>
         public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id,
             string message)
         {
             Log(eventCache, source, eventType, id, message);
         }
 
+
         /// <summary>
-        ///     Écrit les informations sur la trace, un tableau d'objets mis en forme et les informations sur les événements dans
-        ///     la sortie spécifique de l'écouteur.
+        ///     Writes trace information, a message, and event information to the listener specific output.
         /// </summary>
         /// <param name="eventCache">
-        ///     Objet <see cref="T:System.Diagnostics.TraceEventCache" /> qui contient les informations
-        ///     actuelles sur l'ID de processus, l'ID de thread et la trace de la pile.
+        ///     A <see cref="T:System.Diagnostics.TraceEventCache" /> object that contains the current process
+        ///     ID, thread ID, and stack trace information.
         /// </param>
         /// <param name="source">
-        ///     Nom utilisé pour identifier la sortie, généralement le nom de l'application qui a généré
-        ///     l'événement de trace.
+        ///     A name used to identify the output, typically the name of the application that generated the trace
+        ///     event.
         /// </param>
         /// <param name="eventType">
-        ///     Une des valeurs de <see cref="T:System.Diagnostics.TraceEventType" /> spécifiant le type
-        ///     d'événement qui a déclenché la trace.
+        ///     One of the <see cref="T:System.Diagnostics.TraceEventType" /> values specifying the type of
+        ///     event that has caused the trace.
         /// </param>
-        /// <param name="id">Identificateur numérique pour l'événement.</param>
-        /// <param name="format">
-        ///     Chaîne de format qui contient zéro élément de format ou plus, lesquels correspondent aux objets
-        ///     dans le tableau <paramref name="args" />.
-        /// </param>
-        /// <param name="args">Tableau object qui contient zéro objet ou plus à mettre en forme.</param>
+        /// <param name="id">A numeric identifier for the event.</param>
+        /// <param name="format"></param>
+        /// <param name="args"></param>
         /// <PermissionSet>
         ///     <IPermission
         ///         class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"

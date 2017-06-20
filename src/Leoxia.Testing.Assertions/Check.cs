@@ -43,41 +43,78 @@ using Leoxia.Testing.Assertions.Abstractions;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    /// Entry class for fluent assertions.
+    /// </summary>
     public static class Check
     {
         private static readonly IExceptionFactory _factory;
 
-        /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        /// <summary>
+        /// Initializes the <see cref="Check"/> class.
+        /// </summary>
         static Check()
         {
             _factory = new ExceptionFactory();
         }
 
+        /// <summary>
+        /// Check on the specified value.
+        /// </summary>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        /// <returns></returns>
         public static IBoolCheckable That(bool value)
         {
             return new BoolCheckable(_factory, value);
         }
 
+        /// <summary>
+        /// Check on the specified value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public static IIntegerCheckable That(int value)
         {
             return new IntegerCheckable(_factory, value);
         }
 
+        /// <summary>
+        /// Check on the specified value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public static IDateTimeCheckable That(DateTime value)
         {
             return new DateTimeCheckable(_factory, value);
         }
 
+        /// <summary>
+        /// Check on the specified value.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public static IListCheckable<T> That<T>(IList<T> value)
         {
             return new ListCheckable<T>(_factory, value);
         }
 
+        /// <summary>
+        /// Check on the specified value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public static IStringCheckable That(string value)
         {
             return new StringCheckable(_factory, value);
         }
 
+        /// <summary>
+        /// Check on the specified value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">value</exception>
         public static IListCheckable ThatList(IList value)
         {
             if (value == null)
@@ -87,17 +124,33 @@ namespace Leoxia.Testing.Assertions
             return new ListCheckable(_factory, value);
         }
 
+        /// <summary>
+        /// Check on the specified value.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public static IEquatableCheckable<T> That<T>(IEquatable<T> value)
             where T : IEquatable<T>
         {
             return new EquatableCheckable<T>(_factory, value);
         }
 
+        /// <summary>
+        /// Check on the specified value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public static ITypeCheckable That(Type value)
         {
             return new TypeCheckable(_factory, value);
         }
 
+        /// <summary>
+        /// Check on the specified value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public static IClassCheckable<object> ThatObject(object value)
         {
             return new ObjectCheckable<object>(_factory, value);

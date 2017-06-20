@@ -46,15 +46,17 @@ using Leoxia.Implementations;
 
 namespace Leoxia.Testing.Reflection
 {
+    /// <summary>
+    ///     Extensions for <see cref="IAssembly" />
+    /// </summary>
     public static class AssemblyExtensions
     {
-        private static readonly IAssembly _system;
         private static readonly string _systemPath;
 
         static AssemblyExtensions()
         {
-            _system = typeof(string).GetTypeInfo().Assembly.Wrap();
-            _systemPath = Path.GetDirectoryName(_system.Location);
+            var system = typeof(string).GetTypeInfo().Assembly.Wrap();
+            _systemPath = Path.GetDirectoryName(system.Location);
         }
 
         /// <summary>
@@ -74,6 +76,13 @@ namespace Leoxia.Testing.Reflection
         }
 
 
+        /// <summary>
+        ///     Gets all referenced assemblies.
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
+        /// <param name="pattern">The pattern.</param>
+        /// <param name="excludePattern">The exclude pattern.</param>
+        /// <returns></returns>
         public static IAssembly[] GetAllReferencedAssemblies(this IAssembly assembly, string pattern,
             string excludePattern)
         {
@@ -82,6 +91,16 @@ namespace Leoxia.Testing.Reflection
             return GetAllReferencedAssemblies(assembly, pattern, excludePattern, marked, assemblies);
         }
 
+        /// <summary>
+        ///     Gets all referenced assemblies.
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
+        /// <param name="pattern">The pattern.</param>
+        /// <param name="excludePattern">The exclude pattern.</param>
+        /// <param name="marked">The marked.</param>
+        /// <param name="assemblies">The assemblies.</param>
+        /// <returns></returns>
+        // ReSharper disable once ExcessiveIndentation
         private static IAssembly[] GetAllReferencedAssemblies(IAssembly assembly, string pattern, string excludePattern,
             HashSet<string> marked, Dictionary<string, IAssembly> assemblies)
         {
@@ -119,6 +138,13 @@ namespace Leoxia.Testing.Reflection
             return assembly.FullName.Contains(pattern) && !assembly.FullName.Contains(excludePattern);
         }
 
+        /// <summary>
+        ///     Determines whether an assembly is a framework assembly.
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified assembly is a framework assembly; otherwise, <c>false</c>.
+        /// </returns>
         public static bool IsFrameworkAssembly(this IAssembly assembly)
         {
             if (!string.IsNullOrEmpty(assembly.Location))

@@ -72,10 +72,10 @@ namespace Leoxia.Graphs.Test
             var set = new GraphSet<string>();
             var three = set.Add("3");
             var four = three.AddChild("4");
-            var two2 = three.AddParent("2");
+            three.AddParent("2");
             var two = three.AddParent("Two");
             var one = two.AddParent("One");
-            var un = two.AddParent("Un");
+            two.AddParent("Un");
             four.AddParent(one);
             var names = new List<string>();
             var task = set.ToTask(x => { OnNames(names, x); });
@@ -97,11 +97,11 @@ namespace Leoxia.Graphs.Test
             var names = new List<string>();
             var set = new GraphSet<string>();
             var three = set.Add("3");
-            var four = three.AddChild("4");
+            three.AddChild("4");
             var two2 = three.AddParent("2");
             var two = three.AddParent("Two");
-            var three2 = two.AddChild("Three");
-            var one = two.AddParent("One");
+            two.AddChild("Three");
+            two.AddParent("One");
             var un = two.AddParent("Un");
             un.AddChild(two2);
 
@@ -168,10 +168,10 @@ namespace Leoxia.Graphs.Test
             var names = new List<string>();
             var set = new GraphSet<string>();
             var three = set.Add("3");
-            var four = three.AddChild("4");
+            three.AddChild("4");
             var two2 = three.AddParent("2");
             var two = three.AddParent("Two");
-            var one = two.AddParent("One");
+            two.AddParent("One");
             var un = two.AddParent("Un");
             un.AddChild(two2);
             var taskGraph = set.ToTaskGraph(x => { OnNames(names, x); });
@@ -188,11 +188,11 @@ namespace Leoxia.Graphs.Test
             var names = new List<string>();
             var set = new GraphSet<string>();
             var three = set.Add("3");
-            var four = three.AddChild("4");
+            three.AddChild("4");
             var two2 = three.AddParent("2");
             var two = three.AddParent("Two");
-            var three2 = two.AddChild("Three");
-            var one = two.AddParent("One");
+            two.AddChild("Three");
+            two.AddParent("One");
             var un = two.AddParent("Un");
             un.AddChild(two2);
 

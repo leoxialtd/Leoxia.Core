@@ -34,7 +34,6 @@
 
 #region Usings
 
-using System;
 using Leoxia.Testing.Assertions.Abstractions;
 using Leoxia.Testing.Assertions.Failures;
 
@@ -42,59 +41,48 @@ using Leoxia.Testing.Assertions.Failures;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    ///     Checks for <see cref="string" />
+    /// </summary>
+    /// <seealso cref="Leoxia.Testing.Assertions.BaseClassCheckable{String}" />
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.IStringCheckable" />
     public class StringCheckable : BaseClassCheckable<string>, IStringCheckable
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="StringCheckable" /> class.
+        /// </summary>
+        /// <param name="factory"></param>
+        /// <param name="value"></param>
         public StringCheckable(IExceptionFactory factory, string value) :
             base(factory, value)
         {
         }
 
+        /// <summary>
+        ///     Determines whether [is null or empty] [the specified message].
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <exception cref="StringCheckFailure">null</exception>
         public void IsNullOrEmpty(string message = null)
         {
             if (!string.IsNullOrEmpty(_value))
             {
+                // ReSharper disable once UnthrowableException
                 throw _factory.Build(new StringCheckFailure(CheckType.StringNullOrEmpty, _value, null, message));
             }
         }
 
+        /// <summary>
+        ///     Determines whether [is not null or empty] [the specified message].
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <exception cref="StringCheckFailure">null</exception>
         public void IsNotNullOrEmpty(string message = null)
         {
             if (string.IsNullOrEmpty(_value))
             {
+                // ReSharper disable once UnthrowableException
                 throw _factory.Build(new StringCheckFailure(CheckType.StringNotNullOrEmpty, _value, null, message));
-            }
-        }
-    }
-
-    public class StringCheckFailure : BaseCheckFailure<string>
-    {
-        public StringCheckFailure(CheckType type, string tested, string expected, string message)
-            : base(type, tested, expected, message)
-        {
-        }
-
-        protected override string DisplayMessage()
-        {
-            switch (_type)
-            {
-                case CheckType.StringNotNullOrEmpty:
-                {
-                    var value = string.Empty;
-                    if (_tested == null)
-                    {
-                        value = "null";
-                    }
-                    else if (_tested.Length == 0)
-                    {
-                        value = "empty";
-                    }
-                    return $"Checking that tested string is neither null nor empty but it is {value}";
-                }
-                case CheckType.StringNullOrEmpty:
-                    return
-                        $"Checking that tested value [{_tested}] is null or empty: failure, Tested.Length = {_tested.Length}";
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
     }

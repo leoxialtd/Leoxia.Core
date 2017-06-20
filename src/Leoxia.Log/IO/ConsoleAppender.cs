@@ -42,6 +42,10 @@ namespace Leoxia.Log.IO
         private readonly LogFormatter _formatter = new LogFormatter();
         private readonly IConsoleWrapper _wrapper = new ConsoleWrapper();
 
+        /// <summary>
+        ///     Appends the specified log event.
+        /// </summary>
+        /// <param name="logEvent">The log event.</param>
         public void Append(ILogEvent logEvent)
         {
             _wrapper.WriteLine(_formatter.Format(DefaultLogFormatProvider.Instance, logEvent));

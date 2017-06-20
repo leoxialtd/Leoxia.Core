@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RollingFileAppenderTest.cs" company="Leoxia Ltd">
+// <copyright file="RollingFileAppenderTests.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -40,20 +40,19 @@ using System.Text;
 using Leoxia.Abstractions;
 using Leoxia.Abstractions.IO;
 using Leoxia.Log.IO;
-using Leoxia.Testing.Mock;
+using Leoxia.Testing.Mocks;
 using Moq;
 using Xunit;
 
 #endregion
 
-namespace Leoxia.Log.Unit.Tests
+namespace Leoxia.Log.Tests.IO
 {
-    public class RollingFileAppenderTest : MockUnitTestFixture
+    public class RollingFileAppenderTests : MockUnitTestFixture
     {
-        private const string Myfile = "myFile";
-        private const string MyfileWithExtension = Myfile + ".Log";
-        private static readonly string _currentdirectory = Path.Combine("Parent", "CurrentDirectory");
-        private readonly RollingFileAppenderIntegrationTest _rollingFileAppenderIntegrationTest;
+        private const string MyFile = "myFile";
+        private const string MyFileWithExtension = MyFile + ".Log";
+        private static readonly string _currentDirectory = Path.Combine("Parent", "CurrentDirectory");
         private readonly ITimeProvider _timeProvider;
         private RollingFileAppender _appender;
         private string _basePath;
@@ -63,19 +62,18 @@ namespace Leoxia.Log.Unit.Tests
         private MemoryStream _stream;
         private DateTime _today = DateTime.MinValue;
 
-        public RollingFileAppenderTest()
+        public RollingFileAppenderTests()
         {
             Behavior = MockBehavior.Strict;
             var timeProviderMock = Get<ITimeProvider>();
             timeProviderMock.SetupGet(x => x.Today).Returns(() => _today);
             _timeProvider = timeProviderMock.Object;
             SetupFileNames();
-            _rollingFileAppenderIntegrationTest = new RollingFileAppenderIntegrationTest();
         }
 
         public void SetupFileNames()
         {
-            _basePath = Path.Combine(_currentdirectory, Myfile + _today.ToString(".yyyy-MM-dd"));
+            _basePath = Path.Combine(_currentDirectory, MyFile + _today.ToString(".yyyy-MM-dd"));
             _filePath = _basePath + ".Log";
             _filePathOne = _basePath + "." + 1 + ".Log";
             _filePathTwo = _basePath + "." + 2 + ".Log";
@@ -97,7 +95,7 @@ namespace Leoxia.Log.Unit.Tests
             var fileSystemMock = Get<IFile>();
             var fileSystem = fileSystemMock.Object;
             var directoryFileSystem = SetupDirectoryFileSystem();
-            _appender = new RollingFileAppender(MyfileWithExtension,
+            _appender = new RollingFileAppender(MyFileWithExtension,
                 DefaultLogFormatProvider.Instance,
                 factory,
                 fileSystem,
@@ -132,7 +130,7 @@ namespace Leoxia.Log.Unit.Tests
             fileSystemMock.Setup(x => x.Move(_filePath, _filePathOne));
             var fileSystem = fileSystemMock.Object;
             var directoryFileSystem = SetupDirectoryFileSystem();
-            _appender = new RollingFileAppender(MyfileWithExtension,
+            _appender = new RollingFileAppender(MyFileWithExtension,
                 DefaultLogFormatProvider.Instance,
                 factory,
                 fileSystem,
@@ -144,7 +142,7 @@ namespace Leoxia.Log.Unit.Tests
         private IDirectory SetupDirectoryFileSystem()
         {
             var directoryFileSystemMock = Get<IDirectory>();
-            directoryFileSystemMock.Setup(x => x.GetCurrentDirectory()).Returns(_currentdirectory);
+            directoryFileSystemMock.Setup(x => x.GetCurrentDirectory()).Returns(_currentDirectory);
             directoryFileSystemMock.Setup(x => x.Exists(It.IsAny<string>())).Returns(true);
             var directoryFileSystem = directoryFileSystemMock.Object;
             return directoryFileSystem;
@@ -165,7 +163,7 @@ namespace Leoxia.Log.Unit.Tests
             fileSystemMock.Setup(x => x.Move(_filePath, _filePathOne));
             var fileSystem = fileSystemMock.Object;
             var directoryFileSystem = SetupDirectoryFileSystem();
-            _appender = new RollingFileAppender(MyfileWithExtension,
+            _appender = new RollingFileAppender(MyFileWithExtension,
                 DefaultLogFormatProvider.Instance,
                 factory,
                 fileSystem,
@@ -188,7 +186,7 @@ namespace Leoxia.Log.Unit.Tests
             fileSystemMock.Setup(x => x.Move(_filePath, _filePathOne));
             var fileSystem = fileSystemMock.Object;
             var directoryFileSystem = SetupDirectoryFileSystem();
-            _appender = new RollingFileAppender(MyfileWithExtension,
+            _appender = new RollingFileAppender(MyFileWithExtension,
                 DefaultLogFormatProvider.Instance,
                 factory,
                 fileSystem,
@@ -211,7 +209,7 @@ namespace Leoxia.Log.Unit.Tests
             fileSystemMock.Setup(x => x.Move(_filePath, _filePathOne));
             var fileSystem = fileSystemMock.Object;
             var directoryFileSystem = SetupDirectoryFileSystem();
-            _appender = new RollingFileAppender(MyfileWithExtension,
+            _appender = new RollingFileAppender(MyFileWithExtension,
                 DefaultLogFormatProvider.Instance,
                 factory,
                 fileSystem,

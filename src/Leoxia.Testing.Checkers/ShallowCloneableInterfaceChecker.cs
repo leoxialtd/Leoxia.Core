@@ -35,7 +35,6 @@
 #region Usings
 
 using System;
-using System.Reflection;
 using Leoxia.Abstractions;
 using Leoxia.Testing.Assertions;
 using Leoxia.Testing.Reflection;

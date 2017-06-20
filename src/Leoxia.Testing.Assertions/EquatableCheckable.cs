@@ -41,18 +41,41 @@ using Leoxia.Testing.Assertions.Abstractions;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    /// Checks for <see cref="IEquatable{T}"/>
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <seealso cref="Leoxia.Testing.Assertions.BaseClassCheckable{IEquatable}" />
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.IEquatableCheckable{T}" />
     public class EquatableCheckable<T> : BaseClassCheckable<IEquatable<T>>, IEquatableCheckable<T>
         where T : IEquatable<T>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EquatableCheckable{T}"/> class.
+        /// </summary>
+        /// <param name="factory"></param>
+        /// <param name="value"></param>
         public EquatableCheckable(IExceptionFactory factory, IEquatable<T> value) : base(factory, value)
         {
         }
 
+        /// <summary>
+        /// Checks the Inner is equal to
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         protected override bool InnerIsEqualTo(IEquatable<T> expected, string message = null)
         {
             return _value.Equals(expected);
         }
 
+        /// <summary>
+        /// Checks the Inner is not equal to
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
         protected override bool InnerIsNotEqualTo(IEquatable<T> expected, string message = null)
         {
             return !_value.Equals(expected);

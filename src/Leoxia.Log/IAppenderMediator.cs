@@ -34,11 +34,32 @@
 
 namespace Leoxia.Log
 {
+    /// <summary>
+    ///     Interface for mediator in charge of receiving logs and dispatching them to subscribers.
+    /// </summary>
     public interface IAppenderMediator
     {
+        /// <summary>
+        ///     Logs the specified log event.
+        /// </summary>
+        /// <param name="logEvent">The log event.</param>
         void Log(ILogEvent logEvent);
+
+        /// <summary>
+        ///     Subscribes the specified appender.
+        /// </summary>
+        /// <param name="appender">The appender.</param>
         void Subscribe(IAppender appender);
+
+        /// <summary>
+        ///     Unsubscribes the specified appender.
+        /// </summary>
+        /// <param name="appender">The appender.</param>
         void Unsubscribe(IAppender appender);
+
+        /// <summary>
+        ///     Clears this instance.
+        /// </summary>
         void Clear();
     }
 }

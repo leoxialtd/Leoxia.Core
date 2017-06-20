@@ -34,12 +34,14 @@
 
 #region Usings
 
-using Leoxia.Testing.Assertions.Abstractions;
-
 #endregion
 
-namespace Leoxia.Testing.Assertions
+namespace Leoxia.Testing.Assertions.Abstractions
 {
+    /// <summary>
+    ///     Checks for <see cref="int" />
+    /// </summary>
+    /// <seealso cref="int" />
     public interface IIntegerCheckable : ICheckable<int>
     {
     }

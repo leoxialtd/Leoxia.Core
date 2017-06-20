@@ -46,7 +46,7 @@ using Newtonsoft.Json;
 namespace Leoxia.IO
 {
     /// <summary>
-    /// Class in charge of loading and saving a<see cref="DocumentedText{T}"/> from filesystem.
+    ///     Class in charge of loading and saving a<see cref="DocumentedText{T}" /> from filesystem.
     /// </summary>
     /// <typeparam name="T">type of header</typeparam>
     /// <seealso cref="Leoxia.IO.IDocumentedTextSaver{T}" />
@@ -55,16 +55,18 @@ namespace Leoxia.IO
     {
         private const string CommentCharacters = "// ";
 
-        private static readonly string DocumentedHeaderEnd =
+        // ReSharper disable once StaticMemberInGenericType
+        private static readonly string _documentedHeaderEnd =
             CommentCharacters +
             "===== DOCUMENTED HEADER END (DONT EDIT) ======" +
             Environment.NewLine;
 
-        private readonly ILogger _logger = LogManager.GetLogger(typeof(DocumentedTextSaver<T>));
         private readonly ITextAccessor _accessor;
 
+        private readonly ILogger _logger = LogManager.GetLogger(typeof(DocumentedTextSaver<T>));
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentedTextSaver{T}"/> class.
+        ///     Initializes a new instance of the <see cref="DocumentedTextSaver{T}" /> class.
         /// </summary>
         /// <param name="accessor">The saver.</param>
         public DocumentedTextSaver(ITextAccessor accessor)
@@ -73,27 +75,27 @@ namespace Leoxia.IO
         }
 
         /// <summary>
-        /// Saves <see cref="DocumentedText{T}"/> to the specified file path.
+        ///     Saves <see cref="DocumentedText{T}" /> to the specified file path.
         /// </summary>
         /// <param name="document">The document.</param>
         /// <param name="filePath">The file path.</param>
         public void Save(IDocumentedText<T> document, string filePath)
         {
             var builder = new StringBuilder();
-            string header = GenerateHeader(document.Header);
+            var header = GenerateHeader(document.Header);
             var lines = header.SplitInLines();
             foreach (var line in lines)
             {
                 builder.Append(CommentCharacters);
                 builder.AppendLine(line);
             }
-            builder.Append(DocumentedHeaderEnd);
+            builder.Append(_documentedHeaderEnd);
             builder.Append(document.Content);
             _accessor.Save(filePath, builder.ToString());
         }
 
         /// <summary>
-        /// Loads <see cref="DocumentedText{T}"/> from the specified file path.
+        ///     Loads <see cref="DocumentedText{T}" /> from the specified file path.
         /// </summary>
         /// <param name="filePath">The file path.</param>
         /// <returns></returns>
@@ -131,7 +133,7 @@ namespace Leoxia.IO
 
         private string ExtractHeader(string text, out string content)
         {
-            var index = text.IndexOf(DocumentedHeaderEnd, StringComparison.Ordinal);
+            var index = text.IndexOf(_documentedHeaderEnd, StringComparison.Ordinal);
             var header = string.Empty;
             if (index <= 0)
             {
@@ -141,7 +143,7 @@ namespace Leoxia.IO
             else
             {
                 header = text.Substring(0, index);
-                var startIndex = index + DocumentedHeaderEnd.Length;
+                var startIndex = index + _documentedHeaderEnd.Length;
                 content = text.Substring(startIndex, text.Length - startIndex);
             }
             return header;

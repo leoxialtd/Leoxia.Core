@@ -59,7 +59,7 @@ namespace Leoxia.Reflection
             Info = type.GetTypeInfo();
             var properties = Info.GetProperties(BindingFlags.Instance | BindingFlags.Public |
                                                 BindingFlags.FlattenHierarchy);
-            _cachedProperties = properties.Select(p => new CachedProperty(type, p)).ToDictionary(x => x.Name);
+            _cachedProperties = properties.Select(p => new CachedProperty(p)).ToDictionary(x => x.Name);
             HasCollectionProperties = _cachedProperties.Values.Any(x => x.IsCollectionType);
             if (Info.IsGenericType)
             {
@@ -76,6 +76,12 @@ namespace Leoxia.Reflection
             }
         }
 
+        /// <summary>
+        ///     Gets a value indicating whether this instance has collection properties.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance has collection properties; otherwise, <c>false</c>.
+        /// </value>
         public bool HasCollectionProperties { get; }
 
         /// <summary>
@@ -136,6 +142,12 @@ namespace Leoxia.Reflection
             return _cachedProperties.ContainsKey(propertyName);
         }
 
+        /// <summary>
+        ///     Tries to get the value of the specified property.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <param name="destinationCachedProperty">The destination cached property.</param>
+        /// <returns></returns>
         public bool TryGetValue(string propertyName, out CachedProperty destinationCachedProperty)
         {
             return _cachedProperties.TryGetValue(propertyName, out destinationCachedProperty);

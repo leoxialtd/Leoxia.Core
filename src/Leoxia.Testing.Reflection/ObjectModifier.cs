@@ -42,6 +42,9 @@ using System.Reflection;
 
 namespace Leoxia.Testing.Reflection
 {
+    /// <summary>
+    ///     Helpers based on reflection to modify an <see cref="object" />
+    /// </summary>
     public static class ObjectModifier
     {
         /// <summary>
@@ -76,6 +79,7 @@ namespace Leoxia.Testing.Reflection
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="changeNonPublic">if set to <c>true</c> [change non public].</param>
         /// <returns></returns>
+        // ReSharper disable once ExcessiveIndentation
         internal static bool ChangeValue<T>(T containerToChange, string propertyName, bool changeNonPublic)
         {
             var type = typeof(T);

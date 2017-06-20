@@ -32,12 +32,16 @@
 
 #endregion
 
+#region Usings
+
 using System.Security.Cryptography.X509Certificates;
+
+#endregion
 
 namespace Leoxia.Security
 {
     /// <summary>
-    /// Provider of certificate that just take a <see cref="X509Certificate2"/> as input.
+    ///     Provider of certificate that just take a <see cref="X509Certificate2" /> as input.
     /// </summary>
     /// <seealso cref="Leoxia.Security.IX509CertificateProvider" />
     public class X509CertificateSimpleProvider : IX509CertificateProvider
@@ -45,7 +49,7 @@ namespace Leoxia.Security
         private readonly X509Certificate2 _certificate;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="X509CertificateSimpleProvider"/> class.
+        ///     Initializes a new instance of the <see cref="X509CertificateSimpleProvider" /> class.
         /// </summary>
         /// <param name="certificate">The certificate.</param>
         public X509CertificateSimpleProvider(X509Certificate2 certificate)
@@ -54,10 +58,10 @@ namespace Leoxia.Security
         }
 
         /// <summary>
-        /// Gets the certificate.
+        ///     Gets the certificate.
         /// </summary>
         /// <returns>
-        /// the certificate
+        ///     the certificate
         /// </returns>
         public X509Certificate2 Get()
         {

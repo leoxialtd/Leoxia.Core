@@ -40,13 +40,30 @@ using System;
 
 namespace Leoxia.Testing.Assertions.Failures
 {
+    /// <summary>
+    /// Display message on check failure for equality.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <seealso cref="Leoxia.Testing.Assertions.Failures.BaseCheckFailure{T}" />
     public class EqualCheckFailure<T> : BaseCheckFailure<T>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EqualCheckFailure{T}"/> class.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="tested">The tested.</param>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
         public EqualCheckFailure(CheckType type, T tested, T expected, string message) : base(type, tested, expected,
             message)
         {
         }
 
+        /// <summary>
+        /// Displays the message.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         protected override string DisplayMessage()
         {
             switch (_type)

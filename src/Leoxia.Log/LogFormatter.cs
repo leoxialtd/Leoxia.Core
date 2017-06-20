@@ -45,6 +45,12 @@ namespace Leoxia.Log
     /// </summary>
     public class LogFormatter : ILogFormatter
     {
+        /// <summary>
+        ///     Formats the <see cref="ILogEvent" /> with the specified provider.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <param name="logEvent">The log event.</param>
+        /// <returns></returns>
         public string Format(ILogFormatProvider provider, ILogEvent logEvent)
         {
             var format = provider.GetFormat();
@@ -57,10 +63,5 @@ namespace Leoxia.Log
         {
             return timestamp.ToString(dateFormat);
         }
-    }
-
-    public interface ILogFormatter
-    {
-        string Format(ILogFormatProvider provider, ILogEvent logEvent);
     }
 }

@@ -42,15 +42,15 @@ using Newtonsoft.Json.Linq;
 namespace Leoxia.Serialization.Json
 {
     /// <summary>
-    /// Translator of Json Types
+    ///     Translator of Json Types
     /// </summary>
     public class JsonTypeTranslator
     {
         /// <summary>
-        /// Gets the equivalent .NET <see cref="Type"/> for a <see cref="JTokenType"/>.
+        ///     Gets the equivalent .NET <see cref="Type" /> for a <see cref="JTokenType" />.
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <returns>translated <see cref="Type"/></returns>
+        /// <returns>translated <see cref="Type" /></returns>
         /// <exception cref="System.NotSupportedException"></exception>
         /// <exception cref="System.ArgumentOutOfRangeException">type - null</exception>
         public static Type GetEquivalentType(JTokenType type)

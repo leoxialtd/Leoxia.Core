@@ -1,8 +1,15 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
-// The MIT License
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SafeConsoleAdapter.cs" company="Leoxia Ltd">
+//    Copyright (c) 2017 Leoxia Ltd
+// </copyright>
 // 
-// Copyright © 2011 - 2017 Leoxia Ltd, https://www.leoxia.com
+// .NET Software Development
+// https://www.leoxia.com
+// Build. Tomorrow. Together
+// 
+// MIT License
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -11,42 +18,53 @@
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 // 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
 // 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//  --------------------------------------------------------------------------------------------------------------------
 
 #endregion
 
+#region Usings
+
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Leoxia.Abstractions.IO;
 using Leoxia.Implementations.IO;
 
+#endregion
+
 namespace Leoxia.Threading
 {
     /// <summary>
-    /// Console Adapter that ensure that every parallel call is forwarded 
-    /// to one thread.
+    ///     Console Adapter that ensure that every parallel call is forwarded
+    ///     to one thread.
     /// </summary>
+    /// <seealso cref="Leoxia.Threading.ISafeConsole" />
     /// <seealso cref="IConsole" />
+    // ReSharper disable once ClassTooBig
     public class SafeConsoleAdapter : ISafeConsole
     {
+        private static readonly Lazy<SafeConsoleAdapter> _instance =
+            new Lazy<SafeConsoleAdapter>(() => new SafeConsoleAdapter(new ConsoleAdapter()));
+
         private readonly IConsole _consoleImplementation;
         private readonly INotClsConsole _notClsConsole;
         private readonly TaskFactory _taskFactory;
-        private static readonly Lazy<SafeConsoleAdapter> _instance = 
-            new Lazy<SafeConsoleAdapter>(() => new SafeConsoleAdapter(new ConsoleAdapter()));
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="SafeConsoleAdapter" /> class.
+        /// </summary>
+        /// <param name="consoleImplementation">The console implementation.</param>
         public SafeConsoleAdapter(IConsole consoleImplementation)
         {
             _consoleImplementation = consoleImplementation;
@@ -54,6 +72,14 @@ namespace Leoxia.Threading
             var taskScheduler = new LimitedConcurrencyLevelTaskScheduler(1);
             _taskFactory = new TaskFactory(taskScheduler);
         }
+
+        /// <summary>
+        ///     Gets the instance.
+        /// </summary>
+        /// <value>
+        ///     The instance.
+        /// </value>
+        public static ISafeConsole Instance => _instance.Value;
 
         /// <summary>Gets or sets the background color of the console.</summary>
         /// <returns>
@@ -78,22 +104,30 @@ namespace Leoxia.Threading
             set => _taskFactory.StartNew(() => { _consoleImplementation.BackgroundColor = value; });
         }
 
+        /// <summary>
+        ///     Beeps at the specified frequency.
+        /// </summary>
+        /// <param name="frequency">The frequency.</param>
+        /// <param name="duration">The duration.</param>
         public void Beep(int frequency, int duration)
         {
-            _taskFactory.StartNew(() =>
-            {
-                _consoleImplementation.Beep(frequency, duration);
-            });
+            _taskFactory.StartNew(() => { _consoleImplementation.Beep(frequency, duration); });
         }
 
+        /// <summary>
+        ///     Beeps.
+        /// </summary>
         public void Beep()
         {
-            _taskFactory.StartNew(() =>
-            {
-                _consoleImplementation.Beep();
-            });
+            _taskFactory.StartNew(() => { _consoleImplementation.Beep(); });
         }
 
+        /// <summary>
+        ///     Gets or sets the height of the buffer.
+        /// </summary>
+        /// <value>
+        ///     The height of the buffer.
+        /// </value>
         public int BufferHeight
         {
             get => _consoleImplementation.BufferHeight;
@@ -101,49 +135,87 @@ namespace Leoxia.Threading
                 _taskFactory.StartNew(() => { _consoleImplementation.BufferHeight = value; });
         }
 
+        /// <summary>
+        ///     Gets or sets the width of the buffer.
+        /// </summary>
+        /// <value>
+        ///     The width of the buffer.
+        /// </value>
         public int BufferWidth
         {
             get => _consoleImplementation.BufferWidth;
             set => _taskFactory.StartNew(() => { _consoleImplementation.BufferWidth = value; });
         }
 
+        /// <summary>
+        ///     Occurs when the <see cref="F:System.ConsoleModifiers.Control" /> modifier key (Ctrl) and either the
+        ///     <see cref="F:System.ConsoleKey.C" /> console key (C) or the Break key are pressed simultaneously (Ctrl+C or
+        ///     Ctrl+Break).
+        /// </summary>
         public event ConsoleCancelEventHandler CancelKeyPress
         {
             add => _taskFactory.StartNew(() => { _consoleImplementation.CancelKeyPress += value; });
-            remove => _taskFactory.StartNew(() =>
-            {
-                _consoleImplementation.CancelKeyPress -= value;
-            });
+            remove => _taskFactory.StartNew(() => { _consoleImplementation.CancelKeyPress -= value; });
         }
 
-        public bool CapsLock
-        {
-            get => _consoleImplementation.CapsLock;
-        }
+        /// <summary>
+        ///     Gets a value indicating whether [caps lock].
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if [caps lock]; otherwise, <c>false</c>.
+        /// </value>
+        public bool CapsLock => _consoleImplementation.CapsLock;
 
+        /// <summary>
+        ///     Clears this instance.
+        /// </summary>
         public void Clear()
         {
             _taskFactory.StartNew(() => { _consoleImplementation.Clear(); });
         }
 
+        /// <summary>
+        ///     Gets or sets the cursor left.
+        /// </summary>
+        /// <value>
+        ///     The cursor left.
+        /// </value>
         public int CursorLeft
         {
             get => _consoleImplementation.CursorLeft;
             set => _taskFactory.StartNew(() => { _consoleImplementation.CursorLeft = value; });
         }
 
+        /// <summary>
+        ///     Gets or sets the size of the cursor.
+        /// </summary>
+        /// <value>
+        ///     The size of the cursor.
+        /// </value>
         public int CursorSize
         {
             get => _consoleImplementation.CursorSize;
             set => _taskFactory.StartNew(() => { _consoleImplementation.CursorSize = value; });
         }
 
+        /// <summary>
+        ///     Gets or sets the cursor top.
+        /// </summary>
+        /// <value>
+        ///     The cursor top.
+        /// </value>
         public int CursorTop
         {
             get => _consoleImplementation.CursorTop;
             set => _taskFactory.StartNew(() => { _consoleImplementation.CursorTop = value; });
         }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether [cursor visible].
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if [cursor visible]; otherwise, <c>false</c>.
+        /// </value>
         public bool CursorVisible
         {
             get => _consoleImplementation.CursorVisible;
@@ -153,10 +225,7 @@ namespace Leoxia.Threading
         /// <summary>Gets the standard error output stream.</summary>
         /// <returns>A <see cref="T:System.IO.TextWriter" /> that represents the standard error output stream.</returns>
         /// <filterpriority>1</filterpriority>
-        public ITextWriter Error
-        {
-            get => _consoleImplementation.Error;
-        }
+        public ITextWriter Error => _consoleImplementation.Error;
 
         /// <summary>Gets or sets the foreground color of the console.</summary>
         /// <returns>
@@ -184,47 +253,77 @@ namespace Leoxia.Threading
         /// <summary>Gets the standard input stream.</summary>
         /// <returns>A <see cref="T:System.IO.TextReader" /> that represents the standard input stream.</returns>
         /// <filterpriority>1</filterpriority>
-        public ITextReader In
-        {
-            get => _consoleImplementation.In;
-        }
+        public ITextReader In => _consoleImplementation.In;
 
+        /// <summary>
+        ///     Gets or sets the input encoding.
+        /// </summary>
+        /// <value>
+        ///     The input encoding.
+        /// </value>
         public Encoding InputEncoding
         {
             get => _consoleImplementation.InputEncoding;
             set => _taskFactory.StartNew(() => { _consoleImplementation.InputEncoding = value; });
         }
 
-        public bool IsErrorRedirected
-        {
-            get => _consoleImplementation.IsErrorRedirected;
-        }
+        /// <summary>
+        ///     Gets a value indicating whether this instance is error redirected.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is error redirected; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsErrorRedirected => _consoleImplementation.IsErrorRedirected;
 
-        public bool IsInputRedirected
-        {
-            get => _consoleImplementation.IsInputRedirected;
-        }
+        /// <summary>
+        ///     Gets a value indicating whether this instance is input redirected.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is input redirected; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsInputRedirected => _consoleImplementation.IsInputRedirected;
 
-        public bool IsOutputRedirected
-        {
-            get => _consoleImplementation.IsOutputRedirected;
-        }
+        /// <summary>
+        ///     Gets a value indicating whether this instance is output redirected.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is output redirected; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsOutputRedirected => _consoleImplementation.IsOutputRedirected;
 
-        public bool KeyAvailable
-        {
-            get => _consoleImplementation.KeyAvailable;
-        }
+        /// <summary>
+        ///     Gets a value indicating whether [key available].
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if [key available]; otherwise, <c>false</c>.
+        /// </value>
+        public bool KeyAvailable => _consoleImplementation.KeyAvailable;
 
-        public int LargestWindowHeight
-        {
-            get => _consoleImplementation.LargestWindowHeight;
-        }
+        /// <summary>
+        ///     Gets the height of the largest window.
+        /// </summary>
+        /// <value>
+        ///     The height of the largest window.
+        /// </value>
+        public int LargestWindowHeight => _consoleImplementation.LargestWindowHeight;
 
-        public int LargestWindowWidth
-        {
-            get => _consoleImplementation.LargestWindowWidth;
-        }
+        /// <summary>
+        ///     Gets the width of the largest window.
+        /// </summary>
+        /// <value>
+        ///     The width of the largest window.
+        /// </value>
+        public int LargestWindowWidth => _consoleImplementation.LargestWindowWidth;
 
+        /// <summary>
+        ///     Moves the buffer area.
+        /// </summary>
+        /// <param name="sourceLeft">The source left.</param>
+        /// <param name="sourceTop">The source top.</param>
+        /// <param name="sourceWidth">Width of the source.</param>
+        /// <param name="sourceHeight">Height of the source.</param>
+        /// <param name="targetLeft">The target left.</param>
+        /// <param name="targetTop">The target top.</param>
         public void MoveBufferArea(int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight, int targetLeft,
             int targetTop)
         {
@@ -235,6 +334,18 @@ namespace Leoxia.Threading
             });
         }
 
+        /// <summary>
+        ///     Moves the buffer area.
+        /// </summary>
+        /// <param name="sourceLeft">The source left.</param>
+        /// <param name="sourceTop">The source top.</param>
+        /// <param name="sourceWidth">Width of the source.</param>
+        /// <param name="sourceHeight">Height of the source.</param>
+        /// <param name="targetLeft">The target left.</param>
+        /// <param name="targetTop">The target top.</param>
+        /// <param name="sourceChar">The source character.</param>
+        /// <param name="sourceForeColor">Color of the source fore.</param>
+        /// <param name="sourceBackColor">Color of the source back.</param>
         public void MoveBufferArea(int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight, int targetLeft,
             int targetTop,
             char sourceChar, ConsoleColor sourceForeColor, ConsoleColor sourceBackColor)
@@ -246,10 +357,13 @@ namespace Leoxia.Threading
             });
         }
 
-        public bool NumberLock
-        {
-            get => _consoleImplementation.NumberLock;
-        }
+        /// <summary>
+        ///     Gets a value indicating whether {CC2D43FA-BBC4-448A-9D0B-7B57ADF2655C}[number lock].
+        /// </summary>
+        /// <value>
+        ///     {D255958A-8513-4226-94B9-080D98F904A1}  <c>true</c> if [number lock]; otherwise, <c>false</c>.
+        /// </value>
+        public bool NumberLock => _consoleImplementation.NumberLock;
 
         /// <summary>Acquires the standard error stream.</summary>
         /// <returns>The standard error stream.</returns>
@@ -278,11 +392,14 @@ namespace Leoxia.Threading
         /// <summary>Gets the standard output stream.</summary>
         /// <returns>A <see cref="T:System.IO.TextWriter" /> that represents the standard output stream.</returns>
         /// <filterpriority>1</filterpriority>
-        public ITextWriter Out
-        {
-            get => _consoleImplementation.Out;
-        }
+        public ITextWriter Out => _consoleImplementation.Out;
 
+        /// <summary>
+        ///     Gets or sets the output encoding.
+        /// </summary>
+        /// <value>
+        ///     The output encoding.
+        /// </value>
         public Encoding OutputEncoding
         {
             get => _consoleImplementation.OutputEncoding;
@@ -301,11 +418,20 @@ namespace Leoxia.Threading
             return _consoleImplementation.Read();
         }
 
+        /// <summary>
+        ///     Reads the key.
+        /// </summary>
+        /// <param name="intercept">if set to <c>true</c> [intercept].</param>
+        /// <returns></returns>
         public ConsoleKeyInfo ReadKey(bool intercept)
         {
             return _consoleImplementation.ReadKey(intercept);
         }
 
+        /// <summary>
+        ///     Reads the key.
+        /// </summary>
+        /// <returns></returns>
         public ConsoleKeyInfo ReadKey()
         {
             return _consoleImplementation.ReadKey();
@@ -342,11 +468,21 @@ namespace Leoxia.Threading
             _taskFactory.StartNew(() => { _consoleImplementation.ResetColor(); });
         }
 
+        /// <summary>
+        ///     Sets the size of the buffer.
+        /// </summary>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
         public void SetBufferSize(int width, int height)
         {
             _taskFactory.StartNew(() => { _consoleImplementation.SetBufferSize(width, height); });
         }
 
+        /// <summary>
+        ///     Sets the cursor position.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="top">The top.</param>
         public void SetCursorPosition(int left, int top)
         {
             _taskFactory.StartNew(() => { _consoleImplementation.SetCursorPosition(left, top); });
@@ -412,55 +548,96 @@ namespace Leoxia.Threading
             _taskFactory.StartNew(() => { _consoleImplementation.SetOut(newOut); });
         }
 
+        /// <summary>
+        ///     Sets the window position.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="top">The top.</param>
         public void SetWindowPosition(int left, int top)
         {
             _taskFactory.StartNew(() => { _consoleImplementation.SetWindowPosition(left, top); });
         }
 
+        /// <summary>
+        ///     Sets the size of the window.
+        /// </summary>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
         public void SetWindowSize(int width, int height)
         {
             _taskFactory.StartNew(() => { _consoleImplementation.SetWindowSize(width, height); });
         }
 
+        /// <summary>
+        ///     Gets or sets the title.
+        /// </summary>
+        /// <value>
+        ///     The title.
+        /// </value>
         public string Title
         {
             get => _consoleImplementation.Title;
             set => _taskFactory.StartNew(() => { _consoleImplementation.Title = value; });
         }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether [treat control c as input].
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if [treat control c as input]; otherwise, <c>false</c>.
+        /// </value>
         public bool TreatControlCAsInput
         {
             get => _consoleImplementation.TreatControlCAsInput;
             set => _taskFactory.StartNew(() => { _consoleImplementation.TreatControlCAsInput = value; });
         }
 
+        /// <summary>
+        ///     Gets or sets the height of the window.
+        /// </summary>
+        /// <value>
+        ///     The height of the window.
+        /// </value>
         public int WindowHeight
         {
             get => _consoleImplementation.WindowHeight;
             set => _taskFactory.StartNew(() => { _consoleImplementation.WindowHeight = value; });
         }
 
+        /// <summary>
+        ///     Gets or sets the window left.
+        /// </summary>
+        /// <value>
+        ///     The window left.
+        /// </value>
         public int WindowLeft
         {
             get => _consoleImplementation.WindowLeft;
             set => _taskFactory.StartNew(() => { _consoleImplementation.WindowLeft = value; });
         }
 
+        /// <summary>
+        ///     Gets or sets the window top.
+        /// </summary>
+        /// <value>
+        ///     The window top.
+        /// </value>
         public int WindowTop
         {
             get => _consoleImplementation.WindowTop;
             set => _taskFactory.StartNew(() => { _consoleImplementation.WindowTop = value; });
         }
 
+        /// <summary>
+        ///     Gets or sets the width of the window.
+        /// </summary>
+        /// <value>
+        ///     The width of the window.
+        /// </value>
         public int WindowWidth
         {
             get => _consoleImplementation.WindowWidth;
             set => _taskFactory.StartNew(() => { _consoleImplementation.WindowWidth = value; });
-        }
-
-        public static ISafeConsole Instance
-        {
-            get { return _instance.Value; }
         }
 
         /// <summary>Writes the text representation of the specified 64-bit unsigned integer value to the standard output stream.</summary>
@@ -562,10 +739,7 @@ namespace Leoxia.Threading
         /// <filterpriority>1</filterpriority>
         public void Write(object value)
         {
-            _taskFactory.StartNew(() =>
-            {
-                _consoleImplementation.Write(value);
-            });
+            _taskFactory.StartNew(() => { _consoleImplementation.Write(value); });
         }
 
         /// <summary>
@@ -919,17 +1093,27 @@ namespace Leoxia.Threading
             _taskFactory.StartNew(() => { _notClsConsole.WriteLine(value); });
         }
 
+        /// <summary>
+        ///     Safes the call.
+        /// </summary>
+        /// <param name="action">The action.</param>
         public void SafeCall(Action<IConsole> action)
         {
-            _taskFactory.StartNew(() =>
-            {
-                action(_consoleImplementation);
-            });
+            _taskFactory.StartNew(() => { action(_consoleImplementation); });
         }
     }
 
+    /// <summary>
+    ///     Synchronizing access to <see cref="IConsole" />
+    /// </summary>
+    /// <seealso cref="Leoxia.Abstractions.IO.IConsole" />
+    /// <seealso cref="Leoxia.Abstractions.IO.INotClsConsole" />
     public interface ISafeConsole : IConsole, INotClsConsole
     {
+        /// <summary>
+        ///     Invoke a in thread safe context the <see cref="Action{IConsole}" />
+        /// </summary>
+        /// <param name="action">The action.</param>
         void SafeCall(Action<IConsole> action);
     }
 }

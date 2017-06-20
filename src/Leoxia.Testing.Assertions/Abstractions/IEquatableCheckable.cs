@@ -35,12 +35,16 @@
 #region Usings
 
 using System;
-using Leoxia.Testing.Assertions.Abstractions;
 
 #endregion
 
-namespace Leoxia.Testing.Assertions
+namespace Leoxia.Testing.Assertions.Abstractions
 {
+    /// <summary>
+    ///     Checks for <see cref="IEquatable{T}" />
+    /// </summary>
+    /// <typeparam name="T">type of element</typeparam>
+    /// <seealso cref="IEquatable{T}" />
     public interface IEquatableCheckable<T> : IClassCheckable<IEquatable<T>>
     {
     }

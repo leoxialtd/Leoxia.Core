@@ -37,7 +37,7 @@
 using System;
 using System.Collections;
 using DryIoc;
-using Leoxia.Testing.Mock;
+using Leoxia.Testing.Mocks;
 using Moq;
 using Xunit;
 

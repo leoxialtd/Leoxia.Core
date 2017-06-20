@@ -63,10 +63,10 @@ namespace Leoxia.Graphs.Test
             var set = new GraphSet<string>();
             var three = set.Add("3");
             var four = three.AddChild("4");
-            var two2 = three.AddParent("2");
+            three.AddParent("2");
             var two = three.AddParent("Two");
             var one = two.AddParent("One");
-            var un = two.AddParent("Un");
+            two.AddParent("Un");
             four.AddParent(one);
             var nodes = set.GetNodes();
             Assert.Equal(6, nodes.Count());
@@ -82,7 +82,7 @@ namespace Leoxia.Graphs.Test
             Assert.False(set.IsCyclic());
             three.AddChild(four);
             Assert.True(set.IsCyclic());
-            var five = four.AddParent("5");
+            four.AddParent("5");
             Assert.True(set.IsCyclic());
         }
 

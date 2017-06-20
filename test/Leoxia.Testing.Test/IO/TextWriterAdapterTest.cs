@@ -34,7 +34,7 @@
 
 #region Usings
 
-using Leoxia.Testing.IO;
+using Leoxia.Testing.Mocks.IO;
 using Moq;
 using Xunit;
 using Xunit.Abstractions;

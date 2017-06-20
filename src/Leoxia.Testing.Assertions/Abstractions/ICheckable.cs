@@ -41,14 +41,45 @@ using System.Linq.Expressions;
 
 namespace Leoxia.Testing.Assertions.Abstractions
 {
+    /// <summary>
+    ///     Interfaces for checks
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface ICheckable<T>
     {
-        IBoolCheckable Is(Expression<Func<T, bool>> func);
+        /// <summary>
+        ///     Checks whether the current value respects the contract
+        /// </summary>
+        /// <param name="contract">The contract.</param>
+        /// <returns></returns>
+        IBoolCheckable Is(Expression<Func<T, bool>> contract);
 
+        /// <summary>
+        ///     Checks that the current value is equal to the expected value.
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
         void IsEqualTo(T expected, string message = null);
 
+        /// <summary>
+        ///     Checks that the current value is not equal to the expected value.
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
         void IsNotEqualTo(T expected, string message = null);
+
+        /// <summary>
+        ///     Checks that the current value is operator equal to the expected value.
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
         void IsOperatorEqualTo(T expected, string message = null);
+
+        /// <summary>
+        ///     Checks that the current value is not operator equal to the expected value.
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="message">The message.</param>
         void IsOperatorNotEqualTo(T expected, string message = null);
     }
 }

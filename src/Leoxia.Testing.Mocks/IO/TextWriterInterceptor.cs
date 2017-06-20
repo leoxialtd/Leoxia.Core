@@ -39,8 +39,12 @@ using System.Text;
 
 #endregion
 
-namespace Leoxia.Testing.IO
+namespace Leoxia.Testing.Mocks.IO
 {
+    /// <summary>
+    ///     Interceptor for text written to TextWriter.
+    /// </summary>
+    /// <seealso cref="System.IO.TextWriter" />
     public class TextWriterInterceptor : TextWriter
     {
         private readonly StringBuilder _builder = new StringBuilder();

@@ -36,18 +36,31 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using Leoxia.Testing.Assertions.Abstractions;
 
 #endregion
 
-namespace Leoxia.Testing.Assertions
+namespace Leoxia.Testing.Assertions.Abstractions
 {
+    /// <summary>
+    ///     Checks for <see cref="IList" />
+    /// </summary>
+    /// <seealso cref="Abstractions.IClassCheckable{IList}" />
     public interface IListCheckable : IClassCheckable<IList>
     {
     }
 
+    /// <summary>
+    ///     Checks for <see cref="IList{T}" />
+    /// </summary>
+    /// <typeparam name="T">type of element</typeparam>
+    /// <seealso cref="Abstractions.IClassCheckable{IList}" />
     public interface IListCheckable<T> : IClassCheckable<IList<T>>
     {
+        /// <summary>
+        ///     Checks that the item is contained by the list.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <param name="message">The message.</param>
         void Contains(T item, string message = null);
     }
 }

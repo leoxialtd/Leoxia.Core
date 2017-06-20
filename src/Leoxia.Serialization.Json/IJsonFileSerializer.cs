@@ -1,7 +1,7 @@
 ﻿#region Copyright (c) 2017 Leoxia Ltd
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IJsonHelper.cs" company="Leoxia Ltd">
+// <copyright file="IJsonFileSerializer.cs" company="Leoxia Ltd">
 //    Copyright (c) 2017 Leoxia Ltd
 // </copyright>
 // 
@@ -34,10 +34,13 @@
 
 namespace Leoxia.Serialization.Json
 {
+    /// <summary>
+    ///     Interface for Json serializer
+    /// </summary>
     public interface IJsonFileSerializer
     {
         /// <summary>
-        /// Deserialize a T object for a file located at the specified file path.
+        ///     Deserialize a T object for a file located at the specified file path.
         /// </summary>
         /// <typeparam name="T">type of object to deserialize</typeparam>
         /// <param name="filePath">The file path.</param>

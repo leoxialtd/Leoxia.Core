@@ -40,13 +40,25 @@ using System.Collections.Generic;
 
 namespace Leoxia.Testing.Reflection
 {
+    /// <summary>
+    ///     Options used for comparing properties.
+    /// </summary>
     public class PropertiesComparisonOptions
     {
+        /// <summary>
+        ///     The default singleton options
+        /// </summary>
         public static readonly PropertiesComparisonOptions Default = new PropertiesComparisonOptions();
 
+        /// <summary>
+        ///     The options that do not check for number of properties
+        /// </summary>
         public static readonly PropertiesComparisonOptions DoNotCheckForNumberOfProperties =
             BuildDoNotCheckForNumberOfProperties();
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="PropertiesComparisonOptions" /> class.
+        /// </summary>
         public PropertiesComparisonOptions()
         {
             // By default check for number of properties
@@ -54,8 +66,28 @@ namespace Leoxia.Testing.Reflection
             IgnoreReadOnlyProperties = true;
         }
 
+        /// <summary>
+        ///     Gets a value indicating whether [check for number of properties].
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if [check for number of properties]; otherwise, <c>false</c>.
+        /// </value>
         public bool CheckForNumberOfProperties { get; private set; }
+
+        /// <summary>
+        ///     Gets or sets the excluded properties.
+        /// </summary>
+        /// <value>
+        ///     The excluded properties.
+        /// </value>
         public IEnumerable<string> ExcludedProperties { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether [ignore read only properties].
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if [ignore read only properties]; otherwise, <c>false</c>.
+        /// </value>
         public bool IgnoreReadOnlyProperties { get; set; }
 
         private static PropertiesComparisonOptions BuildDoNotCheckForNumberOfProperties()

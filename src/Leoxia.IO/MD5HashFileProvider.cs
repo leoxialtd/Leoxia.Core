@@ -32,9 +32,13 @@
 
 #endregion
 
+#region Usings
+
 using System;
 using System.Security.Cryptography;
 using Leoxia.Abstractions.IO;
+
+#endregion
 
 namespace Leoxia.IO
 {
@@ -46,11 +50,11 @@ namespace Leoxia.IO
     public class MD5HashFileProvider : IHashFileProvider
     {
         /// <summary>
-        /// Gets the <see cref="IFileInfo" /> hash.
+        ///     Gets the <see cref="IFileInfo" /> hash.
         /// </summary>
         /// <param name="fileInfo">The file information.</param>
         /// <returns>
-        ///   <see cref="string" /> hash
+        ///     <see cref="string" /> hash
         /// </returns>
         public string GetFileHash(IFileInfo fileInfo)
         {

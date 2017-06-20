@@ -41,22 +41,39 @@ using Leoxia.Testing.Assertions.Failures;
 
 namespace Leoxia.Testing.Assertions
 {
+    /// <summary>
+    ///     Checks for <see cref="bool" />
+    /// </summary>
+    /// <seealso cref="Leoxia.Testing.Assertions.Abstractions.IBoolCheckable" />
     public class BoolCheckable : IBoolCheckable
     {
         private readonly IExceptionFactory _factory;
         private readonly bool _value;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="BoolCheckable" /> class.
+        /// </summary>
+        /// <param name="factory">The factory.</param>
+        /// <param name="value">if set to <c>true</c> [value].</param>
         public BoolCheckable(IExceptionFactory factory, bool value)
         {
             _factory = factory;
             _value = value;
         }
 
+        /// <summary>
+        ///     Checks the current value is true.
+        /// </summary>
+        /// <param name="message">The message.</param>
         public void IsTrue(string message = null)
         {
             Check(!_value, CheckType.True, message);
         }
 
+        /// <summary>
+        ///     Checks the current value is false.
+        /// </summary>
+        /// <param name="message">The message.</param>
         public void IsFalse(string message = null)
         {
             Check(_value, CheckType.False, message);
@@ -67,6 +84,7 @@ namespace Leoxia.Testing.Assertions
             if (flag)
             {
                 var checkFailure = new BoolCheckFailure(checkType, _value, !_value, message);
+                // ReSharper disable once UnthrowableException
                 throw _factory.Build(checkFailure);
             }
         }
