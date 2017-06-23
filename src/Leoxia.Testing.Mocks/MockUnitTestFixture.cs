@@ -115,7 +115,14 @@ namespace Leoxia.Testing.Mocks
         /// </returns>
         public Mock<T> Get<T>(Lifetime lifeTime) where T : class
         {
-            return (Mock<T>) Get(typeof(T), Behavior, lifeTime);
+            var mock = (Mock<T>) Get(typeof(T), Behavior, lifeTime);
+            Register(mock);
+            return mock;
+        }
+
+        private void Register<T>(Mock<T> mock) where T: class
+        {
+            Container.RegisterInstance<T>(mock.Object, ifAlreadyRegistered: IfAlreadyRegistered.Replace);
         }
 
         /// <summary>
@@ -128,7 +135,9 @@ namespace Leoxia.Testing.Mocks
         /// </returns>
         public Mock<T> Get<T>(MockBehavior behavior) where T : class
         {
-            return (Mock<T>) Get(typeof(T), behavior, Lifetime.Singleton);
+            var mock = (Mock<T>) Get(typeof(T), behavior, Lifetime.Singleton);
+            Register(mock);
+            return mock;
         }
 
         /// <summary>
@@ -142,7 +151,8 @@ namespace Leoxia.Testing.Mocks
         /// </returns>
         private Mock Get(Type type, MockBehavior behavior, Lifetime lifetime)
         {
-            return _factory.Get(type, behavior, lifetime);
+            var mock = _factory.Get(type, behavior, lifetime);
+            return mock;
         }
 
         /// <summary>
