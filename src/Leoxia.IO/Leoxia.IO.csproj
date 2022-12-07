@@ -26,7 +26,7 @@ Provides:
     <DocumentationFile>bin\Release\netstandard1.3\Leoxia.IO.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Leoxia.Log\Leoxia.Log.csproj" />
